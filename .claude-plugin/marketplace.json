@@ -3,5 +3,12 @@
   "owner": {
     "name": "murnana"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "murnana-unreal-engine",
+      "source": "./plugins/murnana-unreal-engine",
+      "description": "Unreal Engine knowledges",
+      "version": "0.0.1"
+    }
+  ]
 }
