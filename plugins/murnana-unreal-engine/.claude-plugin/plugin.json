@@ -1,0 +1,9 @@
+{
+  "name": "murnana-unreal-engine",
+  "description": "Unreal Engine knowledges",
+  "version": "0.0.1",
+  "keywords":["Unreal Engine", "UE"],
+  "author": {
+    "name": "murnana"
+  }
+}
