@@ -7,7 +7,7 @@ when_to_use: >
   "UE5", "Unreal Engine", "Blueprint", "GameplayAbility", "UObject", "AActor",
   "UActorComponent", etc. Always check the docs before answering UE5 code questions.
   Note: dev.epicgames.com is a JavaScript SPA — only WebSearch works, not WebFetch.
-allowed-tools: Read Grep WebSearch
+allowed-tools: Read Grep WebSearch WebFetch(domain:dev.epicgames.com)
 ---
 
 # Unreal Engine 5 Docs Skill
