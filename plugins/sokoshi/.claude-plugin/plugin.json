@@ -1,0 +1,17 @@
+{
+  "name": "sokoshi",
+  "version": "0.1.0",
+  "description": "シェーダー芸(Shadertoy / WebGL生GLSL)の技法・パターン・教訓を蓄積し、コード生成・レビューに活かすための知識スキル集。",
+  "author": {
+    "name": "TODO: your-name"
+  },
+  "homepage": "TODO: https://github.com/your-name/shader-art-knowledge",
+  "license": "MIT",
+  "userConfig": {
+    "extra_knowledge_path": {
+      "type": "string",
+      "title": "追加知識ディレクトリ(任意)",
+      "description": "利用者独自のシェーダー知識Markdownを置くディレクトリの絶対パス。指定するとshader-artスキルから併せて参照されます。"
+    }
+  }
+}
