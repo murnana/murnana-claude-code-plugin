@@ -9,7 +9,7 @@ argument-hint: "[optional scope or intent hint]"
 disable-model-invocation: true
 allowed-tools: >
   Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git add *)
-  Bash(git commit *) Bash(git branch *) Bash(git config *)
+  Bash(git commit *) Bash(git config *)
   Read Grep Glob AskUserQuestion
 ---
 
@@ -21,29 +21,56 @@ project's own commit rules when they exist, or a Why-driven convention otherwise
 ## Current state
 
 ```!
-git status --short
-git diff --stat 2>/dev/null || true
-git diff --cached --stat 2>/dev/null || true
-git log --format='%s' -20 2>/dev/null || true
+git status -sb
+git diff --numstat
+git diff --cached --numstat 2>/dev/null || true
+git log --format='%s' --no-merges -15 2>/dev/null || true
 ```
 
 Treat `$ARGUMENTS` (if any) as an additional hint about which changes to focus on
 or what the user's intent is — it does not override the steps below.
 
+## Output discipline
+
+Every command's output is spent tokens. Always choose the narrowest form that
+answers the question at hand:
+
+- `git status -sb`, never bare `git status` — short format plus branch and
+  tracking info in a single line.
+- `--numstat` over `--stat` for diff summaries: no histogram bars, no padding, and
+  pathnames are never abbreviated, so they stay usable as arguments.
+- Locate changes with `--numstat` first; read hunks only for the paths you are
+  actually grouping into a commit, and read them with `-U1`.
+- Bound every history query: `git log --oneline -<n>`, never an unbounded `git log`.
+- Never re-run a command whose output is already in this context.
+
 ## Step 1: Understand the diff
 
-Using the injected state above as a starting point, run `git diff`,
-`git diff --staged`, and `git branch --show-current` as needed to fully understand
-the changes. If some changes are already staged, treat that staging as intentional
-and respect it.
+The state above already gives the branch, the staged and unstaged file lists, and
+recent history — do not re-run those commands.
+
+Read the actual changes **path-scoped**, never as one bare `git diff`:
+
+- `git diff -U1 -- <paths>` / `git diff --cached -U1 -- <paths>`, limited to the
+  files you are about to group into a commit.
+- For lock files, generated output, and vendored trees, the `--numstat` line above
+  is enough — skip their hunks.
+- Untracked files (`??` above) have no diff. `Read` them directly, and only the ones
+  whose content actually affects how the work is split.
+
+If some changes are already staged, treat that staging as intentional and respect it.
 
 ## Step 2: Discover project rules (highest priority)
 
 Check the sources listed in [references/project-rules.md](references/project-rules.md),
 in order. If a rule is found there, it is the **only** rule that applies — do not mix
-in anything from the fallback convention below. If you fall back to inferring a
-format from `git log` history (weaker than an explicit rule), say so explicitly when
+in anything from the fallback convention below. The history needed to infer a format
+is already injected above — do not re-run `git log`. If you fall back to inferring a
+format from that history (weaker than an explicit rule), say so explicitly when
 presenting the plan in Step 4.
+
+Before reading a candidate rule file, `Glob` for it first — only `Read` files that
+actually exist.
 
 ## Step 3: Run pre-commit checks
 
@@ -74,7 +101,8 @@ presenting the plan in Step 4.
   instructed.
 - Append any attribution lines (e.g. `Co-Authored-By:`) required by the session or
   project.
-- After all commits, report the result in Japanese using `git log --oneline`.
+- After all commits, report the result in Japanese using `git log --oneline -<N>`,
+  where `<N>` is the number of commits just created.
 
 ## References
 
