@@ -1,4 +1,5 @@
 {
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
   "name": "murnana-claude-code-plugin",
   "owner": {
     "name": "murnana"
