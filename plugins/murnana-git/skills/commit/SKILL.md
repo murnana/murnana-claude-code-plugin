@@ -22,8 +22,9 @@ project's own commit rules when they exist, or a Why-driven convention otherwise
 
 ```!
 git status --short
-git diff --stat HEAD
-git log --format='%s' -20
+git diff --stat 2>/dev/null || true
+git diff --cached --stat 2>/dev/null || true
+git log --format='%s' -20 2>/dev/null || true
 ```
 
 Treat `$ARGUMENTS` (if any) as an additional hint about which changes to focus on
