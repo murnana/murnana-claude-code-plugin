@@ -10,6 +10,12 @@
       "source": "./plugins/murnana-unreal-engine",
       "description": "Unreal Engine knowledges",
       "version": "0.0.1"
+    },
+    {
+      "name": "murnana-git",
+      "source": "./plugins/murnana-git",
+      "description": "Git workflow helpers",
+      "version": "0.0.1"
     }
   ]
 }
