@@ -23,6 +23,7 @@ murnana が個人利用を目的として管理する Claude Code プラグイ�
 |---|---|
 | `murnana-unreal-engine` | Unreal Engine の公式ドキュメント検索 |
 | `murnana-git` | Git ワークフロー支援。`/murnana-git:commit` でコミット |
+| `murnana-github` | GitHub ワークフロー支援。`/murnana-github:pr-create` で PR 作成 |
 
 ## ライセンス
 
