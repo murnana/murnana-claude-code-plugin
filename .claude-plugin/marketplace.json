@@ -16,6 +16,12 @@
       "source": "./plugins/murnana-git",
       "description": "Git workflow helpers",
       "version": "0.0.1"
+    },
+    {
+      "name": "murnana-github",
+      "source": "./plugins/murnana-github",
+      "description": "GitHub workflow helpers",
+      "version": "0.0.1"
     }
   ]
 }
