@@ -1,8 +1,6 @@
 # Where to look for project-specific commit rules
 
-Check these in order. The first rule found is the **only** rule that applies — do
-not blend it with the fallback convention in
-[commit-message.md](commit-message.md).
+Check these in order. The first rule found is the **only** rule that applies — do not blend it with the fallback convention in [commit-message.md](commit-message.md).
 
 | Kind | Where to look | What to do if found |
 |---|---|---|
