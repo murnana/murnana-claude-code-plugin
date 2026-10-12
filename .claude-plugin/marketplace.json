@@ -1,6 +1,7 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
   "name": "murnana-claude-code-plugin",
+  "description": "murnana's Claude Code plugins: Git/GitHub workflow helpers, Claude Code configuration authoring, and Unreal Engine knowledge",
   "owner": {
     "name": "murnana"
   },
@@ -21,6 +22,12 @@
       "name": "murnana-github",
       "source": "./plugins/murnana-github",
       "description": "GitHub workflow helpers",
+      "version": "0.0.1"
+    },
+    {
+      "name": "murnana-agent-config",
+      "source": "./plugins/murnana-agent-config",
+      "description": "Helpers for authoring Claude Code configuration (rules, skills, etc.)",
       "version": "0.0.1"
     }
   ]
