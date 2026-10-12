@@ -27,7 +27,7 @@
     {
       "name": "murnana-agent-config",
       "source": "./plugins/murnana-agent-config",
-      "description": "Helpers for authoring Claude Code configuration (rules, etc.)",
+      "description": "Helpers for authoring Claude Code configuration (rules, skills, etc.)",
       "version": "0.0.1"
     }
   ]
