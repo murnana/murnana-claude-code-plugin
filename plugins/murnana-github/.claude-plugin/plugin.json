@@ -4,7 +4,7 @@
   "description": "GitHub workflow helpers",
   "version": "0.0.1",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
-  "keywords": ["GitHub", "pull request", "gh"],
+  "keywords": ["GitHub", "pull request", "gh", "stacked pull requests", "gh-stack"],
   "defaultEnabled": false,
   "author": {
     "name": "murnana"
