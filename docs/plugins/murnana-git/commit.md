@@ -34,6 +34,12 @@
 - **なぜ `--no-verify` を禁じているか** — プロジェクトのコミット前チェックを迂回しないため。
 - **なぜ `references/` に規約を分離したか** — progressive disclosure。リンク先は明示的に参照されたときだけ読み込まれるので、常時コンテキストに乗るのは `SKILL.md` 本体だけで済む。
 - **なぜコミット前に必ず承認を取るか** — 意図しないコミットを防ぐため。1 コミットで済む場合も分割案を提示する。
+- **なぜコミット結果の確認を Hook にしたか** — 以前は全コミット後に Claude が `git log --oneline -<N>` を叩いて確認していた。これを `SKILL.md` frontmatter の `hooks`（`PostToolUse` + `if: "Bash(git commit *)"`）に置き換え、`git commit` が成功するたびに `git log --oneline -1` の結果を `additionalContext` として自動注入している。
+  - 確認が Claude の判断に依存せず決定的に行われ、Bash 呼び出しも 1 回減る。
+  - `PostToolUse` は成功時のみ発火し、失敗時は `PostToolUseFailure` になる。注入が無いこと自体がコミット失敗のシグナルになり、失敗を成功と誤報告しない。
+  - plain stdout は Claude に届く保証がないため、`hookSpecificOutput.additionalContext` の JSON で返す。`jq` が必要。
+  - スキル hook の相対パスや `${CLAUDE_SKILL_DIR}` の展開は公式 docs に記載が無いため、スクリプトファイルは置かずインラインコマンドにしている。
+  - スキル hook は**起動時に登録され、セッション終了まで有効**。`/murnana-git:commit` を一度使った後は、同じセッション内の他の `git commit` にも注入される（無害なので許容）。
 
 ## 実装上の落とし穴：動的コンテキスト注入と空リポジトリ
 
@@ -60,7 +66,7 @@ SKILL.md 冒頭の ```` ```! ```` ブロック（動的コンテキスト注入�
 | 差分サマリ | `git diff --numstat` | man に "more machine friendly" とある通り装飾が無く、パスが省略されない |
 | 差分本体 | `git diff -U1 -- <paths>` | コンテキスト行が既定の 3 行から 1 行に減る。必ず path で絞る |
 | 履歴（規約推定） | `git log --format='%s' --no-merges -15` | マージコミットの件名は自動生成で手書き規約を反映しない |
-| 履歴（結果報告） | `git log --oneline -<N>` | 件数を必ず縛る |
+| 履歴（結果報告） | `git log --oneline -1`（PostToolUse hook 内） | コミット 1 回ごとに直近 1 件だけを注入する。Claude 側では叩かない |
 
 補足:
 
