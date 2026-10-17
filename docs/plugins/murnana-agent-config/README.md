@@ -5,8 +5,8 @@ Claude Code 自体の設定（rules、skills など）の作成を支援する�
 ## インストール
 
 ```
-/plugin marketplace add murnana/murnana-claude-code-plugin
-/plugin install murnana-agent-config@murnana-claude-code-plugin
+claude plugin marketplace add murnana/murnana-claude-code-plugin --sparse .claude-plugin
+claude plugin install murnana-agent-config@murnana-claude-code-plugin
 ```
 
 `plugin.json` の `defaultEnabled` が `false` なので、インストール後に別途有効化が必要（`/plugin` コマンドから対象プラグインを有効化する）。

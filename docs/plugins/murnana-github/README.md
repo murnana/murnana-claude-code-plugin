@@ -5,8 +5,8 @@ GitHub ワークフロー支援プラグイン。
 ## インストール
 
 ```
-/plugin marketplace add murnana/murnana-claude-code-plugin
-/plugin install murnana-github@murnana-claude-code-plugin
+claude plugin marketplace add murnana/murnana-claude-code-plugin --sparse .claude-plugin
+claude plugin install murnana-github@murnana-claude-code-plugin
 ```
 
 `plugin.json` の `defaultEnabled` が `false` なので、インストール後に別途有効化が必要（`/plugin` コマンドから対象プラグインを有効化する）。
