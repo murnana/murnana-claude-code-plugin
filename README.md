@@ -7,15 +7,22 @@ murnana が個人利用を目的として管理する Claude Code プラグイ�
 
 ## マーケットプレイスの追加
 
+リポジトリー全体をダウンロードしないよう、シェルから `--sparse` を付けて追加します。
+
 ```
-/plugin marketplace add murnana/murnana-claude-code-plugin
+claude plugin marketplace add murnana/murnana-claude-code-plugin --sparse .claude-plugin
 ```
+
+セッション内の `/plugin marketplace add murnana/murnana-claude-code-plugin` でも追加できますが、リポジトリー全体をクローンします。
+すでに追加済みの場合は、`claude plugin marketplace remove murnana-claude-code-plugin` で削除してから追加し直してください。
 
 ## プラグインのインストール
 
 ```
-/plugin install <plugin-name>@murnana-claude-code-plugin
+claude plugin install <plugin-name>@murnana-claude-code-plugin
 ```
+
+各プラグインは、インストール時にそのディレクトリーだけが取得されます。
 
 ## 公開プラグイン
 

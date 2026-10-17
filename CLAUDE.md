@@ -13,13 +13,13 @@ This repo is a **Claude Code plugin marketplace** owned by `murnana`. The market
 A user installs this marketplace with:
 
 ```
-/plugin marketplace add murnana/murnana-claude-code-plugin
+claude plugin marketplace add murnana/murnana-claude-code-plugin --sparse .claude-plugin
 ```
 
-…then `/plugin install <plugin-name>@murnana-claude-code-plugin`.
+…then `claude plugin install <plugin-name>@murnana-claude-code-plugin`. `--sparse .claude-plugin` keeps the marketplace checkout to the manifest only; each plugin is fetched separately at install time because its `source` is `git-subdir`.
 
 ## Conventions
 
 - Plugin sources should live in their own directories (e.g. `plugins/<plugin-name>/`) with a `.claude-plugin/plugin.json` and the relevant `commands/`, `agents/`, `hooks/`, `skills/`, or `mcp.json` subpaths as appropriate.
-- After modifying `marketplace.json`, validate it parses as JSON before committing.
+- `marketplace.json` conventions (source type, local testing, validation) live in `.claude/rules/marketplace-manifest.md`.
 - Per-plugin documentation (usage, design rationale) lives under `docs/plugins/<plugin-name>/`, separate from the plugin's own `skills/*/references/` (which holds the rules Claude reads at runtime).
