@@ -21,7 +21,5 @@ claude plugin marketplace add murnana/murnana-claude-code-plugin --sparse .claud
 ## Conventions
 
 - Plugin sources should live in their own directories (e.g. `plugins/<plugin-name>/`) with a `.claude-plugin/plugin.json` and the relevant `commands/`, `agents/`, `hooks/`, `skills/`, or `mcp.json` subpaths as appropriate.
-- Give every `marketplace.json` entry a `git-subdir` source (`url`: `murnana/murnana-claude-code-plugin`, `path`: `plugins/<plugin-name>`), not a relative path. A relative path needs `plugins/` in the marketplace checkout, which defeats `--sparse .claude-plugin`.
-- Plugins installed through the marketplace come from GitHub `main`, so unpushed or unmerged changes do not show up. Test local changes with `claude --plugin-dir plugins/<plugin-name>`.
-- After modifying `marketplace.json`, run `claude plugin validate .` before committing. It no longer checks each plugin's `plugin.json`, so validate those with `claude plugin validate plugins/<plugin-name>`.
+- `marketplace.json` conventions (source type, local testing, validation) live in `.claude/rules/marketplace-manifest.md`.
 - Per-plugin documentation (usage, design rationale) lives under `docs/plugins/<plugin-name>/`, separate from the plugin's own `skills/*/references/` (which holds the rules Claude reads at runtime).
