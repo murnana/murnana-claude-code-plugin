@@ -2,7 +2,7 @@
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-git",
   "description": "Git workflow helpers",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
   "keywords": ["Git", "commit"],
   "defaultEnabled": false,
