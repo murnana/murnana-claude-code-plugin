@@ -15,7 +15,7 @@ claude plugin install murnana-github@murnana-claude-code-plugin
 
 | スキル | 起動 | 概要 |
 |---|---|---|
-| [pr-create](pr-create.md) | `/murnana-github:pr-create` | プロジェクトの規約に従い、チェック→push→テンプレート検出→承認を経て PR を作成する |
+| [pr-create](pr-create.md) | `/murnana-github:pr-create` | プロジェクトの規約に従い、チェック→push→テンプレート検出→承認を経て PR を作成する（スタック上のブランチなら `gh stack submit` を使う） |
 | [stack-create](stack-create.md) | `/murnana-github:stack-create` | 変更を層に分割する設計→承認→`gh stack init/add`→チェック→`gh stack submit --auto` で Stacked PR を作成する |
 | [stack-rebase](stack-rebase.md) | `/murnana-github:stack-rebase` | `gh stack rebase` / `sync` でスタックをカスケード rebase し、コンフリクトを解決して承認後に push する |
 | [stack-pr-message](stack-pr-message.md) | `/murnana-github:stack-pr-message` | スタック内の各 PR のタイトル・本文を層ごとに作成し、承認後に `gh pr edit` で反映する |
@@ -35,7 +35,8 @@ plugins/murnana-github/
     │       ├── project-rules.md
     │       ├── pr-template-discovery.md
     │       ├── pr-message.md
-    │       └── gh-fallback-mcp.md
+    │       ├── gh-fallback-mcp.md
+    │       └── stack-mode.md
     ├── stack-create/
     │   ├── SKILL.md
     │   └── references/
