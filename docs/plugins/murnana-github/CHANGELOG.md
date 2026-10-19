@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- pr-create スキル: 現在のブランチが `gh stack` のスタックに属する場合（`gh stack view --short` で検出）、`git push` / `gh pr create` の代わりに `gh stack submit --auto` と `gh pr edit` で PR を作成するようにした
+
 ## [0.1.0] - 2026-10-17
 
 ### Added

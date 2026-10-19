@@ -19,6 +19,8 @@
 | 6 | 提示と**承認待ち** |
 | 7 | `gh pr create` で作成 |
 
+現在のブランチが `gh stack` のスタックに属している場合（`gh stack view --short` が exit 0）は**スタックモード**になり、Step 4 の `git push` と Step 7 の `gh pr create` の代わりに `gh stack submit --auto` → `gh pr edit` で、PR の無い層すべての PR を作成する。
+
 ## 規約の優先順位
 
 プロジェクト固有の規約が見つかれば、それが唯一の正。見つからないときだけフォールバック規約を使う。
@@ -27,6 +29,7 @@
 - テンプレートの探索順（GitHub公式の規約に準拠）→ [`references/pr-template-discovery.md`](../../../plugins/murnana-github/skills/pr-create/references/pr-template-discovery.md)
 - フォールバック規約（テンプレートが無い場合、`:emoji:` 付きタイトル + なぜ/影響範囲/デバッグ方法の3セクション）→ [`references/pr-message.md`](../../../plugins/murnana-github/skills/pr-create/references/pr-message.md)
 - `gh` が使えない場合のフォールバック手順 → [`references/gh-fallback-mcp.md`](../../../plugins/murnana-github/skills/pr-create/references/gh-fallback-mcp.md)
+- スタック上のブランチでの手順 → [`references/stack-mode.md`](../../../plugins/murnana-github/skills/pr-create/references/stack-mode.md)
 
 いずれも中身はこのドキュメントに写さず、リンク先を正とする。
 
@@ -39,3 +42,6 @@
 - **なぜ emoji テーブルを `murnana-git` と別々に持つか** — プラグインは独立にインストール可能で、スキルの `references/` は自プラグインの `${CLAUDE_PLUGIN_ROOT}` 配下にしか解決できない。クロスプラグイン参照は成立しないため、`murnana-git` の `commit-message.md` にある表を意図的に複製している。片方を直すときはもう片方も確認する（両ファイル冒頭にコメントで明記）。
 - **なぜ Draft PR をデフォルトにしないか** — `$ARGUMENTS` やユーザーの明示的な指示がない限り通常の PR を作る。毎回 Draft かどうかを聞くと承認フローが増えるだけで、通常運用では不要な確認になる。
 - **なぜ assignee が未指定なら `--assignee @me` を付けるか** — テンプレートやユーザー指示にアサイン先の明言がない場合、レビュー依頼の起点が誰もアサインされていない宙に浮いた PR になるのを避けるため、スキルの実行者自身を自動的にアサインする。
+- **なぜスタック上のブランチでは `gh pr create` を使わないか** — 素の `gh pr create` はスタックの親ブランチではなくトランクを base にしがちで、作られた PR は GitHub 上のスタックにも紐付かない。`gh stack submit` なら base の連鎖とスタックへのリンクを正しく行う。自前の `git push` も gh-stack のメタデータとずれるため行わない。
+- **なぜ `submit --open` ではなく `gh pr ready` で ready にするか** — `--open` はスタック内の既存の draft PR まで ready にしてしまう。`submit --auto` で draft 作成 → 新規 PR だけ `gh pr ready` することで、通常モードの「Draft をデフォルトにしない」方針と揃えつつ既存 PR の状態を変えない。
+- **なぜ検出に `gh stack view --short` の終了コードを使うか** — スタック外なら exit 2、gh-stack 未導入でも非 0 になり、どちらも通常モードに落ちる。gh-stack を入れていない環境でも挙動が変わらない。
