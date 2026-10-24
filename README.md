@@ -32,6 +32,7 @@ claude plugin install <plugin-name>@murnana-claude-code-plugin
 | `murnana-git` | Git ワークフロー支援。`/murnana-git:commit` でコミット |
 | `murnana-github` | GitHub ワークフロー支援。`/murnana-github:pr-create` で PR 作成、`/murnana-github:stack-create` / `stack-rebase` / `stack-pr-message` で Stacked PR の作成・rebase・メッセージ作成 |
 | `murnana-agent-config` | Claude Code の設定作成支援。`/murnana-agent-config:rule-create` でルールファイル作成、`/murnana-agent-config:skill-create` でスキル作成 |
+| `murnana-tech-docs` | 技術ドキュメントの作成支援。`/murnana-tech-docs:changelog-write` で Keep a Changelog に沿った CHANGELOG.md の作成・追記 |
 
 ## ライセンス
 
