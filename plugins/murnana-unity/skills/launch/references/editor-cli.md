@@ -1,6 +1,6 @@
 # Unity launch reference
 
-Sources: [Unity CLI reference](https://docs.unity.com/en-us/unity-cli/unity-cli-reference) and the Editor command-line arguments page for Unity 6.3 (<https://docs.unity3d.com/6000.3/Documentation/Manual/EditorCommandLineArguments.html>). Values can change between Editor versions; fetch the page for the project's version when unsure.
+Sources: [Unity CLI reference](https://docs.unity.com/en-us/unity-cli/unity-cli-reference) and the Editor command-line arguments page for Unity 6.3 (<https://docs.unity3d.com/6000.3/Documentation/Manual/EditorCommandLineArguments.html>). Values can change between Editor versions; when unsure, give the user the page for the project's version to check instead of fetching it.
 
 ## Editor executable (default Hub install path)
 

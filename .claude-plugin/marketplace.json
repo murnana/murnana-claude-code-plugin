@@ -64,7 +64,7 @@
         "path": "plugins/murnana-unity-package"
       },
       "description": "Helpers for maintaining Unity Package Manager (UPM) packages (CHANGELOG, etc.)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-unity",
@@ -73,8 +73,8 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-unity"
       },
-      "description": "Helpers for working with the Unity Editor (launch a project on a chosen platform, etc.)",
-      "version": "0.0.1"
+      "description": "Helpers for working with the Unity Editor (launch a project on a chosen platform, check work against Unity's terms, etc.)",
+      "version": "0.1.0"
     }
   ]
 }

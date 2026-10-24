@@ -3,7 +3,7 @@ name: launch
 description: Launches a Unity project in the Unity Editor on a chosen platform, and saves the first platform given as the project default.
 disable-model-invocation: true
 argument-hint: "[platform: android|ios|webgl|win64|osx|linux64|tvos|visionos|…] [project path]"
-allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *) WebFetch(domain:docs.unity3d.com) WebFetch(domain:docs.unity.com)
+allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *)
 ---
 
 # Launch Unity
@@ -96,4 +96,4 @@ One or two lines: Editor version, platform, project, whether the default was sav
 - `-buildTarget` takes lowercase identifiers, not Hub labels. `win` is 32-bit; use `win64`.
 - A project whose version is missing from the machine opens a Hub dialog if launched through the Hub. Check the version first.
 - `-activeBuildProfile <path>` (Unity 6) applies a build profile's scripting defines before compilation. Offer it only if the user mentions build profiles; it is a separate choice from the platform.
-- Documentation differs per version. Fetch the page for the project's version when an argument is in doubt: `https://docs.unity3d.com/<major>000.<minor>/Documentation/Manual/EditorCommandLineArguments.html` for Unity 6 (for example `6000.3`), and `https://docs.unity3d.com/<year>.<minor>/Documentation/Manual/CommandLineArguments.html` for 2022.x and earlier.
+- Documentation differs per version. Don't fetch Unity's documentation yourself: Unity's Terms of Service restrict automated access to its sites. When an argument is in doubt, run `unity open --help` when the CLI exists, or give the user the page for the project's version to check: `https://docs.unity3d.com/<major>000.<minor>/Documentation/Manual/EditorCommandLineArguments.html` for Unity 6 (for example `6000.3`), and `https://docs.unity3d.com/<year>.<minor>/Documentation/Manual/CommandLineArguments.html` for 2022.x and earlier.

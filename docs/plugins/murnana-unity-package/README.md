@@ -37,3 +37,8 @@ plugins/murnana-unity-package/
 ## 今後
 
 現時点のスキルは `changelog-write` の 1 つのみ。今後、`package.json` の編集、サンプルやテストの追加など、UPM パッケージ開発の作業を支援するスキルを同じプラグインに追加していく想定。追加時はこのディレクトリに `<スキル名>.md` を並べる。
+
+## 商標
+
+Unity は Unity Technologies またはその関連会社の米国およびその他の国における商標または登録商標です。
+このプラグインは、Unity Technologies およびその関連会社が後援・提携するものではありません。
