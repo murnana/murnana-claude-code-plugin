@@ -23,11 +23,6 @@ claude plugin install murnana-unity-package@murnana-claude-code-plugin
 plugins/murnana-unity-package/
 ├── .claude-plugin/
 │   └── plugin.json
-├── evals/
-│   └── <ケース名>/          # 起動判定の claude plugin eval ケース（起動する 5 件・しない 5 件）
-│       ├── prompt.md
-│       └── graders/
-│           └── skill-fired.md
 └── skills/
     └── changelog-write/
         ├── SKILL.md
