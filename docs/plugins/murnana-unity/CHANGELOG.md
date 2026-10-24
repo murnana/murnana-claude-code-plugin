@@ -9,6 +9,10 @@
 
 ## [0.1.0] - 2026-10-24
 
+### Changed
+
+- launch スキルが Unity のドキュメント（docs.unity3d.com、docs.unity.com）を自動で取得しないようにした。Unity 利用規約 §17.2 が自動手段によるサイトへのアクセスを制限しているため。引数を確かめたいときは `unity open --help` を使うか、該当バージョンのページ URL を案内してユーザーに確認してもらう
+
 ### Added
 
 - Unity 関連のツール、Claude Code プラグイン、UPM パッケージ、Unity プロジェクトが Unity の規約に違反していないかを点検する terms-checker エージェントを追加した。最新の Unity 利用規約、Editor Software Terms、商標ガイドライン、Package Guidelines、Manual の利用条件を毎回取得して照合し、該当条項と対処案を報告する。判定は「規約への当てはまり方」と「影響の大きさ」の 2 軸で示し、規約に関する記述には出典タグを付ける。引用は取得した本文と照合し、前提条件（Unity との契約や配布形態など）も報告に明記する。ファイルは編集しない

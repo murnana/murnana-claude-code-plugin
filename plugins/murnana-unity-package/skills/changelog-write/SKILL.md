@@ -3,7 +3,7 @@ name: changelog-write
 description: Creates or updates the CHANGELOG.md of a Unity Package Manager (UPM) package following Keep a Changelog and Unity's package versioning rules, and on request cuts a release that also bumps the version in the package's package.json.
 when_to_use: Use when the user asks to record changes in a UPM package's changelog, write its release notes, or release a new version of it. A UPM package is a folder with a package.json whose name is reverse-domain (com.company.package) and that has Unity fields such as `unity`. Example requests - "Unity パッケージの CHANGELOG を更新して", "UPM パッケージの変更履歴に追記して", "このパッケージを 1.2.0 でリリースして", "update the UPM package changelog", "release com.acme.foo 1.2.0". Not for npm or other non-Unity packages, Claude Code plugins, a Unity project's own version (bundleVersion), or dependency updates in Packages/manifest.json.
 argument-hint: "[changes to record, or \"release\" / a version to cut]"
-allowed-tools: Read Grep Glob Edit Write AskUserQuestion WebFetch(domain:raw.githubusercontent.com) WebFetch(domain:keepachangelog.com) WebFetch(domain:docs.unity3d.com) Bash(git status *) Bash(git log *) Bash(git diff *) Bash(git tag -l *) Bash(git tag --list *) Bash(git describe *) Bash(git remote get-url *) Bash(git show *) Bash(gh pr list *) Bash(gh pr view *) Bash(gh issue view *) Bash(uuidgen)
+allowed-tools: Read Grep Glob Edit Write AskUserQuestion WebFetch(domain:raw.githubusercontent.com) WebFetch(domain:keepachangelog.com) Bash(git status *) Bash(git log *) Bash(git diff *) Bash(git tag -l *) Bash(git tag --list *) Bash(git describe *) Bash(git remote get-url *) Bash(git show *) Bash(gh pr list *) Bash(gh pr view *) Bash(gh issue view *) Bash(uuidgen)
 ---
 
 # Changelog Write (UPM package)
@@ -111,7 +111,7 @@ Present the diff of both files and get approval before writing. Don't create tag
 - A Fixed entry without reproduction steps ("Fixed a crash") isn't finished. Ask the user if the steps can't be found in the issue, PR or diff.
 - Don't infer compatibility from the version bump. Breaking changes often ship in minor and patch releases; judge from the diff. In Unity, a changed `.meta` GUID or an asmdef setting can break users without any C# change.
 - A raised minimum Unity version isn't `**Breaking:**`: the Package Manager hides the new version from older Editors. Record it under Changed, bump at least MINOR, and mention it in the release summary.
-- If a Unity rule in the references looks outdated, WebFetch the Unity Manual page listed under its Sources and follow the Manual.
+- If a Unity rule in the references looks outdated, don't fetch the Unity Manual yourself: Unity's Terms of Service restrict automated access to its sites. Give the user the Manual page listed under its Sources, and follow the Manual where the user reports that it differs.
 - `CHANGELOG.md` belongs at the package root, never in `Documentation~/` or `Samples~/`. Never edit a package under `Library/PackageCache/`.
 - Never reuse or change an existing `.meta` GUID. A new `CHANGELOG.md` in a package that tracks `.meta` files needs its own `.meta`, or immutable installs warn on import.
 - Unity's Package Validation Suite flags an `[Unreleased]` section at publish and promotion time. Follow the project's habit for whether an empty one stays after a release.

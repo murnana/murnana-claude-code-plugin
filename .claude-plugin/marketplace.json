@@ -64,7 +64,7 @@
         "path": "plugins/murnana-unity-package"
       },
       "description": "Helpers for maintaining Unity Package Manager (UPM) packages (CHANGELOG, etc.)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-unity",
