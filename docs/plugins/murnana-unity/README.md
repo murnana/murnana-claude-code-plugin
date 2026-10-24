@@ -37,3 +37,8 @@ plugins/murnana-unity/
         └── references/
             └── editor-cli.md
 ```
+
+## 商標
+
+Unity は Unity Technologies またはその関連会社の米国およびその他の国における商標または登録商標です。
+このプラグインは、Unity Technologies およびその関連会社が後援・提携するものではありません。
