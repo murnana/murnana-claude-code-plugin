@@ -17,12 +17,20 @@ claude plugin install murnana-unity@murnana-claude-code-plugin
 |---|---|---|
 | [launch](launch.md) | `/murnana-unity:launch [プラットフォーム] [プロジェクトパス]`（手動起動のみ。Claude が自動では起動しない） | Unity プロジェクトを、指定したプラットフォーム（`-buildTarget`）で Unity Editor に開く。最初に指定したプラットフォームをプロジェクトの既定として保存する |
 
+## 収録エージェント
+
+| エージェント | 起動 | 概要 |
+|---|---|---|
+| [terms-checker](terms-checker.md) | 「Unity の規約に違反していないか確認して」などの依頼で Claude が委任、または `@murnana-unity:terms-checker` | Unity 関連のツール・プラグイン・パッケージ・プロジェクトを、最新の Unity 利用規約、Editor Software Terms、商標ガイドラインなどと照合し、条項つきでリスクを報告する（読み取り専用） |
+
 ## ファイル構成
 
 ```
 plugins/murnana-unity/
 ├── .claude-plugin/
 │   └── plugin.json
+├── agents/
+│   └── terms-checker.md
 └── skills/
     └── launch/
         ├── SKILL.md

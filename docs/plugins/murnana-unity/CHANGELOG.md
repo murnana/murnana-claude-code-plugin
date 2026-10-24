@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-24
+
+### Added
+
+- Unity 関連のツール、Claude Code プラグイン、UPM パッケージ、Unity プロジェクトが Unity の規約に違反していないかを点検する terms-checker エージェントを追加した。最新の Unity 利用規約、Editor Software Terms、商標ガイドライン、Package Guidelines、Manual の利用条件を毎回取得して照合し、該当条項と対処案を報告する。判定は「規約への当てはまり方」と「影響の大きさ」の 2 軸で示し、規約に関する記述には出典タグを付ける。引用は取得した本文と照合し、前提条件（Unity との契約や配布形態など）も報告に明記する。ファイルは編集しない
+
 ## [0.0.1] - 2026-10-24
 
 ### Added
@@ -14,4 +20,5 @@
 - Unity プロジェクトを指定したプラットフォームで Unity Editor に開く launch スキルを追加した。Unity CLI で Editor の検索・インストールを行い、Editor 本体の `-projectPath` と `-buildTarget` で起動する。最初に指定したプラットフォームをプロジェクトの既定として保存し、指定がなければそれを使う
 
 [unreleased]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
-[0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
+[0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
+[0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/b55cccb/plugins/murnana-unity

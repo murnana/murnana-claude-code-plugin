@@ -34,7 +34,7 @@ claude plugin install <plugin-name>@murnana-claude-code-plugin
 | `murnana-agent-config` | Claude Code の設定作成支援。`/murnana-agent-config:rule-create` でルールファイル作成、`/murnana-agent-config:skill-create` でスキル作成 |
 | `murnana-tech-docs` | 技術ドキュメントの作成支援。`/murnana-tech-docs:changelog-write` で Keep a Changelog に沿った CHANGELOG.md の作成・追記 |
 | `murnana-unity-package` | Unity Package Manager (UPM) パッケージの保守支援。`/murnana-unity-package:changelog-write` で Unity のバージョニング規則に沿った CHANGELOG.md の作成・追記とリリース（`package.json` の版更新を含む） |
-| `murnana-unity` | Unity Editor の操作支援。`/murnana-unity:launch` で Unity プロジェクトを指定プラットフォームで起動（最初に指定したプラットフォームを既定として保存） |
+| `murnana-unity` | Unity Editor の操作支援。`/murnana-unity:launch` で Unity プロジェクトを指定プラットフォームで起動（最初に指定したプラットフォームを既定として保存）、`terms-checker` エージェントで Unity の規約への適合を点検 |
 
 ## ライセンス
 
