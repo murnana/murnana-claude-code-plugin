@@ -43,8 +43,13 @@
 
 上げ幅は、`[Unreleased]` に溜まった変更のうち最大のものに合わせます。`plugins/` の外の変更（README、`docs/`、`.claude/`、CLAUDE.md）ではバージョンを上げません。
 
+## サードパーティーの資料
+
+他者の文章・コード・テンプレート・仕様などを複製、要約、翻案して取り込むときは、出典のライセンスを確認し、同じ PR で [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) を更新します。ライセンスが許さない使い方は避け、リンクか自分の言葉での要約にとどめます。
+
 ## 関連ファイル
 
 - `.claude/rules/branch-workflow.md`: ブランチ運用
 - `.claude/rules/plugin-version-bump.md`: バージョン更新
 - `.claude/rules/marketplace-manifest.md`: `marketplace.json` の書き方
+- `.claude/rules/third-party-notices.md`: 権利の確認と THIRD_PARTY_NOTICES.md の更新
