@@ -17,6 +17,7 @@
 
 - launch スキルが Editor 起動時に `-logFile` で `<プロジェクト>/Logs/Editor_<yyyyMMdd_HHmmss>.log` を指定するようにした。起動コマンド実行時の日時をファイル名にするため、他の Unity とログが混ざらない。ユーザーが別の `-logFile` を求めたときはそちらを使う
 - launch スキルの起動前に `date` を別コマンドで実行し、結果をリテラルとして埋め込むようにした。`unity open --args` の分割規則が不明なため、パスに空白があるときは Editor 本体を直接起動する。起動完了の待機には `unity status --timeout` を使う
+- launch スキルの `allowed-tools` に、Windows の既定パスにある Editor（`Unity.exe`）の直接起動を許可するパターンを追加した（Git Bash 形式の `/c/Program Files/…` と `C:/Program Files/…` の両方）
 
 ## [0.1.0] - 2026-10-24
 

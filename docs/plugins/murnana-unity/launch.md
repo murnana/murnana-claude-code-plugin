@@ -53,3 +53,5 @@ Unity プロジェクトを Unity Editor で起動するスキル。
 ### 公式スキルとの関係
 
 [Unity-Technologies/skills](https://github.com/Unity-Technologies/skills) の `unity-cli` スキルを読み、`unity status --until-ready` という待機手段の存在を知るために参照した。文面や構成は転記せず、手順は本プラグイン独自の言葉で書いている。公式リポジトリの `LICENSE.md` は Unity Companion License（Unity に依存するプロジェクト向け）を指しており、その本文と Unity 利用規約は実行環境からは取得できず未確認。配布前に terms-checker エージェントで確認すること。
+
+Windows の Editor を直接起動するときの許可パターンは、Hub の既定パス（`C:\Program Files\Unity\Hub\Editor\<version>\Editor\Unity.exe`）を `/` 区切りで書いている。インストール先を変えている場合は一致せず、許可プロンプトが出る。
