@@ -43,7 +43,7 @@ Unity プロジェクトを Unity Editor で起動するスキル。
 
 ### 起動完了の待機（MCP 接続テスト）
 
-`unity open` は Editor のプロセスを起動した時点で戻るため、その直後は Unity MCP や `unity command` がまだ応答しない。そこで起動後に `unity status --until-ready --project-path <プロジェクト>` で Editor が応答するまで待ち、その後に作業を始める。Unity MCP も CLI も、プロジェクトの `com.unity.pipeline` パッケージ経由で Editor に接続するため、先に `Packages/manifest.json` にこのパッケージがあるかを確かめる。無ければ待っても ready にならないので、待たずに `unity pipeline install` を案内する。
+`unity open` は Editor のプロセスを起動した時点で戻るため、その直後は Unity MCP や `unity command` がまだ応答しない。そこで起動後に `unity status --until-ready --project-path <プロジェクト>` で Editor が応答するまで待ち、その後に作業を始める。Unity MCP も CLI も、プロジェクトの `com.unity.pipeline` パッケージ経由で Editor に接続するため、先に `Packages/manifest.json` にこのパッケージがあるかを確かめる。無ければ待っても ready にならないので、待たずに「パッケージが未導入のため起動完了の確認はしていない」とだけ報告する。導入の案内はしない（プロジェクトによっては使えない、または使わない選択をしているため）。
 
 - タイムアウトは `unity status --timeout`（秒、既定 300）で指定し、Bash の `timeout` はそれより長くする。初回のプラットフォーム切り替えは再インポートで長引くため延ばす。
 - Safe Mode（C# のコンパイルエラー）やモーダルダイアログ（利用規約、プロジェクトのアップグレード）で止まっているときは、待ち続けずに原因をユーザーに伝える。

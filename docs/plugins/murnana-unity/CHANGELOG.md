@@ -11,7 +11,7 @@
 
 ### Added
 
-- launch スキルが起動後に Editor の応答を待つようにした。`unity status --until-ready` で ready になるまで待ち、Unity MCP や `unity command` が使える状態になってから作業を始める。`com.unity.pipeline` が未導入のとき、Safe Mode のとき、ダイアログで止まっているときは待たずに原因を伝える
+- launch スキルが起動後に Editor の応答を待つようにした。`unity status --until-ready` で ready になるまで待ち、Unity MCP や `unity command` が使える状態になってから作業を始める。`com.unity.pipeline` が未導入のときは待機を省いてその旨だけ報告し（導入は案内しない）、Safe Mode のとき、ダイアログで止まっているときは待たずに原因を伝える
 
 ### Changed
 
