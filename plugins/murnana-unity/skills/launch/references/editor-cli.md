@@ -56,7 +56,7 @@ Add `--non-interactive` when running the CLI without a terminal, so it errors in
 | `-projectPath <path>` | Project to open |
 | `-buildTarget <name>` | Active platform on open (table above) |
 | `-activeBuildProfile <path>` | Unity 6 build profile asset, relative to the project root |
-| `-logFile <path>` | Editor log location; `-` prints to the console |
+| `-logFile <path>` | Editor log location; `-` prints to the console. This skill always sets `<project>/Logs/Editor_<yyyyMMdd_HHmmss>.log` unless the user asks otherwise |
 | `-force-vulkan`, `-force-d3d11`, `-force-d3d12`, `-force-metal`, `-force-glcore` | Force a graphics API (d3d is Windows-only, metal is macOS-only) |
 | `-disable-assembly-updater` | Skip API Updater |
 | `-rebuildLibrary` | Delete `Library/` and reimport everything (slow; only on request) |

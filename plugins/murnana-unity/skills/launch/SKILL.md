@@ -3,7 +3,7 @@ name: launch
 description: Launches a Unity project in the Unity Editor on a chosen platform, and saves the first platform given as the project default.
 disable-model-invocation: true
 argument-hint: "[platform: android|ios|webgl|win64|osx|linux64|tvos|visionos|…] [project path]"
-allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *)
+allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(mkdir -p *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *)
 ---
 
 # Launch Unity
@@ -68,27 +68,32 @@ A stale lockfile with no process is fine to ignore.
 
 ## Step 5: Launch
 
+Every launch writes its own Editor log, named by the launch time, so that logs of several Editors never mix. Build the path from the project root, at `<project>/Logs/Editor_<yyyyMMdd_HHmmss>.log` (that is `./Logs/Editor_<日時>.log` seen from the project). Take the timestamp from `date` in the launch command itself, not from an earlier step, and pass an absolute path: the Editor resolves a relative `-logFile` from its own working directory, not from the project.
+
 With the `unity` CLI, which returns once the Editor is starting:
 
 ```sh
-unity open "<project>" --build-target <target> [--editor-path "<editor .app>"]
+mkdir -p "<project>/Logs"
+LOG="<project>/Logs/Editor_$(date +%Y%m%d_%H%M%S).log"
+unity open "<project>" --build-target <target> [--editor-path "<editor .app>"] --args "-logFile \"$LOG\""
 ```
 
-`--build-target` is passed to the Editor as `-buildTarget`. Use the CLI's own spelling from [references/editor-cli.md](references/editor-cli.md) (for example `Android`, `StandaloneOSX`). Extra Editor arguments go in `--args "<string>"`. Add `--wait` only if the user wants to block.
+`--build-target` is passed to the Editor as `-buildTarget`. Use the CLI's own spelling from [references/editor-cli.md](references/editor-cli.md) (for example `Android`, `StandaloneOSX`). Other Editor arguments go in the same `--args "<string>"`. Add `--wait` only if the user wants to block.
 
 Without the CLI, start the Editor executable directly with the Editor's lowercase target, in the background (`run_in_background: true`) because it stays running until the user quits it:
 
 ```sh
-"<editor executable>" -projectPath "<project>" -buildTarget <target>
+mkdir -p "<project>/Logs"
+"<editor executable>" -projectPath "<project>" -buildTarget <target> -logFile "<project>/Logs/Editor_$(date +%Y%m%d_%H%M%S).log"
 ```
 
-Add extra Editor arguments only when the user asked for them (`-logFile -`, `-force-vulkan`, `-disable-assembly-updater`, and so on; see the reference). Do not use `--batchmode`, `-batchmode`, `-quit`, or `-nographics`: they make the Editor non-interactive or exit it. Do not use `--accept-upgrades` unless the user asks: it upgrades the project and rewrites scripts without a prompt.
+Add extra Editor arguments only when the user asked for them (`-force-vulkan`, `-disable-assembly-updater`, and so on; see the reference). If the user asks for another `-logFile` (for example `-logFile -` to print to the console), use theirs instead of the timestamped one. Do not use `--batchmode`, `-batchmode`, `-quit`, or `-nographics`: they make the Editor non-interactive or exit it. Do not use `--accept-upgrades` unless the user asks: it upgrades the project and rewrites scripts without a prompt.
 
 Switching a project to another platform reimports assets and can take many minutes the first time. Warn the user when the target differs from the platform in `ProjectSettings/EditorUserBuildSettings.asset` (`m_ActiveBuildTarget`) or the first launch.
 
 ## Step 6: Report
 
-One or two lines: Editor version, platform, project, whether the default was saved. If the launch command exits immediately with an error, show the error and the command. Do not retry with different flags blindly.
+One or two lines: Editor version, platform, project, the log file path, whether the default was saved. If the launch command exits immediately with an error, show the error and the command. Do not retry with different flags blindly.
 
 ## Gotchas
 
