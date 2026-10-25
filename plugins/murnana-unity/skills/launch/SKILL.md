@@ -3,7 +3,7 @@ name: launch
 description: Launches a Unity project in the Unity Editor on a chosen platform, and saves the first platform given as the project default.
 disable-model-invocation: true
 argument-hint: "[platform: android|ios|webgl|win64|osx|linux64|tvos|visionos|…] [project path]"
-allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(mkdir -p *) Bash(date *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *) Bash(/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash(C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *)
+allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(mkdir -p *) Bash(date *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *) Bash(/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash(C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash("/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity" *) Bash("/opt/Unity/Hub/Editor/*/Editor/Unity" *) Bash("/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *) Bash("C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *)
 ---
 
 # Launch Unity
