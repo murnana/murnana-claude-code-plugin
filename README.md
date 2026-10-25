@@ -36,6 +36,10 @@ claude plugin install <plugin-name>@murnana-claude-code-plugin
 | `murnana-unity-package` | Unity Package Manager (UPM) パッケージの保守支援。`/murnana-unity-package:changelog-write` で Unity のバージョニング規則に沿った CHANGELOG.md の作成・追記とリリース（`package.json` の版更新を含む） |
 | `murnana-unity` | Unity Editor の操作支援。`/murnana-unity:launch` で Unity プロジェクトを指定プラットフォームで起動（最初に指定したプラットフォームを既定として保存）、`terms-checker` エージェントで Unity の規約への適合を点検 |
 
+## 開発
+
+ブランチ運用やリリース手順は [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
+
 ## 商標
 
 Unity は Unity Technologies またはその関連会社の米国およびその他の国における商標または登録商標です。
