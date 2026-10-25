@@ -15,7 +15,7 @@ Create or update a `.gitignore` with templates from [murnana/gitignore](https://
 ```!
 git rev-parse --show-toplevel 2>/dev/null || true
 git ls-files --cached --others --exclude-standard -- '.gitignore' '**/.gitignore' 2>/dev/null | head -20 || true
-grep -nE '^# --- (BEGIN|END) murnana/gitignore ' .gitignore 2>/dev/null || true
+grep -nE '^# --- (BEGIN|END) [^ ]+\.gitignore( |$)' .gitignore 2>/dev/null || true
 ```
 
 The lines above are the repo root, the existing `.gitignore` files, and the managed block markers already in the root `.gitignore`. Do not re-run these commands.

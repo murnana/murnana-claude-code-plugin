@@ -5,9 +5,9 @@ Each template lives in its own block so it can be refreshed or removed later wit
 ## Format
 
 ```gitignore
-# --- BEGIN murnana/gitignore Unity.gitignore (e4410f4e4a88) ---
+# --- BEGIN Unity.gitignore (e4410f4e4a88) ---
 <template text, verbatim>
-# --- END murnana/gitignore Unity.gitignore ---
+# --- END Unity.gitignore ---
 ```
 
 - The name is the template's path in murnana/gitignore (`Unity.gitignore`, `Global/macOS.gitignore`, `community/JavaScript/Vue.gitignore`).

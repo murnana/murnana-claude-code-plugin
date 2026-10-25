@@ -30,9 +30,9 @@
 テンプレートごとに次のマーカーで囲む。括弧内は取得元コミットの先頭 12 文字。
 
 ```gitignore
-# --- BEGIN murnana/gitignore Unity.gitignore (e4410f4e4a88) ---
+# --- BEGIN Unity.gitignore (e4410f4e4a88) ---
 （テンプレート本文をそのまま）
-# --- END murnana/gitignore Unity.gitignore ---
+# --- END Unity.gitignore ---
 ```
 
 詳しい規則（挿入位置、更新・削除、ブロック外の行の扱い）は [`references/managed-blocks.md`](../../../plugins/murnana-git/skills/gitignore/references/managed-blocks.md)、テンプレートの推定表は [`references/templates.md`](../../../plugins/murnana-git/skills/gitignore/references/templates.md) を正とする。
