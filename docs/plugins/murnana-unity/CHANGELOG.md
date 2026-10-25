@@ -7,6 +7,18 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-25
+
+### Added
+
+- launch スキルが起動後に Editor の応答を待つようにした。`unity status --until-ready` で ready になるまで待ち、Unity MCP や `unity command` が使える状態になってから作業を始める。`com.unity.pipeline` が未導入のとき、Safe Mode のとき、ダイアログで止まっているときは待たずに原因を伝える
+
+### Changed
+
+- launch スキルが Editor 起動時に `-logFile` で `<プロジェクト>/Logs/Editor_<yyyyMMdd_HHmmss>.log` を指定するようにした。起動コマンド実行時の日時をファイル名にするため、他の Unity とログが混ざらない。ユーザーが別の `-logFile` を求めたときはそちらを使う
+- launch スキルの起動前に `date` を別コマンドで実行し、結果をリテラルとして埋め込むようにした。`unity open --args` の分割規則が不明なため、パスに空白があるときは Editor 本体を直接起動する。起動完了の待機には `unity status --timeout` を使う
+- launch スキルの `allowed-tools` に、Windows の既定パスにある Editor（`Unity.exe`）の直接起動を許可するパターンを追加した（Git Bash 形式の `/c/Program Files/…` と `C:/Program Files/…` の両方）
+
 ## [0.1.0] - 2026-10-24
 
 ### Changed
@@ -24,5 +36,6 @@
 - Unity プロジェクトを指定したプラットフォームで Unity Editor に開く launch スキルを追加した。Unity CLI で Editor の検索・インストールを行い、Editor 本体の `-projectPath` と `-buildTarget` で起動する。最初に指定したプラットフォームをプロジェクトの既定として保存し、指定がなければそれを使う
 
 [unreleased]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
+[0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
 [0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/b55cccb/plugins/murnana-unity

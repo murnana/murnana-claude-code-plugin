@@ -11,7 +11,7 @@ hooks:
         - type: command
           if: "Bash(git commit *)"
           command: >-
-            jq -n --arg log "$(git log --oneline -1 2>/dev/null)"
+            jq -n --arg log "$(git log -1 --format='%H %s' 2>/dev/null)"
             '{hookSpecificOutput:{hookEventName:"PostToolUse",additionalContext:("Commit created: " + $log)}}'
 ---
 
