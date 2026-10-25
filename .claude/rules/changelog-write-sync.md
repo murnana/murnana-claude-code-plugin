@@ -28,4 +28,4 @@ paths:
 
 ## Versioning
 
-- A mirrored change touches both plugins. Bump both versions and add an entry to both CHANGELOGs, following `.claude/rules/plugin-version-bump.md`.
+- A mirrored change touches both plugins. Add an entry to both CHANGELOGs under `[Unreleased]` in the same `feature/*` / `bugfix/*` PR. Bump both versions in the `develop` → `main` release PR, following `.claude/rules/plugin-version-bump.md`.

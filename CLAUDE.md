@@ -18,6 +18,14 @@ claude plugin marketplace add murnana/murnana-claude-code-plugin --sparse .claud
 
 …then `claude plugin install <plugin-name>@murnana-claude-code-plugin`. `--sparse .claude-plugin` keeps the marketplace checkout to the manifest only; each plugin is fetched separately at install time because its `source` is `git-subdir`.
 
+## Branch workflow
+
+Development branches off `develop` (created from `main` if missing) as `feature/*` or `bugfix/*`, and merges back into `develop` without bumping plugin versions. Versions are bumped only in the `develop` → `main` release PR. Details live in `.claude/rules/branch-workflow.md` and `.claude/rules/plugin-version-bump.md`.
+
+## Third-party material
+
+Before adding anything copied, summarized or adapted from another source, check its license and update `THIRD_PARTY_NOTICES.md` in the same PR. Details live in `.claude/rules/third-party-notices.md`.
+
 ## Conventions
 
 - Plugin sources should live in their own directories (e.g. `plugins/<plugin-name>/`) with a `.claude-plugin/plugin.json` and the relevant `commands/`, `agents/`, `hooks/`, `skills/`, or `mcp.json` subpaths as appropriate.
