@@ -91,9 +91,34 @@ Add extra Editor arguments only when the user asked for them (`-force-vulkan`, `
 
 Switching a project to another platform reimports assets and can take many minutes the first time. Warn the user when the target differs from the platform in `ProjectSettings/EditorUserBuildSettings.asset` (`m_ActiveBuildTarget`) or the first launch.
 
-## Step 6: Report
+## Step 6: Wait until the Editor accepts commands
 
-One or two lines: Editor version, platform, project, the log file path, whether the default was saved. If the launch command exits immediately with an error, show the error and the command. Do not retry with different flags blindly.
+`unity open` and the Editor executable return as soon as the process starts. The Editor then needs a while to load the project, so the Unity MCP server and the CLI's live commands do not answer yet. Do not start work that needs the Editor until it does.
+
+1. Check `<project>/Packages/manifest.json` for `com.unity.pipeline` (`Grep`). The CLI and the MCP server reach the Editor through that package. If it is missing, the Editor never becomes ready: skip the wait, say so in the report, and tell the user to run `unity pipeline install --project-path "<project>"` and relaunch. Do not install it yourself, because it edits the project.
+2. With the `unity` CLI, block until the Editor answers (the same wait the MCP server depends on):
+
+   ```sh
+   unity status --until-ready --project-path "<project>" --format json
+   ```
+
+   Pass the project's full path so another Editor open on a sibling project cannot end the wait. Run it in the foreground with the Bash `timeout` set to 300000 ms, and extend it for a first launch on a new platform (reimport). If `unity status --help` lists `--timeout`, you may use that instead.
+3. Read the result:
+
+   | Result | Meaning | Do |
+   |---|---|---|
+   | Exit `0`, state `ready` | Editor is up and answers | Report ready |
+   | Exit `6` | Not ready within the time limit | Look at the Editor log from Step 5 (`Read` the tail), then report. Do not relaunch |
+   | Safe Mode reported | The project has C# compile errors, and the Pipeline package is not loaded | Show the compile errors and stop. Fixing them is a separate task |
+   | A modal dialog (terms, project upgrade) holds the Editor | Needs the user | Tell the user which dialog and wait for them |
+
+4. Without the CLI there is no readiness check to run. Tell the user the Editor is starting and that no connection test was done.
+
+To confirm the MCP side after `ready`, check that the Unity MCP server is registered for Claude Code (`unity mcp configure --list` shows the status per client). If it is not, tell the user to run `unity mcp configure claude-code` themselves: it writes the client's config file, so never run it unasked.
+
+## Step 7: Report
+
+One or two lines: Editor version, platform, project, the log file path, whether the Editor became ready (or why it was not checked), whether the default was saved. If the launch command exits immediately with an error, show the error and the command. Do not retry with different flags blindly.
 
 ## Gotchas
 
