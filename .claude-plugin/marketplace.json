@@ -24,7 +24,7 @@
         "path": "plugins/murnana-git"
       },
       "description": "Git workflow helpers",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "name": "murnana-github",
