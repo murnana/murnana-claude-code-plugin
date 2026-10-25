@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-25
+
+### Changed
+
+- launch スキルの `allowed-tools` に、引用符つきの Editor パス（macOS・Linux・Windows）のパターンを追加した。起動コマンドは実行ファイルのパスを引用符で囲むため、コマンドが `"` で始まり、引用符なしのパターンでは一致しないおそれがあった
+- launch スキルは `com.unity.pipeline` が未導入のとき、起動完了の待機を省いてその旨だけ報告し、導入を案内しないようにした。プロジェクトによってはこのパッケージを使えない、または使わないため
+
 ## [0.2.0] - 2026-10-25
 
 ### Added
@@ -36,6 +43,7 @@
 - Unity プロジェクトを指定したプラットフォームで Unity Editor に開く launch スキルを追加した。Unity CLI で Editor の検索・インストールを行い、Editor 本体の `-projectPath` と `-buildTarget` で起動する。最初に指定したプラットフォームをプロジェクトの既定として保存し、指定がなければそれを使う
 
 [unreleased]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
+[0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
 [0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/b55cccb/plugins/murnana-unity
