@@ -45,6 +45,8 @@ claude plugin install <plugin-name>@murnana-claude-code-plugin
 Unity は Unity Technologies またはその関連会社の米国およびその他の国における商標または登録商標です。
 このリポジトリーおよび各プラグインは、Unity Technologies およびその関連会社が後援・提携するものではありません。
 
+サードパーティーの資料と権利表記は [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) を参照してください。
+
 ## ライセンス
 
 このリポジトリのコードおよびプラグインは、特に明示のない限り個人利用を前提として提供されます。
