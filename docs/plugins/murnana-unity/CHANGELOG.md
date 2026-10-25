@@ -9,13 +9,14 @@
 
 ## [0.2.0] - 2026-10-25
 
-### Changed
-
-- launch スキルが Editor 起動時に `-logFile` で `<プロジェクト>/Logs/Editor_<yyyyMMdd_HHmmss>.log` を指定するようにした。起動コマンド実行時の日時をファイル名にするため、他の Unity とログが混ざらない。ユーザーが別の `-logFile` を求めたときはそちらを使う
-
 ### Added
 
 - launch スキルが起動後に Editor の応答を待つようにした。`unity status --until-ready` で ready になるまで待ち、Unity MCP や `unity command` が使える状態になってから作業を始める。`com.unity.pipeline` が未導入のとき、Safe Mode のとき、ダイアログで止まっているときは待たずに原因を伝える
+
+### Changed
+
+- launch スキルが Editor 起動時に `-logFile` で `<プロジェクト>/Logs/Editor_<yyyyMMdd_HHmmss>.log` を指定するようにした。起動コマンド実行時の日時をファイル名にするため、他の Unity とログが混ざらない。ユーザーが別の `-logFile` を求めたときはそちらを使う
+- launch スキルの起動前に `date` を別コマンドで実行し、結果をリテラルとして埋め込むようにした。`unity open --args` の分割規則が不明なため、パスに空白があるときは Editor 本体を直接起動する。起動完了の待機には `unity status --timeout` を使う
 
 ## [0.1.0] - 2026-10-24
 

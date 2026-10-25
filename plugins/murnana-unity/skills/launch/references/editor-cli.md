@@ -44,7 +44,8 @@ The host's own desktop platform needs no extra module.
 | `unity editors -i --json` | Installed Editors and paths |
 | `unity install <version> [-c <changeset>] [-m <module>]... [--cm]` | Install an Editor |
 | `unity install-modules -e <version> [-l] [-m <module>]... [--cm]` | List or add modules |
-| `unity open [project] [--build-target <t>] [--editor-path <app>] [--editor-version <v>] [--args "<string>"] [--wait]` | Open a project in the Editor resolved from its version. `--build-target` is passed as `-buildTarget`; `--args` passes any other Editor arguments. Verified against 1.0.0-beta.14. Also has `--batchmode`, `--accept-upgrades`, `--until-ready`, which this skill does not use |
+| `unity open [project] [--build-target <t>] [--editor-path <app>] [--editor-version <v>] [--args "<string>"] [--wait]` | Open a project in the Editor resolved from its version. `--build-target` is passed as `-buildTarget`; `--args` passes any other Editor arguments. Verified against 1.0.0-beta.14. Also has `--batchmode`, `--accept-upgrades`, `--until-ready`, which this skill does not use (`--until-ready` is absent from `unity open --help` in 1.0.0-beta.13, so it may be new in beta.14; the skill waits with `unity status --until-ready` instead). `--args` splitting is not documented: pass nothing with spaces through it |
+| `unity status --until-ready [--timeout <s>] [--project-path <dir>] [--format json]` | Block until the Editor's Pipeline server answers `ready`. `--timeout` defaults to 300 s. A `--project-path` that exists matches that project's Editor only. Verified against 1.0.0-beta.13 |
 | `unity close` | Close the Editor that has the project open. Does not save. Never run it unasked |
 
 Add `--non-interactive` when running the CLI without a terminal, so it errors instead of waiting for a prompt. Exit codes: `0` ok, `2` usage error, `6` primary operation failed, `7` service unreachable (safe to retry).
