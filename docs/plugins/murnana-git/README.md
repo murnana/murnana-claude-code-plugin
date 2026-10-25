@@ -16,6 +16,7 @@ claude plugin install murnana-git@murnana-claude-code-plugin
 | スキル | 起動 | 概要 |
 |---|---|---|
 | [commit](commit.md) | `/murnana-git:commit` | プロジェクトの規約に従い、Why 単位でコミットする |
+| [gitignore](gitignore.md) | `/murnana-git:gitignore` | murnana/gitignore のテンプレートで `.gitignore` を作成・更新する |
 
 ## ファイル構成
 
@@ -24,13 +25,18 @@ plugins/murnana-git/
 ├── .claude-plugin/
 │   └── plugin.json
 └── skills/
-    └── commit/
+    ├── commit/
+    │   ├── SKILL.md
+    │   └── references/
+    │       ├── commit-message.md
+    │       └── project-rules.md
+    └── gitignore/
         ├── SKILL.md
         └── references/
-            ├── commit-message.md
-            └── project-rules.md
+            ├── managed-blocks.md
+            └── templates.md
 ```
 
 ## 今後
 
-現時点のスキルは `commit` の 1 つのみ。今後 Git 関連のスキルを同じプラグインに追加していく想定。追加時はこのディレクトリに `<スキル名>.md` を並べる。
+今後も Git 関連のスキルを同じプラグインに追加していく想定。追加時はこのディレクトリに `<スキル名>.md` を並べる。
