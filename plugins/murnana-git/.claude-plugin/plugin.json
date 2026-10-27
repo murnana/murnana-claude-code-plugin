@@ -3,6 +3,7 @@
   "name": "murnana-git",
   "description": "Git workflow helpers",
   "version": "0.2.0",
+  "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
   "keywords": ["Git", "commit", "gitignore"],
   "defaultEnabled": false,

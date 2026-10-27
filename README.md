@@ -45,8 +45,14 @@ claude plugin install <plugin-name>@murnana-claude-code-plugin
 Unity は Unity Technologies またはその関連会社の米国およびその他の国における商標または登録商標です。
 このリポジトリーおよび各プラグインは、Unity Technologies およびその関連会社が後援・提携するものではありません。
 
-サードパーティーの資料と権利表記は [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) を参照してください。
+サードパーティーの資料と権利表記は、各プラグインの `plugins/<plugin-name>/THIRD_PARTY_NOTICES.md` を参照してください。
 
 ## ライセンス
 
-このリポジトリのコードおよびプラグインは、特に明示のない限り個人利用を前提として提供されます。
+このリポジトリーの内容は [BSD Zero Clause License (0BSD)](LICENSE) で公開します。誰でも自由に使え、改変・再配布でき、権利表記も不要です。動作保証はありません。
+
+ただし、他者の資料を取り込んだ部分は、その権利者のライセンスに従います。該当するものは各プラグインの `THIRD_PARTY_NOTICES.md` に載せています。
+
+## 貢献
+
+外部からの Issue や Pull Request は歓迎しますが、取り入れるかどうかはメンテナーが判断します。必ず取り入れるとは限りません。詳しくは [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。セキュリティ上の問題は [SECURITY.md](SECURITY.md) に従って報告してください。

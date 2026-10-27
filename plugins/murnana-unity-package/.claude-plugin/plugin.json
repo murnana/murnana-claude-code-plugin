@@ -3,6 +3,7 @@
   "name": "murnana-unity-package",
   "description": "Helpers for maintaining Unity Package Manager (UPM) packages (CHANGELOG, etc.)",
   "version": "0.0.2",
+  "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
   "keywords": ["unity", "upm", "package", "changelog", "Keep a Changelog"],
   "defaultEnabled": false,
