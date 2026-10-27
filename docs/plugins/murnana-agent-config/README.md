@@ -17,6 +17,7 @@ claude plugin install murnana-agent-config@murnana-claude-code-plugin
 |---|---|---|
 | [rule-create](rule-create.md) | `/murnana-agent-config:rule-create` | `.claude/rules/`（プロジェクト）または `~/.claude/rules/`（ユーザー）にルールファイルを作成・更新する |
 | [skill-create](skill-create.md) | `/murnana-agent-config:skill-create` | `.claude/skills/`（プロジェクト）、`~/.claude/skills/`（個人）、またはプラグインの `skills/` にスキルを作成・更新し、評価の雛形も作る |
+| [project-instructions-create](project-instructions-create.md) | `/murnana-agent-config:project-instructions-create` | claude.ai の Project の「指示」を、ヒアリングを通して作成・見直しする |
 
 ## ファイル構成
 
@@ -25,6 +26,8 @@ plugins/murnana-agent-config/
 ├── .claude-plugin/
 │   └── plugin.json
 └── skills/
+    ├── project-instructions-create/
+    │   └── SKILL.md
     ├── rule-create/
     │   ├── SKILL.md
     │   └── references/
@@ -42,4 +45,4 @@ plugins/murnana-agent-config/
 
 ## 今後
 
-現在は `rule-create` と `skill-create` を収録している。今後、Claude Code の他の設定（hooks、subagents、CLAUDE.md など）を作成するスキルを同じプラグインに追加していく想定。追加時はこのディレクトリに `<スキル名>.md` を並べる。
+現在は `rule-create`、`skill-create`、`project-instructions-create` を収録している。今後、Claude Code の他の設定（hooks、subagents、CLAUDE.md など）を作成するスキルを同じプラグインに追加していく想定。追加時はこのディレクトリに `<スキル名>.md` を並べる。

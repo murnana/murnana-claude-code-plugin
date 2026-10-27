@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- project-instructions-create スキル（claude.ai の Project の「指示」を作成・見直す）
+
 ## [0.0.1] - 2026-10-12
 
 ### Added
