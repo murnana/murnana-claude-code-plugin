@@ -1,10 +1,10 @@
 # THIRD_PARTY_NOTICES
 
-このプラグインが取り込んでいる、または実行時に利用するサードパーティーの資料と、その権利表記をまとめます。
+このプラグインに含まれるサードパーティーの資料の出典、ライセンスと商標をまとめます。
 
 > 各権利者は、このプラグインを後援・提携していません。
 
-## 取り込んでいる資料
+## 出典とライセンス
 
 ### GitHub Docs（積み重ね PR のコマンドリファレンスなど）
 
@@ -47,22 +47,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-## 実行時に利用するツール（取り込んでいない）
-
-次のツールは、利用者の環境にあらかじめ用意して使います。このプラグインには含まれていません。
-
-| ツール | 用途 | 入手先 |
-|---|---|---|
-| GitHub CLI (`gh`) | PR の作成など | https://cli.github.com/ |
-| gh-stack（`gh` の拡張機能） | 積み重ね PR の作成・rebase | https://github.com/github/gh-stack |
-
-## 利用要件の確認
-
-2026-10-28 に GitHub 利用規約（2026-04-27 版）、追加製品の規約（GitHub Actions を含む）、ロゴのポリシーを確認しました。
-
-- 利用者自身のアカウントで `gh` を使うこと自体を禁じる条項は、見つかりませんでした。API の過度な頻度のリクエストと、トークンの共有は禁じられています。
-- 名前: GitHub の名前やロゴを自分のものであるかのように使うこと、許可なくロゴを使うことが禁じられています。製品名に GitHub の名前を入れる場合の規定は見つかりませんでした。このプラグインの名前 `murnana-github` は、提携を示唆しない説明的な使用と考えていますが、確実ではありません。
 
 ## 商標
 

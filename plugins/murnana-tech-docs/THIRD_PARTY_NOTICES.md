@@ -1,10 +1,10 @@
 # THIRD_PARTY_NOTICES
 
-このプラグインが取り込んでいる、または実行時に参照するサードパーティーの資料と、その権利表記をまとめます。
+このプラグインに含まれるサードパーティーの資料の出典とライセンスをまとめます。
 
 > 各権利者は、このプラグインを後援・提携していません。
 
-## 取り込んでいる資料
+## 出典とライセンス
 
 ### Keep a Changelog
 
@@ -36,17 +36,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-## 実行時に参照する資料（取り込んでいない）
-
-次の資料は、スキルの実行中にユーザーの環境から取得して使います。このプラグインには含まれていません。
-
-| 資料 | 使うスキル | 取得元 |
-|---|---|---|
-| Keep a Changelog の最新仕様 | `changelog-write` | https://keepachangelog.com/ |
-
-取得した内容の権利は、それぞれの権利者に帰属します。
-
-## 参照している規格
-
-- [Semantic Versioning 2.0.0](https://semver.org/)（CC BY 3.0）: バージョン番号の付け方の基準として名前とリンクを示しているだけで、本文は含めていません。
