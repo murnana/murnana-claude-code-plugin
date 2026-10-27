@@ -1,0 +1,58 @@
+name: Check plugin versions
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+  versions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check plugin versions
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          set -uo pipefail
+          status=0
+          for dir in plugins/*/; do
+            name=$(basename "$dir")
+            manifest="plugins/$name/.claude-plugin/plugin.json"
+            [ -f "$manifest" ] || continue
+            head_version=$(jq -r '.version // empty' "$manifest")
+            base_version=$(git show "origin/$BASE_REF:$manifest" 2>/dev/null | jq -r '.version // empty')
+            listed_version=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty' .claude-plugin/marketplace.json)
+
+            if ! printf '%s' "$head_version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "::error file=$manifest::$name: version must be MAJOR.MINOR.PATCH (got '$head_version')"
+              status=1
+              continue
+            fi
+            if [ -n "$listed_version" ] && [ "$listed_version" != "$head_version" ]; then
+              echo "::error file=.claude-plugin/marketplace.json::$name: marketplace.json version ($listed_version) differs from plugin.json ($head_version)"
+              status=1
+            fi
+            [ -n "$base_version" ] || continue
+
+            if [ "$BASE_REF" = "main" ]; then
+              changed=$(git diff --name-only "origin/$BASE_REF...HEAD" -- "plugins/$name" | head -n 1)
+              [ -n "$changed" ] || continue
+              newest=$(printf '%s\n%s\n' "$base_version" "$head_version" | sort -V | tail -n 1)
+              if [ "$head_version" = "$base_version" ] || [ "$newest" != "$head_version" ]; then
+                echo "::error file=$manifest::$name changed but its version was not raised ($base_version -> $head_version)"
+                status=1
+              fi
+            elif [[ "$HEAD_REF" == feature/* || "$HEAD_REF" == bugfix/* ]]; then
+              if [ "$head_version" != "$base_version" ]; then
+                echo "::error file=$manifest::$name: do not change the version in a $HEAD_REF PR ($base_version -> $head_version); versions are bumped in the develop -> main PR"
+                status=1
+              fi
+            fi
+          done
+          exit $status

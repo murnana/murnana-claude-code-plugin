@@ -1,0 +1,16 @@
+# Dependabot: GitHub Actions のバージョン更新 PR を作る
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "saturday"
+      timezone: "Asia/Tokyo"
+    assignees:
+      - "murnana"
+    # アクション公開から 7 日経過するまで更新 PR を作らない
+    cooldown:
+      default-days: 7
