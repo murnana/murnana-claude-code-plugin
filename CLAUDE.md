@@ -20,11 +20,17 @@ claude plugin marketplace add murnana/murnana-claude-code-plugin --sparse .claud
 
 ## Branch workflow
 
-Development branches off `develop` (created from `main` if missing) as `feature/*` or `bugfix/*`, and merges back into `develop` without bumping plugin versions. Versions are bumped only in the `develop` → `main` release PR. Details live in `.claude/rules/branch-workflow.md` and `.claude/rules/plugin-version-bump.md`.
+Development branches off `develop` (created from `main` if missing) as `feature/*` or `bugfix/*`, and merges back into `develop` without bumping plugin versions. Versions are bumped only in the `develop` → `main` release PR. Urgent fixes to released `main` use `hotfix/*` from `main`. Details live in `.claude/rules/branch-workflow.md` and `.claude/rules/plugin-version-bump.md`.
+
+## Commit and PR messages
+
+Follow the `murnana-github` `pr-create` skill for pull request titles and bodies (mirrored in `.claude/rules/pr-message.md`; update it whenever that skill changes, see `.claude/rules/pr-message-sync.md`).
+
+Follow the `murnana-git` `commit` skill (gitmoji title, Why-driven body, one why per commit). The mirrored rules live in `.claude/rules/commit-message.md`; update them whenever that skill changes (`.claude/rules/commit-message-sync.md`).
 
 ## Third-party material
 
-Before adding anything copied, summarized or adapted from another source, check its license and update `THIRD_PARTY_NOTICES.md` in the same PR. Details live in `.claude/rules/third-party-notices.md`.
+Before adding anything copied, summarized or adapted from another source, check its license and update that plugin's `plugins/<plugin-name>/THIRD_PARTY_NOTICES.md` in the same PR. There is no repository-root notices file. Details live in `.claude/rules/third-party-notices.md`.
 
 ## Conventions
 
