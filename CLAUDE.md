@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository purpose
 
-This repo is a **Claude Code plugin marketplace** owned by `murnana`. The marketplace manifest lives at `.claude-plugin/marketplace.json` and currently lists seven published plugins (`murnana-unreal-engine`, `murnana-git`, `murnana-github`, `murnana-agent-config`, `murnana-tech-docs`, `murnana-unity-package`, `murnana-unity`). Work in this repo will typically mean **adding plugins to the marketplace** and/or **authoring plugin source** that the marketplace points to.
+This repo is a **Claude Code plugin marketplace** owned by `murnana`. The marketplace manifest lives at `.claude-plugin/marketplace.json` and currently lists fifteen published plugins (see the `plugins` array; the language comment plugins are `murnana-cpp`, `murnana-csharp`, `murnana-java`, `murnana-kotlin`, `murnana-python`, `murnana-rust`, `murnana-swift`, `murnana-typescript`). Work in this repo will typically mean **adding plugins to the marketplace** and/or **authoring plugin source** that the marketplace points to.
 
 ## Marketplace manifest
 
@@ -36,4 +36,6 @@ Before adding anything copied, summarized or adapted from another source, check 
 
 - Plugin sources should live in their own directories (e.g. `plugins/<plugin-name>/`) with a `.claude-plugin/plugin.json` and the relevant `commands/`, `agents/`, `hooks/`, `skills/`, or `mcp.json` subpaths as appropriate.
 - `marketplace.json` conventions (source type, local testing, validation) live in `.claude/rules/marketplace-manifest.md`.
+- Name every plugin `murnana-<name>`, and use the same name for `plugins/<name>/`, `docs/plugins/<name>/`, `evals/plugins/<name>/`, `plugin.json` `name` and the `marketplace.json` entry (skills are invoked as `/murnana-<name>:<skill>`).
+- Keep each plugin's eval cases (`<case>/prompt.md` and `<case>/graders/`) at the repository root under `evals/plugins/<plugin-name>/`, not inside `plugins/<plugin-name>/`, so they are not installed with the plugin. `claude plugin eval` only reads cases from inside the plugin root (`--eval-dir` and `experimental.evals` reject `..`), so to run one, temporarily link it in (the link is git-ignored, never commit it): `ln -s ../../evals/plugins/<plugin-name> plugins/<plugin-name>/evals`, then `claude plugin eval plugins/<plugin-name> --output-dir <dir outside the plugin>` (results cannot be written through the symlink), and remove the link afterwards. The plugins set `defaultEnabled: false`, and the eval sandbox does not enable them, so confirm the run does not print "will run WITHOUT this plugin" before trusting scores.
 - Per-plugin documentation (usage, design rationale) lives under `docs/plugins/<plugin-name>/`, separate from the plugin's own `skills/*/references/` (which holds the rules Claude reads at runtime).

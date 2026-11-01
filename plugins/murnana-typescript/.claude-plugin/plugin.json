@@ -1,0 +1,13 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "murnana-typescript",
+  "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル)",
+  "version": "0.0.1",
+  "license": "0BSD",
+  "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
+  "keywords": ["typescript", "comment", "tsdoc"],
+  "defaultEnabled": false,
+  "author": {
+    "name": "murnana"
+  }
+}
