@@ -4,14 +4,20 @@ on:
   pull_request:
     branches: [main, develop]
 
-permissions:
-  contents: read
+# 既定では権限を与えず、必要な権限はジョブごとに付与する。
+permissions: {}
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   versions:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
           fetch-depth: 0
       - name: Check plugin versions
