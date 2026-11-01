@@ -19,6 +19,6 @@
 
 - Keep a Changelog の最新版に沿って CHANGELOG.md を作成・追記し、依頼されたときにバージョンを切れる changelog-write スキルを追加した
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/@SHA@...main
-[0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/@SHA@/plugins/murnana-tech-docs
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-tech-docs
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/05c5eaa/plugins/murnana-tech-docs

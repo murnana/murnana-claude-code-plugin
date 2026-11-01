@@ -17,5 +17,5 @@
 
 - evals をリポジトリルートの `evals/plugins/murnana-csharp/` に移した
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/@SHA@...main
-[0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/@SHA@/plugins/murnana-csharp
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-csharp

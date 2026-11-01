@@ -25,7 +25,7 @@
 
 - Unity Package Manager (UPM) パッケージの CHANGELOG.md を、Keep a Changelog と Unity のバージョニング規則に沿って作成・追記できる changelog-write スキルを追加した。依頼されたときはバージョンを切り、`package.json` の `version` も更新する
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/@SHA@...main
-[0.0.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/@SHA@/plugins/murnana-unity-package
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[0.0.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-unity-package
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity-package
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/c013a3e/plugins/murnana-unity-package
