@@ -53,7 +53,7 @@ When optimizing the description:
 
 ## Format A: plugin skills (`claude plugin eval`)
 
-The suite lives at `<plugin-root>/evals/`, one directory per case:
+The suite lives at `<plugin-root>/evals/` by default, one directory per case. If the project's CLAUDE.md or rules keep evals elsewhere (for example a repository-root `evals/plugins/<plugin>/`), put the cases there instead. Note that `--eval-dir` must stay inside the plugin root (it rejects `..`), so check how the project runs suites kept outside the plugin:
 
 ```text
 <plugin>/
