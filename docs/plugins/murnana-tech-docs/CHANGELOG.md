@@ -7,11 +7,18 @@
 
 ## [Unreleased]
 
+## [0.0.2] - 2026-11-01
+
+### Changed
+
+- THIRD_PARTY_NOTICES.md を、同梱している資料の出典・ライセンスと商標だけを書く形に整理した（実行時に参照する資料や利用規約の確認メモを削除）
+
 ## [0.0.1] - 2026-10-24
 
 ### Added
 
 - Keep a Changelog の最新版に沿って CHANGELOG.md を作成・追記し、依頼されたときにバージョンを切れる changelog-write スキルを追加した
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/05c5eaa...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-tech-docs
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/05c5eaa/plugins/murnana-tech-docs

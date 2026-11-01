@@ -1,0 +1,13 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "murnana-kotlin",
+  "description": "Kotlin のコードを書くためのツールキット(KDoc とコードコメントを書くスキル)",
+  "version": "0.1.0",
+  "license": "0BSD",
+  "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
+  "keywords": ["kotlin", "comment", "kdoc"],
+  "defaultEnabled": false,
+  "author": {
+    "name": "murnana"
+  }
+}

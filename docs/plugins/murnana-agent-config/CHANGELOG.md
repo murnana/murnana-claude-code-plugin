@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-01
+
+### Added
+
+- project-instructions-create スキル（claude.ai の Project の「指示」を作成・見直す）
+
+### Changed
+
+- skill-create スキルが、プロジェクトの CLAUDE.md やルールで eval の置き場所が決まっている場合はそちらに eval を作るようにした
+- THIRD_PARTY_NOTICES.md を、同梱している資料の出典・ライセンスと商標だけを書く形に整理した（実行時に参照する資料や利用規約の確認メモを削除）
+
 ## [0.0.1] - 2026-10-12
 
 ### Added
@@ -14,5 +25,6 @@
 - rule-create スキル
 - skill-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/278ceff...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-agent-config
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/278ceff/plugins/murnana-agent-config

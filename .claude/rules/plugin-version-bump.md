@@ -18,5 +18,6 @@ Do not bump versions in `feature/*` or `bugfix/*` pull requests into `develop`. 
   - Choose the level from the combined changes accumulated in `[Unreleased]`, using the largest one.
 - Record changes in `docs/plugins/<plugin-name>/CHANGELOG.md` under `## [Unreleased]` as they are made (in the `feature/*` / `bugfix/*` PR), in Japanese, using the [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) categories (`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`).
 - In the release PR, move the `[Unreleased]` entries to a new `## [x.y.z] - YYYY-MM-DD` section and update the link references at the bottom of the file.
+- The `Check plugin versions` workflow (`.github/workflows/version-check.yml`) checks only versions: a PR into `main` must raise the version of every changed plugin, `marketplace.json` must match `plugin.json`, and `feature/*` / `bugfix/*` PRs into `develop` must not change a version. It does not run `claude plugin validate`; run that locally.
 - Run `claude plugin validate .` before opening the release PR.
 - Do not bump versions for changes outside `plugins/` (README, `docs/`, CLAUDE.md, `.claude/`). Editing a CHANGELOG alone needs no bump.

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "murnana-cpp",
+  "description": "C++開発用ツールキット(コードコメントとDoxygenドキュメントコメントを書く・見直すスキル)",
+  "version": "0.0.1",
+  "license": "0BSD",
+  "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
+  "keywords": ["cpp", "comment", "doxygen"],
+  "defaultEnabled": false,
+  "author": {
+    "name": "murnana"
+  }
+}

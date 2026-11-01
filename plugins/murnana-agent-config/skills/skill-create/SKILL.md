@@ -107,7 +107,7 @@ Follow [references/evals.md](references/evals.md). Write the files, but **never 
 - 2–3 realistic **output test cases** (prompt + expected output, optional input files), varied in phrasing and including one edge case. Add assertions only where they're objectively checkable.
 - A **trigger query set** of about 20 queries: 8–10 that should trigger and 8–10 near-misses that shouldn't. Skip it for `disable-model-invocation: true` skills, since they never auto-trigger.
 - **Format by location**:
-  - **Plugin skill**: `claude plugin eval` cases under `<plugin>/evals/<case>/`. Each case has a `prompt.md`, an outcome grader, and a `tool_used: Skill` grader.
+  - **Plugin skill**: `claude plugin eval` cases under `<plugin>/evals/<case>/`, unless the project's CLAUDE.md or rules name another eval directory (then use that one). Each case has a `prompt.md`, an outcome grader, and a `tool_used: Skill` grader.
   - **Project or personal skill**: `evals/evals.json` (agentskills format) inside the skill directory, plus `evals/trigger-queries.json`.
 - If the skill's output is purely subjective (style, tone), say so and keep evals to a human-review checklist instead.
 

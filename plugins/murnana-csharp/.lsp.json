@@ -1,0 +1,10 @@
+{
+  "roslyn": {
+    "command": "roslyn-language-server",
+    "args": ["--stdio", "--autoLoadProjects"],
+    "extensionToLanguage": {
+      ".cs": "csharp"
+    },
+    "startupTimeout": 120000
+  }
+}
