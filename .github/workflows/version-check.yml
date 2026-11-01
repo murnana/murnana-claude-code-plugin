@@ -32,7 +32,8 @@ jobs:
             manifest="plugins/$name/.claude-plugin/plugin.json"
             [ -f "$manifest" ] || continue
             head_version=$(jq -r '.version // empty' "$manifest")
-            base_version=$(git show "origin/$BASE_REF:$manifest" 2>/dev/null | jq -r '.version // empty')
+            # ベースにまだ無い新規プラグインでは git show が失敗する。pipefail と -e で止まらないよう || true で受ける。
+            base_version=$({ git show "origin/$BASE_REF:$manifest" 2>/dev/null || true; } | jq -r '.version // empty')
             listed_version=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty' .claude-plugin/marketplace.json)
 
             if ! printf '%s' "$head_version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
