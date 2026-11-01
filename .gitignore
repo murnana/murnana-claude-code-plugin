@@ -1,0 +1,3 @@
+.DS_Store
+# 実行時だけ張る eval へのシンボリックリンク(配布しない)
+plugins/*/evals
