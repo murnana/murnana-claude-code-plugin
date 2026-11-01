@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.0.1] - 2026-11-01
+
 ### Added
 
 - マーケットプレイスに登録し、公開できる状態にした（ライセンス・リポジトリ情報の追加、インストール手順の修正）
@@ -14,3 +16,6 @@
 ### Changed
 
 - evals をリポジトリルートの `evals/plugins/murnana-python/` に移した
+
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-python

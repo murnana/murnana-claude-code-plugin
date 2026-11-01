@@ -14,7 +14,7 @@
         "path": "plugins/murnana-unreal-engine"
       },
       "description": "Unreal Engine knowledges",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-git",
@@ -24,7 +24,7 @@
         "path": "plugins/murnana-git"
       },
       "description": "Git workflow helpers",
-      "version": "0.2.0"
+      "version": "0.2.1"
     },
     {
       "name": "murnana-github",
@@ -34,7 +34,7 @@
         "path": "plugins/murnana-github"
       },
       "description": "GitHub workflow helpers",
-      "version": "0.2.0"
+      "version": "0.2.1"
     },
     {
       "name": "murnana-agent-config",
@@ -44,7 +44,7 @@
         "path": "plugins/murnana-agent-config"
       },
       "description": "Helpers for authoring Claude Code configuration (rules, skills, etc.)",
-      "version": "0.0.1"
+      "version": "0.1.0"
     },
     {
       "name": "murnana-tech-docs",
@@ -54,7 +54,7 @@
         "path": "plugins/murnana-tech-docs"
       },
       "description": "Helpers for writing technical documents (CHANGELOG, etc.)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-unity-package",
@@ -64,7 +64,7 @@
         "path": "plugins/murnana-unity-package"
       },
       "description": "Helpers for maintaining Unity Package Manager (UPM) packages (CHANGELOG, etc.)",
-      "version": "0.0.2"
+      "version": "0.0.3"
     },
     {
       "name": "murnana-unity",
@@ -74,7 +74,7 @@
         "path": "plugins/murnana-unity"
       },
       "description": "Helpers for working with the Unity Editor (launch a project on a chosen platform, check work against Unity's terms, etc.)",
-      "version": "0.2.1"
+      "version": "0.2.2"
     },
     {
       "name": "murnana-cpp",
