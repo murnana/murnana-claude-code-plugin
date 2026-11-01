@@ -1,0 +1,13 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "murnana-csharp",
+  "description": "C#の開発を手伝うセット(Roslyn公式言語サーバーの接続、コードコメントとXMLドキュメントコメントを書く・見直すスキル)",
+  "version": "0.0.1",
+  "license": "0BSD",
+  "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
+  "keywords": ["csharp", "comment", "xml-doc", "roslyn", "lsp"],
+  "defaultEnabled": false,
+  "author": {
+    "name": "murnana"
+  }
+}

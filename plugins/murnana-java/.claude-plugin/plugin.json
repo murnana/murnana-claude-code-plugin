@@ -1,0 +1,13 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "murnana-java",
+  "description": "Java開発用ツールキット(コードコメントとJavadocを書く・見直すスキル)",
+  "version": "0.0.1",
+  "license": "0BSD",
+  "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
+  "keywords": ["java", "comment", "javadoc"],
+  "defaultEnabled": false,
+  "author": {
+    "name": "murnana"
+  }
+}

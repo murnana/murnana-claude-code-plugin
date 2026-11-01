@@ -1,0 +1,13 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "murnana-python",
+  "description": "Python開発用ツールキット(コードコメントとdocstringを書く・見直すスキル)",
+  "version": "0.0.1",
+  "license": "0BSD",
+  "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
+  "keywords": ["python", "comment", "docstring"],
+  "defaultEnabled": false,
+  "author": {
+    "name": "murnana"
+  }
+}
