@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-01
+
 ### Changed
 
 - THIRD_PARTY_NOTICES.md を、同梱している資料の出典・ライセンスと商標だけを書く形に整理した（実行時に参照する資料や利用規約の確認メモを削除）
@@ -29,7 +31,8 @@
 
 - pr-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/014d844...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/@SHA@...main
+[0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/@SHA@/plugins/murnana-github
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/014d844/plugins/murnana-github
 [0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/4cf5e55/plugins/murnana-github
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/40e2dd2/plugins/murnana-github

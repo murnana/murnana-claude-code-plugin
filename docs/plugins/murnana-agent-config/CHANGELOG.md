@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-01
+
 ### Added
 
 - project-instructions-create スキル（claude.ai の Project の「指示」を作成・見直す）
@@ -23,5 +25,6 @@
 - rule-create スキル
 - skill-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/278ceff...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/@SHA@...main
+[0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/@SHA@/plugins/murnana-agent-config
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/278ceff/plugins/murnana-agent-config

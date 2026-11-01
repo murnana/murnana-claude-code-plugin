@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.0.3] - 2026-11-01
+
 ### Changed
 
 - THIRD_PARTY_NOTICES.md を、同梱している資料の出典・ライセンスと商標だけを書く形に整理した（実行時に参照する資料や利用規約の確認メモを削除）
@@ -23,6 +25,7 @@
 
 - Unity Package Manager (UPM) パッケージの CHANGELOG.md を、Keep a Changelog と Unity のバージョニング規則に沿って作成・追記できる changelog-write スキルを追加した。依頼されたときはバージョンを切り、`package.json` の `version` も更新する
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/c013a3e...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/@SHA@...main
+[0.0.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/@SHA@/plugins/murnana-unity-package
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity-package
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/c013a3e/plugins/murnana-unity-package
