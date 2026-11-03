@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository purpose
 
-This repo is a **Claude Code plugin marketplace** owned by `murnana`. The marketplace manifest lives at `.claude-plugin/marketplace.json` and currently lists fifteen published plugins (see the `plugins` array; the language comment plugins are `murnana-cpp`, `murnana-csharp`, `murnana-java`, `murnana-kotlin`, `murnana-python`, `murnana-rust`, `murnana-swift`, `murnana-typescript`). Work in this repo will typically mean **adding plugins to the marketplace** and/or **authoring plugin source** that the marketplace points to.
+This repo is a **Claude Code plugin marketplace** owned by `murnana`. The marketplace manifest lives at `.claude-plugin/marketplace.json` and currently lists sixteen published plugins (see the `plugins` array; the language comment plugins are `murnana-cpp`, `murnana-csharp`, `murnana-java`, `murnana-kotlin`, `murnana-python`, `murnana-rust`, `murnana-swift`, `murnana-typescript`; `unity-ariadne` is sourced from the separate `murnana/unity-ariadne` repository). Work in this repo will typically mean **adding plugins to the marketplace** and/or **authoring plugin source** that the marketplace points to.
 
 ## Marketplace manifest
 
