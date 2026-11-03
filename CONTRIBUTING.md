@@ -81,6 +81,15 @@ Git のタグと GitHub Release は使いません。プラグインごとにバ
 
 上げ幅は、`[Unreleased]` に溜まった変更のうち最大のものに合わせます。`plugins/` の外の変更（README、`docs/`、`.claude/`、CLAUDE.md）ではバージョンを上げません。
 
+## 外部リポジトリーのプラグイン（unity-ariadne）
+
+`unity-ariadne` は [murnana/unity-ariadne](https://github.com/murnana/unity-ariadne) の `claude-plugins/` にあり、このリポジトリーの `plugins/` にはありません。`marketplace.json` のエントリーだけを管理します。
+
+- `unity-ariadne` を更新（リリース）したら、このリポジトリーの `marketplace.json` の `unity-ariadne` の `version` を、`unity-ariadne` 側の `claude-plugins/.claude-plugin/plugin.json` の `version` に合わせます。これを上げないと、利用者のキャッシュが更新されません。
+- 通常の `feature/*` と同じく `develop` から `feature/unity-ariadne-<version>` を切り、`develop` 向けに PR を作ります。利用者に届くのはリリース PR（`develop` → `main`）のマージ後です。
+- `Check plugin versions` ワークフローはこのプラグインを調べません。バージョンの一致は手で確認します。
+- 詳しい手順と参照方式（`git-subdir` / `archive`）は [docs/plugins/unity-ariadne/README.md](docs/plugins/unity-ariadne/README.md) を参照してください。
+
 ## サードパーティーの資料
 
 他者の文章・コード・テンプレート・仕様などを複製、要約、翻案して取り込むときは、出典のライセンスを確認し、同じ PR で、使うプラグインの `plugins/<plugin-name>/THIRD_PARTY_NOTICES.md` を更新します。リポジトリーのルートには置きません。ライセンスが許さない使い方は避け、リンクか自分の言葉での要約にとどめます。
