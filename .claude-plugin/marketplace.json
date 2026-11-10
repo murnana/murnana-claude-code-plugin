@@ -155,6 +155,17 @@
       },
       "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル)",
       "version": "0.0.1"
+    },
+    {
+      "name": "unity-ariadne",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/unity-ariadne.git",
+        "path": "claude-plugins",
+        "sha": "743487a52ce8a422f53a64150dccc63671d9521f"
+      },
+      "description": "Unityプロジェクトの依存関係グラフ(SQLite)をMCPで照会するプラグイン。事前に ariadne をインストールし、analyze で graph.db を作成してください",
+      "version": "0.1.3"
     }
   ]
 }

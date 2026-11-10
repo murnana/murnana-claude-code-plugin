@@ -12,3 +12,4 @@ paths:
 - Leave `ref` unset on the source. Entries follow `main`; a pinned ref would keep users on the old copy even after a version bump.
 - Plugins installed through the marketplace come from GitHub `main`, so unpushed changes and anything still on `develop` or a `feature/*` / `bugfix/*` branch never show up. Test local changes with `claude --plugin-dir plugins/<plugin-name>`.
 - After editing, run `claude plugin validate .`. It does not read `plugin.json` of `git-subdir` plugins, so also run `claude plugin validate plugins/<plugin-name>` for each plugin whose files changed.
+- `unity-ariadne` is the one entry whose plugin lives in another repository: its `source` is `git-subdir` with `url` `https://github.com/murnana/unity-ariadne.git` and `path` `claude-plugins`. Keep its `version` equal to `version` in that repository's `claude-plugins/.claude-plugin/plugin.json`; `Check plugin versions` does not cover it. See `docs/plugins/unity-ariadne/README.md`.
