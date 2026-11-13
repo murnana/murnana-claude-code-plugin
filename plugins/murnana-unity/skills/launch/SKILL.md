@@ -3,7 +3,7 @@ name: launch
 description: Launches a Unity project in the Unity Editor on a chosen platform, and saves the first platform given as the project default.
 disable-model-invocation: true
 argument-hint: "[platform: android|ios|webgl|win64|osx|linux64|tvos|visionos|…] [project path]"
-allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(mkdir -p *) Bash(date *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *) Bash(/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash(C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash("/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity" *) Bash("/opt/Unity/Hub/Editor/*/Editor/Unity" *) Bash("/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *) Bash("C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *)
+allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity version) Bash(unity install-path) Bash(unity editors *) Bash(unity open *) Bash(unity status *) Bash(unity install-modules -e * -l) Bash(unity mcp configure --list) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(mkdir -p *) Bash(date *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *) Bash(/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash(C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash("/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity" *) Bash("/opt/Unity/Hub/Editor/*/Editor/Unity" *) Bash("/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *) Bash("C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *)
 ---
 
 # Launch Unity
@@ -74,7 +74,7 @@ Outcomes:
 - **Not installed**: tell the user which version is missing and ask (`AskUserQuestion`) before installing. If a platform module is missing too, ask about both in the same call. With the CLI, install with `unity install <version> -m <module>`; take `-c <changeset>` from `ProjectVersion.txt`'s `m_EditorVersionWithRevision` (the hash in parentheses) when the version is not in the release list. Without the CLI, tell the user to install it from Unity Hub and stop.
 - **Platform module missing** (the chosen platform needs one, such as `android`, `ios`, `webgl`; see the table in the reference): list with `unity install-modules -e <version> -l`, then ask (`AskUserQuestion`) before running `unity install-modules -e <version> -m <module> --cm`. Without the CLI, tell the user to add the module in Unity Hub.
 
-Installing downloads gigabytes and may need elevation. Never install without a yes.
+Installing downloads gigabytes and may need elevation. Never install without a yes. `unity install` and `unity install-modules … -m` are deliberately not pre-approved, so they also show a permission prompt.
 
 ## Step 4: Check the project is not already open
 

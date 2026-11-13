@@ -3,7 +3,7 @@ name: commit
 description: Split the working tree into one-why commits and create them after approval.
 argument-hint: "[optional scope or intent hint]"
 disable-model-invocation: true
-allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git add *) Bash(git restore --staged *) Bash(git commit *) Bash(git config *) Read Grep Glob AskUserQuestion
+allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git add *) Bash(git restore --staged *) Bash(git commit *) Bash(git config --get *) Read Grep Glob AskUserQuestion
 hooks:
   PostToolUse:
     - matcher: "Bash"

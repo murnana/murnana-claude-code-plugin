@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Security
+
+- commit スキルの事前許可を `git config *` から読み取りだけの `git config --get *` に絞った。git 設定の書き換えには確認が出る
+
 ### Changed
 
 - commit / gitignore スキルで、ユーザーへの質問と承認の確認を必ず AskUserQuestion ツールで行い、未回答の質問は 1 回の呼び出しにまとめるようにした

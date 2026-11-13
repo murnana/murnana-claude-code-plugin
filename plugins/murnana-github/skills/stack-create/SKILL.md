@@ -3,7 +3,7 @@ name: stack-create
 description: Create a stack of pull requests (GitHub Stacked PRs) with gh stack
 argument-hint: "[what to stack, or existing branch names bottom-to-top]"
 disable-model-invocation: true
-allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git branch *) Bash(git rev-parse *) Bash(git remote *) Bash(git config *) Bash(git add *) Bash(git restore --staged *) Bash(git commit *) Bash(gh auth status *) Bash(gh extension list *) Bash(gh repo view *) Bash(gh stack view *) Bash(gh stack init *) Bash(gh stack add *) Bash(gh stack submit *) Bash(gh stack link *) Bash(gh stack up *) Bash(gh stack down *) Bash(gh stack top *) Bash(gh stack bottom *) Read Grep Glob AskUserQuestion
+allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git branch --show-current) Bash(git rev-parse *) Bash(git remote -v) Bash(git remote get-url *) Bash(git config --get *) Bash(git add *) Bash(git restore --staged *) Bash(git commit *) Bash(gh auth status *) Bash(gh extension list *) Bash(gh repo view *) Bash(gh stack view *) Bash(gh stack init *) Bash(gh stack add *) Bash(gh stack submit *) Bash(gh stack link *) Bash(gh stack up *) Bash(gh stack down *) Bash(gh stack top *) Bash(gh stack bottom *) Read Grep Glob AskUserQuestion
 ---
 
 # Stack Create
@@ -62,7 +62,7 @@ Copy this checklist into your response and tick it off:
 
 - `gh auth status` failed → stop and ask, following `${CLAUDE_PLUGIN_ROOT}/skills/pr-create/references/gh-fallback-mcp.md`. Note that the MCP fallback cannot create stacks; it only helps for plain PRs.
 - No `stack` line in `gh extension list` → ask (`AskUserQuestion`) before running `gh extension install github/gh-stack`. Never install silently. Requires Git 2.36+.
-- More than one remote in `git remote -v` and `git config remote.pushDefault` empty → pass `--remote <name>` to every `init`/`submit`/`link` call (ask which remote if unclear).
+- More than one remote in `git remote -v` and `git config --get remote.pushDefault` empty → pass `--remote <name>` to every `init`/`submit`/`link` call (ask which remote if unclear).
 
 ## Step 2: Discover project rules
 

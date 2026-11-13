@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Security
+
+- launch スキルの事前許可を `unity *` から、実際に使う読み取りと起動のサブコマンドだけに絞った。Editor やモジュールのインストール、`unity close`、`unity mcp configure <client>` には確認が出る
+
 ### Changed
 
 - launch スキルで、ユーザーへの質問を必ず AskUserQuestion ツールで行い、プロジェクトとプラットフォーム、Editor とモジュールのインストール確認をそれぞれ 1 回の呼び出しにまとめるようにした

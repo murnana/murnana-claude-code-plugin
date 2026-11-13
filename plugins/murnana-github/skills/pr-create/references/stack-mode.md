@@ -23,7 +23,7 @@ gh stack view --json
 - Each layer's **parent branch** is the previous entry in `branches[]`, or `trunk` for the bottom one. `branches[].base` is the parent's tip **commit SHA**, not a branch name — use it for diffs, never show it as the base branch.
 - If the current branch already has an open PR and there are no targets, there's nothing to create. Report the existing PR URL and stop; suggest `/murnana-github:stack-pr-message` if the user wants to rewrite messages.
 - Any branch with `needsRebase: true` → stop and suggest `/murnana-github:stack-rebase` first. Submitting a stale stack pushes layers whose diffs include their parent's old commits.
-- More than one remote in `git remote` and `git config remote.pushDefault` empty → pass `--remote <name>` to `submit` (ask which remote if unclear).
+- More than one remote in `git remote -v` and `git config --get remote.pushDefault` empty → pass `--remote <name>` to `submit` (ask which remote if unclear).
 
 ## S2: Pre-PR checks (Step 3)
 

@@ -3,7 +3,7 @@ name: pr-create
 description: Push the current branch and create a pull request (or stacked PRs) after approval.
 argument-hint: "[optional scope or intent hint]"
 disable-model-invocation: true
-allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git branch *) Bash(git rev-parse *) Bash(git push *) Bash(git config *) Bash(git remote *) Bash(gh auth status *) Bash(gh --version *) Bash(gh repo view *) Bash(gh pr view *) Bash(gh pr list *) Bash(gh pr create *) Bash(gh pr edit *) Bash(gh pr ready *) Bash(gh stack view *) Bash(gh stack submit *) Bash(gh stack up *) Bash(gh stack up) Bash(gh stack down *) Bash(gh stack down) Bash(gh stack top) Bash(gh stack bottom) Read Grep Glob AskUserQuestion
+allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git branch --show-current) Bash(git rev-parse *) Bash(git push) Bash(git push -u origin *) Bash(git config --get *) Bash(git remote -v) Bash(git remote get-url *) Bash(gh auth status *) Bash(gh --version *) Bash(gh repo view *) Bash(gh pr view *) Bash(gh pr list *) Bash(gh pr create *) Bash(gh pr edit *) Bash(gh pr ready *) Bash(gh stack view *) Bash(gh stack submit *) Bash(gh stack up *) Bash(gh stack up) Bash(gh stack down *) Bash(gh stack down) Bash(gh stack top) Bash(gh stack bottom) Read Grep Glob AskUserQuestion
 ---
 
 # PR Create
@@ -73,7 +73,7 @@ Stack mode: skip this step (`gh stack submit` pushes). See [references/stack-mod
 
 - Use the status line and the unpushed subjects from Current state. No upstream → `git push -u origin <branch>`. Upstream with unpushed commits → `git push`. Nothing unpushed → skip the push.
 - If the push fails for any reason (rejected, no remote, auth), **stop entirely** — do not attempt PR creation. Report the failure and ask how to proceed.
-- Never force-push.
+- Never force-push. Only plain `git push` and `git push -u origin <branch>` are pre-approved; any other form asks for permission.
 
 ## Step 5: Find or generate the PR template
 

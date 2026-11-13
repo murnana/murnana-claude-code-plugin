@@ -3,7 +3,7 @@ name: changelog-write
 description: Create or update CHANGELOG.md following the latest Keep a Changelog, and cut a release section when asked.
 argument-hint: "[changes to record, or \"release\" / a version to cut]"
 disable-model-invocation: true
-allowed-tools: Read Grep Glob Edit Write AskUserQuestion WebFetch(domain:raw.githubusercontent.com) WebFetch(domain:keepachangelog.com) Bash(git status *) Bash(git log *) Bash(git diff *) Bash(git tag *) Bash(git describe *) Bash(git remote *) Bash(git show *) Bash(gh pr list *) Bash(gh pr view *) Bash(gh issue view *)
+allowed-tools: Read Grep Glob Edit Write AskUserQuestion WebFetch(domain:raw.githubusercontent.com) WebFetch(domain:keepachangelog.com) Bash(git status *) Bash(git log *) Bash(git diff *) Bash(git tag -l *) Bash(git tag --list *) Bash(git describe *) Bash(git remote get-url *) Bash(git show *) Bash(gh pr list *) Bash(gh pr view *) Bash(gh issue view *)
 ---
 
 # Changelog Write
