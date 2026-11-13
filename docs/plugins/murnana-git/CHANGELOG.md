@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Removed
+
+- commit スキルから、コミットメッセージに帰属行（`Co-Authored-By:` など）を追記する指示を削除した
+
 ### Security
 
 - commit スキルの事前許可を `git config *` から読み取りだけの `git config --get *` に絞った。git 設定の書き換えには確認が出る

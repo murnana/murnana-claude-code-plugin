@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Removed
+
+- pr-create / stack-pr-message スキルから、PR 本文の末尾に `🤖 Generated with [Claude Code]` の行を付ける指示を削除した
+
 ### Security
 
 - pr-create / stack-create スキルの事前許可を絞った。`git config` と `git remote` は読み取りだけ、`git branch` は現在のブランチ名の取得だけ、`git push` は素の push と `-u origin <branch>` だけを許可する。force-push、リモートやブランチの変更・削除、git 設定の書き換えには確認が出る

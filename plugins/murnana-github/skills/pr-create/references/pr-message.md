@@ -21,13 +21,10 @@ What this change affects — files, features, users, or systems that could be to
 ## デバッグ方法 (How to verify)
 Concrete steps to check the change works: commands to run, screens to check, edge
 cases to try.
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
 
 - The title starts with a GitHub emoji markup code (e.g. `:memo:`).
 - All three body sections are required — do not omit one because it seems obvious.
-- The attribution line is required and always goes last.
 
 ## Emoji table (gitmoji-based)
 

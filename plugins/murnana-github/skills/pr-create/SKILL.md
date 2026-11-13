@@ -81,7 +81,6 @@ Stack mode: skip this step (`gh stack submit` pushes). See [references/stack-mod
 - If exactly one template is found, use it.
 - If multiple are found (e.g. multiple files under `.github/PULL_REQUEST_TEMPLATE/`), either pick the one whose name most closely matches the change (e.g. `bug_fix.md` for a fix) or, if ambiguous, ask the user via `AskUserQuestion`.
 - If none is found, generate title and body per [references/pr-message.md](references/pr-message.md) — title prefixed with a GitHub emoji code, body with なぜ (why) / 影響範囲 (scope & impact) / デバッグ方法 (how to verify) sections.
-- Always append the required attribution line to the body: `🤖 Generated with [Claude Code](https://claude.com/claude-code)`
 
 ## Step 6: Present the plan and get approval
 

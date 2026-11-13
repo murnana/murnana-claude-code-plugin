@@ -41,7 +41,6 @@ Draft a title and body for **each target**, bottom to top, following `${CLAUDE_P
 - Each body describes only its own layer's diff (`git diff --stat <base>..<branch>`, then the full diff only if needed; `<base>` is the SHA from the JSON), plus the stack section from `stack-message.md` unless project rules forbid extra sections.
 - The stack section links neighbor PRs as `#n`, but new PRs have no number until S6. Write `#<branch-name>` as a placeholder for each not-yet-created neighbor; S6 replaces them with real numbers.
 - No position (`2/3`) in titles.
-- End every body with `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
 
 ## S5: Approval (Step 6)
 

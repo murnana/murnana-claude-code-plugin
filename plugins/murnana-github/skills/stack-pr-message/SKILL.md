@@ -78,7 +78,6 @@ Follow [references/stack-message.md](references/stack-message.md). Draft the bot
 
 - Each body describes **its own layer's diff**, framed by the stack's overall goal. Don't describe what other layers do beyond one line of context.
 - If an existing body contains human-written content (not the `submit --auto` placeholder), keep it and merge your sections around it; never silently drop it.
-- End every body with the attribution line: `🤖 Generated with [Claude Code](https://claude.com/claude-code)`
 
 ## Step 5: Present and get approval
 

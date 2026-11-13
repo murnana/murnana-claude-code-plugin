@@ -20,4 +20,3 @@ These rules mirror the `commit` skill of the `murnana-git` plugin (`plugins/murn
 - Emoji (gitmoji-based): `:sparkles:` feature, `:bug:` bug fix, `:recycle:` refactor, `:memo:` documentation, `:white_check_mark:` tests, `:art:` assets, `:zap:` performance, `:fire:` removal, `:wrench:` configuration, `:arrow_up:` dependency update, `:bookmark:` version bump, `:construction:` work in progress, `:green_heart:` CI fix.
 - Stage explicit paths (`git add <paths>`), never `git add -A` or `git add .`. Pass the message through a heredoc.
 - Do not use `--no-verify`, `git push`, `git commit --amend` or `git reset` unless the user asks.
-- Append the attribution lines the session requires (e.g. `Co-Authored-By:`).

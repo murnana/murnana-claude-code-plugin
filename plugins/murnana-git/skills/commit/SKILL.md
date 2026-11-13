@@ -108,7 +108,6 @@ Before reading a candidate rule file, `Glob` for it first — only `Read` files 
 - Pass the message via heredoc to avoid mangling Japanese text, line breaks, or punctuation.
 - Never sweep in unrelated or unstaged changes that belong to a different why.
 - Never run `git push`, `git commit --amend`, or `git reset` unless explicitly instructed.
-- Append any attribution lines (e.g. `Co-Authored-By:`) required by the session or project.
 - After each successful `git commit`, a hook injects `Commit created: <hash> <subject>` next to the tool result. Use those lines to report the result in Japanese after all commits — do not run `git log` to confirm.
 - If no `Commit created:` line follows a `git commit`, the commit failed: stop, report its output as-is, and ask how to proceed.
 
