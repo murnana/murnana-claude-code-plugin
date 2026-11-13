@@ -8,11 +8,20 @@ allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI
 
 # Launch Unity
 
-Start with `UNITY_CLI_FTUE=1 unity auth status --json`
-
 Open a Unity project in the right Editor version on the right platform, and remember the platform so the next launch needs no argument.
 
 Treat `$ARGUMENTS` as an optional platform and an optional project path, in either order.
+
+## Step 0: Check the Unity CLI
+
+Run this first, exactly as written. The `UNITY_CLI_FTUE=1` prefix is part of the pre-approved command; without it the call asks for permission:
+
+```sh
+UNITY_CLI_FTUE=1 unity auth status --json
+```
+
+- `command not found` → the `unity` CLI is not installed. Use the "without the CLI" path in Steps 3, 5 and 6.
+- Any other result → the CLI is installed. If it reports that the user is signed out, say so in the Step 7 report. Don't sign in for them.
 
 ## Step 1: Find the project
 
@@ -49,7 +58,7 @@ platform: android
 ## Step 3: Find the Editor
 
 1. Read the version from `m_EditorVersion:` in `ProjectSettings/ProjectVersion.txt` (e.g. `6000.3.7f1`).
-2. If the `unity` CLI exists (`unity version`), run `unity editors -i --json` (each entry has `version`, `location`, `moduleNames`) and look for that version. The CLI is documented at <https://docs.unity.com/en-us/unity-cli/unity-cli-reference>.
+2. If the `unity` CLI is installed (Step 0), run `unity editors -i --json` (each entry has `version`, `location`, `moduleNames`) and look for that version. The CLI is documented at <https://docs.unity.com/en-us/unity-cli/unity-cli-reference>.
 3. Without the CLI, look at the default Hub path in [references/editor-cli.md](references/editor-cli.md) for the current OS (`ls`).
 
 Outcomes:

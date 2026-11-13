@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+### Changed
+
+- terms-checker サブエージェントの description を短くし、常時コンテキストに載る量を減らした
+- launch スキルの冒頭にあった Unity CLI の確認コマンドを「Step 0」として手順化し、CLI が無いときの分岐先を明記した
+
 ## [0.2.2] - 2026-11-01
 
 ### Changed

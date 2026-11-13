@@ -12,6 +12,8 @@ Create (or update) one rule file that Claude Code loads from `.claude/rules/` or
 
 ## Current state
 
+Run these first to find the repo root, the existing project rules and the instruction files:
+
 ```bash
 git rev-parse --show-toplevel 2>/dev/null || pwd
 ls -R .claude/rules 2>/dev/null || true
