@@ -1,6 +1,6 @@
 ---
 name: commit
-description: use `git commit` the working tree.
+description: Split the working tree into one-why commits and create them after approval.
 argument-hint: "[optional scope or intent hint]"
 disable-model-invocation: true
 allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git add *) Bash(git restore --staged *) Bash(git commit *) Bash(git config *) Read Grep Glob AskUserQuestion
@@ -21,12 +21,33 @@ Split the working tree into well-formed commits and create them, following the p
 
 ## Current state
 
-```sh
-git status --short --branch
-git diff --numstat
+These blocks were filled in when the skill loaded. Do not re-run their commands. `(Bash completed with no output)` means the list is empty.
+
+Branch and changed files (`git status --short --branch`; `??` = untracked):
+
+```!
+git status --short --branch 2>&1 || true
+```
+
+Unstaged changes (`git diff --numstat`: added, deleted, path):
+
+```!
+git diff --numstat 2>/dev/null || true
+```
+
+Staged changes (`git diff --cached --numstat`):
+
+```!
 git diff --cached --numstat 2>/dev/null || true
+```
+
+Last 15 commit subjects, merges excluded:
+
+```!
 git log --format='%s' --no-merges -15 2>/dev/null || true
 ```
+
+If the first block says `not a git repository`, stop and say so. If there is nothing to commit (no changed, staged or untracked files), say so and stop.
 
 Treat `$ARGUMENTS` (if any) as an additional hint about which changes to focus on or what the user's intent is — it does not override the steps below.
 
@@ -42,7 +63,7 @@ Every command's output is spent tokens. Always choose the narrowest form that an
 
 ## Step 1: Understand the diff
 
-The state above already gives the branch, the staged and unstaged file lists, and recent history — do not re-run those commands.
+The Current state section already gives the branch, the staged and unstaged file lists, and recent history.
 
 Read the actual changes **path-scoped**, never as one bare `git diff`:
 
@@ -55,7 +76,7 @@ If some changes are already staged, treat that staging as intentional and respec
 ## Step 2: Discover project rules (highest priority)
 
 Check the sources listed in [references/project-rules.md](references/project-rules.md), in order. If a rule is found there, it is the **only** rule that applies — do not mix in anything from the fallback convention below.
-The history needed to infer a format is already injected above — do not re-run `git log`.
+Use the commit subjects in the Current state section to infer a format; do not re-run `git log`.
 If you fall back to inferring a format from that history (weaker than an explicit rule), say so explicitly when presenting the plan in Step 4.
 
 Before reading a candidate rule file, `Glob` for it first — only `Read` files that actually exist.

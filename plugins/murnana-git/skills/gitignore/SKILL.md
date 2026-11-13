@@ -3,7 +3,7 @@ name: gitignore
 description: Create or update a .gitignore from the templates in murnana/gitignore, keeping each template in a marked block that can be refreshed later.
 argument-hint: "[template names, e.g. Unity macOS] [update | remove <name>]"
 disable-model-invocation: true
-allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(mktemp -d) Bash(git clone --depth 1 --filter=blob:none --no-checkout https://github.com/murnana/gitignore.git *) Bash(git -C * rev-parse HEAD) Bash(git -C * ls-tree *) Bash(git -C * show *) Bash(git rev-parse *) Bash(git ls-files *) Bash(git check-ignore *) Bash(git config --get *)
+allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(mktemp -d) Bash(git clone --depth 1 --filter=blob:none --no-checkout https://github.com/murnana/gitignore.git *) Bash(git -C * rev-parse HEAD) Bash(git -C * ls-tree *) Bash(git -C * show *) Bash(git rev-parse *) Bash(git ls-files *) Bash(git check-ignore *) Bash(git grep *) Bash(git config --get *)
 ---
 
 # gitignore
@@ -12,13 +12,25 @@ Create or update a `.gitignore` with templates from [murnana/gitignore](https://
 
 ## Current state
 
+These blocks were filled in when the skill loaded. Do not re-run their commands. `(Bash completed with no output)` means "none".
+
+Repo root (none: the current directory is not a Git repo):
+
 ```!
 git rev-parse --show-toplevel 2>/dev/null || true
-git ls-files --cached --others --exclude-standard -- '.gitignore' '**/.gitignore' 2>/dev/null | head -20 || true
-grep -nE '^# --- (BEGIN|END) [^ ]+\.gitignore( |$)' .gitignore 2>/dev/null || true
 ```
 
-The lines above are the repo root, the existing `.gitignore` files, and the managed block markers already in the root `.gitignore`. Do not re-run these commands.
+Existing `.gitignore` files:
+
+```!
+git ls-files --cached --others --exclude-standard -- '.gitignore' '**/.gitignore' 2>/dev/null || true
+```
+
+Managed block markers already in the `.gitignore` of the current directory:
+
+```!
+git grep --no-index -nE '^# --- (BEGIN|END) [^ ]+\.gitignore( |$)' -- .gitignore 2>/dev/null || true
+```
 
 Treat `$ARGUMENTS` as template names to add, `update` (refresh every managed block), or `remove <name>`. With no arguments, detect templates from the project (Step 2).
 
@@ -42,7 +54,7 @@ git -C <tmp> ls-tree -r --name-only HEAD
 
 - Map the request or the project's files to template paths with [references/templates.md](references/templates.md). Match against the tree from Step 1, never from memory; the tree is the source of truth for names and folders.
 - Root-level templates are languages and frameworks. `community/` holds niche or older ones. `Global/` holds OS, editor and tool rules.
-- Target file, by default the `.gitignore` at the repo root (the current directory if the first Current state line is empty, i.e. not a Git repo). Use a subdirectory `.gitignore` only when the user asks or the project lives in a subdirectory (e.g. a Unity project inside a monorepo; the Unity template expects to sit at the project root).
+- Target file, by default the `.gitignore` at the repo root (the current directory if the repo root in Current state is empty, i.e. not a Git repo). Use a subdirectory `.gitignore` only when the user asks or the project lives in a subdirectory (e.g. a Unity project inside a monorepo; the Unity template expects to sit at the project root).
 - `Global/` templates are meant for the user's global excludes file. When the selection includes one, ask whether to put it in the project `.gitignore` or the global file. For the global file, read `git config --get core.excludesFile`; if unset, the default is `$XDG_CONFIG_HOME/git/ignore` (or `~/.config/git/ignore`). Never change git config yourself.
 
 ## Step 3: Plan the edit and get approval
