@@ -23,7 +23,7 @@ paths:
 ## Plugin-specific: never copy across
 
 - UPM only: `references/unity-package.md`, the `package.json` version update, Unity's version rules, `-exp`/`-pre` suffixes, `.meta` handling, the Validation Suite and `[Unreleased]` removal, UPM tag patterns, the Unity-specific rows in `project-rules.md`, and the Unity names and examples in `entry-writing.md`.
-- UPM only in SKILL.md: the frontmatter (`description`, `when_to_use`, `allowed-tools`, no `disable-model-invocation`) and the stop when no UPM package is found.
+- UPM only in SKILL.md: the frontmatter (`description`, `allowed-tools`, no `disable-model-invocation`) and the stop when no UPM package is found.
 - tech-docs only: `disable-model-invocation: true`, the murnana-claude-code-plugin example in `project-rules.md`, and "don't edit version fields" in `release.md`.
 
 ## Versioning

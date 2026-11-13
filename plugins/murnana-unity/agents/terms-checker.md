@@ -1,6 +1,6 @@
 ---
 name: terms-checker
-description: Checks a Unity-related tool, Claude Code plugin or skill, UPM package, or Unity project against Unity's current Terms of Service, Editor Software Terms, Trademark Guidelines, Package Guidelines and documentation license, and reports risks with clause citations. Read-only. Use when the user asks whether something violates Unity's terms ("Unity の規約に違反していないか確認して", "check this against Unity's ToS"), or before publishing a tool that names Unity, drives the Unity Editor/CLI/Hub, fetches Unity documentation, or ships Unity content.
+description: Read-only check of a Unity-related tool, plugin, skill, UPM package or project against Unity's current legal terms (Terms of Service, Editor terms, trademark and package guidelines, docs license), reporting risks with clause citations. Use when asked whether something violates Unity's terms, or before publishing a tool that names Unity, drives the Editor/CLI/Hub, fetches Unity docs or ships Unity content.
 tools: Read, Grep, Glob, WebFetch, WebSearch
 model: inherit
 ---

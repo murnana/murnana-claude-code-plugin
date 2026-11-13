@@ -1,7 +1,6 @@
 ---
 name: changelog-write
-description: Creates or updates the CHANGELOG.md of a Unity Package Manager (UPM) package following Keep a Changelog and Unity's package versioning rules, and on request cuts a release that also bumps the version in the package's package.json.
-when_to_use: Use when the user asks to record changes in a UPM package's changelog, write its release notes, or release a new version of it. A UPM package is a folder with a package.json whose name is reverse-domain (com.company.package) and that has Unity fields such as `unity`. Example requests - "Unity パッケージの CHANGELOG を更新して", "UPM パッケージの変更履歴に追記して", "このパッケージを 1.2.0 でリリースして", "update the UPM package changelog", "release com.acme.foo 1.2.0". Not for npm or other non-Unity packages, Claude Code plugins, a Unity project's own version (bundleVersion), or dependency updates in Packages/manifest.json.
+description: Write or update the CHANGELOG.md of a Unity Package Manager (UPM) package (a folder whose package.json has a reverse-domain name such as com.company.pkg), or cut its release and bump the version in package.json. Use for UPM package changelogs, release notes and releases. Not for npm packages, Claude Code plugins, a Unity project's bundleVersion, or Packages/manifest.json.
 argument-hint: "[changes to record, or \"release\" / a version to cut]"
 allowed-tools: Read Grep Glob Edit Write AskUserQuestion WebFetch(domain:raw.githubusercontent.com) WebFetch(domain:keepachangelog.com) Bash(git status *) Bash(git log *) Bash(git diff *) Bash(git tag -l *) Bash(git tag --list *) Bash(git describe *) Bash(git remote get-url *) Bash(git show *) Bash(gh pr list *) Bash(gh pr view *) Bash(gh issue view *) Bash(uuidgen)
 ---

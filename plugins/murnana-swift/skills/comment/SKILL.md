@@ -1,10 +1,9 @@
 ---
 name: comment
-description: Write and clean up Swift comments, placing How/What/Why/Why not where each belongs and writing DocC documentation comments for public declarations.
-when_to_use: Swiftのコメントを書いて / この型にドキュメントコメントを付けて / 不要なコメントを整理して
+description: Write, review or clean up Swift code comments (DocC documentation comments for the API, Why-not comments in implementations). Not for commit messages or prose docs.
 argument-hint: "[file, directory or declaration to comment]"
 model: sonnet
-allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/swift_comments.py *) Bash(swift package generate-documentation:*) Bash(git log:*) Bash(git blame:*) Bash(git show:*) Bash(git diff:*) Bash(git status:*)
+allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/swift_comments.py *) Bash(swift package generate-documentation *) Bash(git log *) Bash(git blame *) Bash(git show *) Bash(git diff *) Bash(git status *)
 ---
 
 # Swift Comment
