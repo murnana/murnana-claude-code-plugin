@@ -33,5 +33,6 @@ Format details live in `plugins/murnana-agent-config/skills/skill-create/referen
 
 ## Check before committing
 
+- `.claude/hooks/check-plugin-authoring.sh` runs after every Edit or Write of a `SKILL.md` and rejects the mechanical mistakes above (`when_to_use`, a non-ASCII `description`, old or broad `allowed-tools` forms, inline injection syntax, compound commands in injected blocks). Fix what it reports; do not work around it. It cannot judge the rest of this file.
 - Run `claude plugin validate plugins/<plugin-name>`.
 - Invoke each changed skill once with `claude --plugin-dir plugins/<plugin-name>` and confirm it loads without `Shell command failed for pattern` or `This command requires approval`.

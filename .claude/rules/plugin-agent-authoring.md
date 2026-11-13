@@ -42,4 +42,5 @@ Imitate `plugins/murnana-unity/agents/terms-checker.md`. The field list is at ht
 ## Docs and checks
 
 - Add `docs/plugins/<plugin-name>/<agent-name>.md` in Japanese: how to call it (`@agent-<plugin-name>:<agent-name>`), what to pass, the report format, and the reason for each design choice.
+- `.claude/hooks/check-plugin-authoring.sh` runs after every Edit or Write of an agent file and rejects a missing `tools`, `AskUserQuestion` in `tools`, a `name` that differs from the filename, and the three ignored fields. Fix what it reports; do not work around it.
 - Run `claude plugin validate plugins/<plugin-name>`, then call the agent once with `claude --plugin-dir plugins/<plugin-name>`: once with a normal target and once with no target, and confirm the report follows the fixed format both times.
