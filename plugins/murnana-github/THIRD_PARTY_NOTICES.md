@@ -12,8 +12,11 @@
   - `skills/stack-create/references/command-reference.md`
   - `skills/stack-rebase/references/conflict-resolution.md`
   - `skills/stack-create/references/layer-design.md`（積み重ね PR に関する GitHub のドキュメントの考え方を参考にしています）
+  - `skills/large-file-guard/references/github-limits.md`（リポジトリーの制限のうち、ファイルサイズの制限値を要約したもの）
 - 内容: GitHub Docs の積み重ね PR のコマンド解説を、要約・翻案したもの。原文から内容を変更しています
-- 出典: https://docs.github.com/en/pull-requests/reference/stacked-prs-cli-commands
+- 出典
+  - https://docs.github.com/en/pull-requests/reference/stacked-prs-cli-commands
+  - https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits
 - 著作権: GitHub, Inc.
 - ライセンス: Creative Commons Attribution 4.0 International (CC BY 4.0) https://creativecommons.org/licenses/by/4.0/
 

@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- large-file-guard スキルを追加した。`/murnana-github:large-file-guard` でリポジトリに Hook を設定すると、Git LFS を使っていない 100 MiB 以上のファイルを含む `git commit` を Claude が実行する前に止める。50 MiB 以上は警告だけでコミットは通す
+
 ### Removed
 
 - pr-create / stack-pr-message スキルから、PR 本文の末尾に `🤖 Generated with [Claude Code]` の行を付ける指示を削除した
