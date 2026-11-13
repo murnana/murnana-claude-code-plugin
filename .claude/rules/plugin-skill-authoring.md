@@ -1,10 +1,9 @@
 ---
 paths:
   - "plugins/**/SKILL.md"
-  - "plugins/**/agents/*.md"
 ---
 
-# Plugin Skill and Agent Authoring Rules
+# Plugin Skill Authoring Rules
 
 Format details live in `plugins/murnana-agent-config/skills/skill-create/references/skill-format.md` and `writing-guide.md`. Read them before writing a new skill. The rules below are the ones this repository has already been bitten by.
 
@@ -31,7 +30,6 @@ Format details live in `plugins/murnana-agent-config/skills/skill-create/referen
 - Write procedures as numbered steps with the exact command, how to read its result, and where to go for each outcome. Skills also run on Sonnet (the `comment` skills set `model: sonnet`), which skips or reorders loosely described steps.
 - Ask the user only through `AskUserQuestion`, with all open questions in one call. Do not end a reply with a question in prose. Do not ask for what has a sensible default (reply language, optional rounds).
 - Do not tell the skill to add attribution lines or footers (`Co-Authored-By:`, "Generated with Claude Code"). That is the user's setting.
-- For a subagent, list `tools` explicitly and keep read-only agents read-only (see `plugins/murnana-unity/agents/terms-checker.md`).
 
 ## Check before committing
 
