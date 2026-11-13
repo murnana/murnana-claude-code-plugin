@@ -37,6 +37,8 @@
 - **なぜコミット前に必ず承認を取るか** — 意図しないコミットを防ぐため。1 コミットで済む場合も分割案を提示する。
 - **なぜコミット結果の確認を Hook にしたか** — 以前は全コミット後に Claude が `git log --oneline -<N>` を叩いて確認していた。これを `SKILL.md` frontmatter の `hooks`（`PostToolUse` + `if: "Bash(git commit *)"`）に置き換え、`git commit` が成功するたびに `git log --oneline -1` の結果を `additionalContext` として自動注入している。
   - 確認が Claude の判断に依存せず決定的に行われ、Bash 呼び出しも 1 回減る。
+  - フックのコマンド自身が、標準入力の `tool_input.command` に `git commit` が含まれるときだけ出力する。`if` は最善努力の絞り込みで、`Bash(git commit *)` のようにコマンド名より細かいパターンは、`$()` を含むコマンドや解析できないコマンドでは一致しなくてもフックが走る。スキルのフックはセッション終了まで残るため、`if` だけに頼ると、コミットと無関係な Bash 実行の後にも「Commit created」が注入されていた。
+  - 正規表現は `[[:space:]]` で書き、バックスラッシュを使わない。Windows の Git Bash からネイティブの `jq.exe` に引数を渡すとき、`\\s` が `\s` に変換されて jq の構文エラーになるため。
   - `PostToolUse` は成功時のみ発火し、失敗時は `PostToolUseFailure` になる。注入が無いこと自体がコミット失敗のシグナルになり、失敗を成功と誤報告しない。
   - plain stdout は Claude に届く保証がないため、`hookSpecificOutput.additionalContext` の JSON で返す。`jq` が必要。
   - スキル hook の相対パスや `${CLAUDE_SKILL_DIR}` の展開は公式 docs に記載が無いため、スクリプトファイルは置かずインラインコマンドにしている。

@@ -14,6 +14,8 @@ Format details live in `plugins/murnana-agent-config/skills/skill-create/referen
 - List in `allowed-tools` only the exact command shapes the body runs, as `Bash(git log *)`, space-separated. Never the old `Bash(git log:*)` form, and never a whole tool family such as `Bash(git config *)` when the body only reads (`Bash(git config --get *)`). A broad grant lets through the very operations the body says to confirm first.
 - Leave out any tool the body says must be confirmed or must not run (`git push`, `git commit --amend`, `git reset`). The approval prompt is the safety valve.
 - Remove a tool from `allowed-tools` when the body stops using it.
+- In a `hooks` entry, do not rely on `if` alone. `if: "Bash(git commit *)"` still runs the hook for commands with `$()` or ones Claude Code cannot parse, and a skill's hooks stay registered for the rest of the session. Make the hook command read `.tool_input.command` from stdin and output nothing unless it matches (see `plugins/murnana-git/skills/commit/SKILL.md`).
+- Write no backslashes in a hook's `jq` filter (use `[[:space:]]`, not `\\s`): Git Bash on Windows rewrites them before they reach `jq.exe`.
 - Reference bundled scripts as `${CLAUDE_SKILL_DIR}/scripts/<name>`, in both `allowed-tools` and the body.
 
 ## Dynamic context injection
