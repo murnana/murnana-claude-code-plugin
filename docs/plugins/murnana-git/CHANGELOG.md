@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- commit スキルを一度使うと、そのセッション中、コミットと無関係なコマンド（`$()` を含むものなど）の後にも「Commit created」が表示されていた。`git commit` を実行したときだけ表示するようにした
+
 ### Removed
 
 - commit スキルから、コミットメッセージに帰属行（`Co-Authored-By:` など）を追記する指示を削除した

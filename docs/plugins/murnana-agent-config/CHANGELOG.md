@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- agent-create スキル（サブエージェントを、仕事・置き場所・できること・任せ方のヒアリングを先に行ってから作成・更新する）
+
 ### Changed
 
 - rule-create / skill-create スキルで、ユーザーへの質問と承認の確認を必ず AskUserQuestion ツールで行い、未回答の質問は 1 回の呼び出しにまとめるようにした。skill-create のセルフレビューにも、作るスキルが同じ方針に沿っているかの項目を追加した
