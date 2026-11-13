@@ -35,6 +35,13 @@ Copy this checklist into your response and update it as you go:
 - [ ] 8 (Only if asked) Cut a release
 ```
 
+## Asking the user
+
+- Every question to the user goes through the `AskUserQuestion` tool, never as a plain-text question at the end of a reply. This includes every "wait for approval" and every "ask how to proceed": show the plan or the failure in the reply, then call `AskUserQuestion` with options such as 「この内容で進める」 and 「修正する」. The dialog can hide the reply, so say in the question itself, in one line, what is being approved.
+- Ask as few times as possible. Don't ask what `$ARGUMENTS`, the conversation, the files or command output already answer. Where a step gives a default, use it and state it in the plan instead of asking.
+- Collect the open questions and send them in one call (up to 4 questions per call). A question that can wait goes into the approval call, not a call of its own.
+- If `AskUserQuestion` is unavailable (a non-interactive run), don't guess: stop before changing anything and list the questions in the reply.
+
 ## Step 1: Locate the target changelog
 
 - Glob for `**/CHANGELOG.md`, and also `HISTORY*`, `NEWS*`, `RELEASES*`, skipping `node_modules/` and vendored trees.
@@ -48,7 +55,7 @@ Check the sources in [references/project-rules.md](references/project-rules.md).
 ## Step 3: New file only — pick format version, language, versioning
 
 1. **Format version**: always start a new changelog on the **latest** Keep a Changelog version. Check it each time with the procedure in [references/keep-a-changelog.md](references/keep-a-changelog.md). Don't rely on memory or on the upstream git tags.
-2. **Language**: default to the language of the current conversation. Confirm it with `AskUserQuestion`: offer that language first, then English if the conversation isn't already in English; "Other" covers the rest. Skip the question only if a project rule fixes the language.
+2. **Language**: use the language a project rule fixes; otherwise the language of the current conversation. Don't ask about it: name the chosen language in the Step 7 plan, where the user can change it.
 3. **Versioning**: follow the project's scheme if there is one. Otherwise use [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
 4. Write the header preamble from the reference for that version, translated into the chosen language, then an empty `## [Unreleased]`.
 
@@ -80,7 +87,7 @@ Follow [references/entry-writing.md](references/entry-writing.md). The core rule
 - For **Deprecated** and **Removed**, name the API explicitly, plus its replacement, or say there is none.
 - For `**Breaking:**`, add the action users must take.
 - Start each entry with what the reader recognizes (feature, command, area). Merge commits that make up one change. No generic entries ("改善した", "Bug fixes and improvements").
-- If a change can't be described as behavior (internal refactor, test-only change, CI config), don't invent an entry. List those changes separately and ask with `AskUserQuestion` whether to record each one, and how.
+- If a change can't be described as behavior (internal refactor, test-only change, CI config), don't invent an entry. Leave it out of the draft, list it separately in the Step 7 plan, and ask about all of them in the Step 7 approval call (record them or not), not one by one.
 
 ## Step 7: Present and get approval
 

@@ -1,7 +1,7 @@
 ---
 name: ue5-docs
 description: Answer Unreal Engine 5 questions (features, C++ API, Blueprint, errors, settings) from Epic's official documentation via web search. Use before answering any UE5 question, even if the user doesn't ask for docs.
-allowed-tools: Read Glob WebSearch
+allowed-tools: Read Glob WebSearch AskUserQuestion
 ---
 
 # Unreal Engine 5 Docs
@@ -20,8 +20,9 @@ Stop at the first source that gives a version such as `5.4`:
 
 1. The user's message or earlier conversation.
 2. A `*.uproject` file in the working directory (Glob `**/*.uproject`, then Read it): the `EngineAssociation` value, when it looks like `5.4`. A GUID there means a source build; it gives no version.
-3. Ask the user and wait for the answer before searching:
-   > 使用している Unreal Engine のバージョン（例: 5.4, 5.5）を教えてください。
+3. Ask with the `AskUserQuestion` tool, never as plain reply text, and wait for the answer before searching. Question: 「使用している Unreal Engine のバージョンを教えてください。」 Options: the three newest 5.x releases you know of; the user can type another via "Other". Without the tool, ask in the reply.
+
+Ask at most once per conversation: reuse the version for every later UE5 question unless the user names another.
 
 ## Step 2: Search
 

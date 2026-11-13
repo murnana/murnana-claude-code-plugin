@@ -12,6 +12,13 @@ Open a Unity project in the right Editor version on the right platform, and reme
 
 Treat `$ARGUMENTS` as an optional platform and an optional project path, in either order.
 
+## Asking the user
+
+- Every question to the user goes through the `AskUserQuestion` tool, never as a plain-text question at the end of a reply. The dialog can hide the reply, so each question must make sense on its own.
+- Ask as few times as possible. Don't ask what `$ARGUMENTS`, the conversation, the files or command output already answer.
+- Collect the open questions and send them in one call (up to 4 questions per call).
+- If `AskUserQuestion` is unavailable (a non-interactive run), don't guess: stop and list the questions in the reply.
+
 ## Step 0: Check the Unity CLI
 
 Run this first, exactly as written. The `UNITY_CLI_FTUE=1` prefix is part of the pre-approved command; without it the call asks for permission:
@@ -29,7 +36,7 @@ The project root is the folder that has `Assets/`, `Packages/`, and `ProjectSett
 
 1. If `$ARGUMENTS` has a path, use it.
 2. Otherwise use the working directory, then look for the nearest folder below it that matches (`Glob` `**/ProjectSettings/ProjectVersion.txt`).
-3. If several projects match, ask which one. If none, stop and say so.
+3. If several projects match, ask which one (in the same `AskUserQuestion` call as the platform, when Step 2 also needs to ask). If none, stop and say so.
 
 ## Step 2: Decide the platform
 
@@ -64,14 +71,14 @@ platform: android
 Outcomes:
 
 - **Found**: continue.
-- **Not installed**: tell the user which version is missing and ask before installing. With the CLI, install with `unity install <version> -m <module>`; take `-c <changeset>` from `ProjectVersion.txt`'s `m_EditorVersionWithRevision` (the hash in parentheses) when the version is not in the release list. Without the CLI, tell the user to install it from Unity Hub and stop.
-- **Platform module missing** (the chosen platform needs one, such as `android`, `ios`, `webgl`; see the table in the reference): list with `unity install-modules -e <version> -l`, then ask before running `unity install-modules -e <version> -m <module> --cm`. Without the CLI, tell the user to add the module in Unity Hub.
+- **Not installed**: tell the user which version is missing and ask (`AskUserQuestion`) before installing. If a platform module is missing too, ask about both in the same call. With the CLI, install with `unity install <version> -m <module>`; take `-c <changeset>` from `ProjectVersion.txt`'s `m_EditorVersionWithRevision` (the hash in parentheses) when the version is not in the release list. Without the CLI, tell the user to install it from Unity Hub and stop.
+- **Platform module missing** (the chosen platform needs one, such as `android`, `ios`, `webgl`; see the table in the reference): list with `unity install-modules -e <version> -l`, then ask (`AskUserQuestion`) before running `unity install-modules -e <version> -m <module> --cm`. Without the CLI, tell the user to add the module in Unity Hub.
 
 Installing downloads gigabytes and may need elevation. Never install without a yes.
 
 ## Step 4: Check the project is not already open
 
-Unity allows one instance per project. If `<project>/Temp/UnityLockfile` exists and a Unity process is running (`pgrep -fl Unity`), the project is probably open. Tell the user and ask whether to continue. Do not close it: `unity close` discards unsaved work.
+Unity allows one instance per project. If `<project>/Temp/UnityLockfile` exists and a Unity process is running (`pgrep -fl Unity`), the project is probably open. Tell the user and ask (`AskUserQuestion`) whether to continue. Do not close it: `unity close` discards unsaved work.
 
 A stale lockfile with no process is fine to ignore.
 

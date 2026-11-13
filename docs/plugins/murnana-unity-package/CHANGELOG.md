@@ -9,6 +9,7 @@
 
 ### Changed
 
+- changelog-write スキルで、ユーザーへの質問と承認の確認を必ず AskUserQuestion ツールで行い、未回答の質問は 1 回の呼び出しにまとめるようにした。新規作成時の言語は聞かずに会話の言語を使い、振る舞いとして書けない変更の扱いは承認の確認と同じ呼び出しで聞く
 - changelog-write スキルの description と when_to_use を 1 つの短い description にまとめ、常時コンテキストに載る量を減らした
 
 ## [0.0.3] - 2026-11-01

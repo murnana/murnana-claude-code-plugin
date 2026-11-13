@@ -9,6 +9,7 @@
 
 ### Changed
 
+- pr-create / stack-create / stack-pr-message / stack-rebase スキルで、ユーザーへの質問と承認の確認を必ず AskUserQuestion ツールで行い、未回答の質問は 1 回の呼び出しにまとめるようにした
 - pr-create スキルの description を、スキルが行うことを表す文に書き直した
 - pr-create スキルの push 手順を、upstream の有無ごとに実行するコマンドを明記する形にした
 

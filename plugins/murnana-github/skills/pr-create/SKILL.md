@@ -33,6 +33,13 @@ Treat `$ARGUMENTS` (if any) as an additional hint about the PR's intent — it d
 - Prefer `gh pr view --json <fields>` over the default human-readable form when only specific fields are needed.
 - Never re-run a command whose output is already in this context.
 
+## Asking the user
+
+- Every question to the user goes through the `AskUserQuestion` tool, never as a plain-text question at the end of a reply. This includes every "wait for approval" and every "ask how to proceed": show the plan or the failure in the reply, then call `AskUserQuestion` with options such as 「この内容で進める」 and 「修正する」. The dialog can hide the reply, so say in the question itself, in one line, what is being approved.
+- Ask as few times as possible. Don't ask what `$ARGUMENTS`, the conversation, the files or command output already answer. Where a step gives a default, use it and state it in the plan instead of asking.
+- Collect the open questions and send them in one call (up to 4 questions per call). A question that can wait goes into the approval call, not a call of its own.
+- If `AskUserQuestion` is unavailable (a non-interactive run), don't guess: stop before changing anything and list the questions in the reply.
+
 ## Step 1: Confirm `gh` is usable
 
 - If `gh auth status` reported no login, or `gh` is missing (`command not found`), **stop and ask the user** (`AskUserQuestion`) whether to fall back to the GitHub MCP server. 

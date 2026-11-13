@@ -9,6 +9,7 @@
 
 ### Changed
 
+- commit / gitignore スキルで、ユーザーへの質問と承認の確認を必ず AskUserQuestion ツールで行い、未回答の質問は 1 回の呼び出しにまとめるようにした
 - commit スキルの description を、スキルが行うことを表す文に書き直した
 
 ### Fixed

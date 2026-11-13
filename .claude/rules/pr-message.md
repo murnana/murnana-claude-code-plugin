@@ -26,5 +26,5 @@ These rules mirror the `pr-create` skill of the `murnana-github` plugin (`plugin
 - The title starts with a GitHub emoji markup code (same table as `.claude/rules/commit-message.md`) and is written in Japanese. All three body sections are required, and the attribution line always goes last.
 - Name the specific files or consumers under 影響範囲, and give an exact command or click-path under デバッグ方法. Do not re-describe the diff line by line.
 - Run the relevant checks before pushing; if a check or the push fails, stop and report instead of creating the PR. Never force-push.
-- Show the base branch, title and full body and wait for approval before creating the PR. Pass the body through stdin (`--body-file -`), not a multi-line `--body` argument.
+- Show the base branch, title and full body, then ask for approval with `AskUserQuestion` (one call, with any other open question) before creating the PR. Pass the body through stdin (`--body-file -`), not a multi-line `--body` argument.
 - Add `--assignee @me` unless an assignee is specified. Use `--draft` only when asked.
