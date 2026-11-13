@@ -1,82 +1,65 @@
 ---
 name: ue5-docs
-description: Search Unreal Engine 5 official documentation to answer questions.
-when_to_use: >
-  Use this skill whenever the user asks about UE5 features, concepts, C++ APIs,
-  Blueprint usage, error causes, or configuration. Trigger on keywords like
-  "UE5", "Unreal Engine", "Blueprint", "GameplayAbility", "UObject", "AActor",
-  "UActorComponent", etc. Always check the docs before answering UE5 code questions.
-  Note: dev.epicgames.com is a JavaScript SPA — only WebSearch works, not WebFetch.
-allowed-tools: Read Grep WebSearch WebFetch(domain:dev.epicgames.com)
+description: Answer Unreal Engine 5 questions (features, C++ API, Blueprint, errors, settings) from Epic's official documentation via web search. Use before answering any UE5 question, even if the user doesn't ask for docs.
+allowed-tools: Read Glob WebSearch
 ---
 
-# Unreal Engine 5 Docs Skill
+# Unreal Engine 5 Docs
 
-Search Epic Games' official documentation via WebSearch and answer in Japanese.
+Answer an Unreal Engine 5 question from Epic's official documentation (`dev.epicgames.com`), in Japanese, with source URLs.
 
-> **Note:** `dev.epicgames.com` is a JavaScript-rendered SPA. WebFetch returns empty content for all pages on this site. Use WebSearch exclusively.
+## Rules
 
-## Version Awareness
+1. **Use WebSearch only.** `dev.epicgames.com` is rendered by JavaScript, so WebFetch returns an empty page for every URL on it. Don't try WebFetch, not even once.
+2. **Know the engine version before searching.** APIs and settings differ between 5.x releases, so an answer for the wrong version can be wrong.
+3. **Answer from the search results.** Don't fill gaps from memory. If the results don't cover something, say that it was not found.
 
-**Before searching or answering, you must identify the exact UE version (e.g., 5.3, 5.4, 5.5).**
+## Step 1: Fix the version
 
-- If the version is stated in the question, use it directly.
-- If the version is unclear, **stop and ask the user** before doing anything else:
-  > 「使用しているUnreal Engineのバージョン（例: 5.4, 5.5）を教えてください。」
-- Do not assume a version or proceed with a generic answer when the version is unknown.
+Stop at the first source that gives a version such as `5.4`:
 
-## Documentation URLs
+1. The user's message or earlier conversation.
+2. A `*.uproject` file in the working directory (Glob `**/*.uproject`, then Read it): the `EngineAssociation` value, when it looks like `5.4`. A GUID there means a source build; it gives no version.
+3. Ask the user and wait for the answer before searching:
+   > 使用している Unreal Engine のバージョン（例: 5.4, 5.5）を教えてください。
 
-Base URL pattern for version `5.X`:
+## Step 2: Search
 
-| Content | URL pattern |
+Run WebSearch with the version in the query:
+
+| Question type | Query |
 |---|---|
-| Main docs | `https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-{minor}-documentation` |
-| C++ API reference | `https://dev.epicgames.com/documentation/en-us/unreal-engine/API` |
+| Feature, concept, setting, error | `<keywords> Unreal Engine 5.<minor> documentation dev.epicgames.com` |
+| C++ class or function | `<class or function name> Unreal Engine API dev.epicgames.com` |
 
-**Examples:**
-- UE 5.4 → `https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-4-documentation`
-- UE 5.5 → `https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-5-documentation`
-- UE 5.7 → `https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-7-documentation`
+- Search in English, even when the question is in Japanese: the documentation is indexed in English.
+- If the first results are thin, search again with other keywords (the class name, the editor menu name, the error text). Two or three searches are normal.
+- Prefer results under these paths. Other sites (forums, blogs) only support what the documentation says, and are labeled as such in the answer:
+  - Main documentation for 5.X: `https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-5-<minor>-documentation`
+  - C++ API reference: `https://dev.epicgames.com/documentation/en-us/unreal-engine/API`
 
-## Workflow
+## Step 3: Answer in Japanese
 
-### Step 1: Search with WebSearch
+Use this shape. Leave out the code section when there is no code.
 
-Use this query, substituting the confirmed version:
-```
-<keywords> Unreal Engine 5.{minor} documentation dev.epicgames.com
-```
+````markdown
+## <トピック>
 
-For C++ API lookups:
-```
-<class or function name> Unreal Engine API dev.epicgames.com
-```
+<説明。対象バージョンを最初に書く>
 
-Run multiple searches if needed to gather enough information.
+### コード例
 
-### Step 2: Answer in Japanese
-
-Summarize the search results and answer clearly in Japanese. Code samples may remain in English. Always include the source URLs at the end.
-
-## Response Format
-
-```
-## [Topic]
-
-[Explanation]
-
-### Code Example (if applicable)
-\`\`\`cpp
+```cpp
 // sample
-\`\`\`
-
-### References
-- [Doc title](URL)
 ```
 
-## Notes
+### 参考
 
-- Prefer version-specific pages over generic ones
-- Note when a feature was added, changed, or deprecated in a particular version
-- If information is not found, say so and suggest alternative resources (e.g., Epic Developer Community forums)
+- [<ページタイトル>](<URL>)
+````
+
+- Code and identifiers stay in English.
+- List every URL the answer relies on under 参考.
+- When a result is for another 5.x version than the user's, say which version it is for.
+- When a feature was added, changed or deprecated in a specific version, say so.
+- When nothing relevant is found, say so and point to the Epic Developer Community forums (`https://forums.unrealengine.com/`) instead of guessing.

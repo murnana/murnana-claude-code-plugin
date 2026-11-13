@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+### Changed
+
+- ue5-docs スキルを手順（バージョンの確定 → 検索 → 回答）ごとに書き直した。`.uproject` の `EngineAssociation` からバージョンを読めるときは質問しない。検索結果に無いことを記憶で補わない
+- ue5-docs スキルの description と when_to_use を 1 つの短い description にまとめ、常時コンテキストに載る量を減らした
+- 使えない WebFetch を `allowed-tools` から外した
+
 ## [0.0.2] - 2026-11-01
 
 ### Changed
