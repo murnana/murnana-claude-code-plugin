@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+### Changed
+
+- pr-create スキルの description を、スキルが行うことを表す文に書き直した
+- pr-create スキルの push 手順を、upstream の有無ごとに実行するコマンドを明記する形にした
+
+### Fixed
+
+- pr-create / stack-create / stack-pr-message / stack-rebase スキルの「Current state」が、注入されない通常のコードブロックなのに「上の出力を見る」前提で書かれていたのを修正した。最初に各コマンドを実行する手順として明記し、`gh stack view` は終了コードが読めるよう `|| true` を付けずに実行する
+- pr-create スキルの本文が、テンプレートが無いときの見出しを「理由」と書いていたのを、references と同じ「なぜ」に揃えた
+
 ## [0.2.1] - 2026-11-01
 
 ### Changed

@@ -12,9 +12,11 @@ Restore a linear history across a GitHub stack — every branch containing the t
 
 ## Current state
 
+Run these first, each as its own Bash call, exactly as written:
+
 ```bash
 git status --short --branch
-gh stack view --json 2>&1 || true
+gh stack view --json
 ```
 
 Treat `$ARGUMENTS` as the requested mode (`--upstack`, `--downstack`, `--no-trunk`, or `sync`). With no argument, choose per Step 2.

@@ -1,6 +1,6 @@
 ---
 name: pr-create
-description: Create pull request
+description: Push the current branch and create a pull request (or stacked PRs) after approval.
 argument-hint: "[optional scope or intent hint]"
 disable-model-invocation: true
 allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git branch *) Bash(git rev-parse *) Bash(git push *) Bash(git config *) Bash(git remote *) Bash(gh auth status *) Bash(gh --version *) Bash(gh repo view *) Bash(gh pr view *) Bash(gh pr list *) Bash(gh pr create *) Bash(gh pr edit *) Bash(gh pr ready *) Bash(gh stack view *) Bash(gh stack submit *) Bash(gh stack up *) Bash(gh stack up) Bash(gh stack down *) Bash(gh stack down) Bash(gh stack top) Bash(gh stack bottom) Read Grep Glob AskUserQuestion
@@ -12,15 +12,18 @@ Create a pull request for the current branch, following the target project's own
 
 ## Current state
 
+Run these first, each line as its own Bash call, exactly as written. Send the first five together in one message, then run the last one on its own (it exits non-zero outside a stack, which is expected):
+
 ```bash
 gh auth status 2>&1 || true
 git status --short --branch
-git branch --show-current 2>/dev/null || true
-git log --format='%s' --no-merges @{u}..HEAD 2>/dev/null || true
+git log --format='%s' --no-merges '@{u}..HEAD' 2>/dev/null || true
 git log --format='%s' --no-merges -15 2>/dev/null || true
 git remote get-url origin 2>/dev/null || true
-gh stack view --short 2>/dev/null; echo "gh-stack-exit=$?"
+gh stack view --short
 ```
+
+They give, in order: whether `gh` is logged in, the branch with its upstream (`## <branch>...<remote>/<branch> [ahead N]`; no `...` part means no upstream) and uncommitted files, the unpushed commit subjects (empty when there are none or no upstream), recent subjects for inferring a title format, the remote URL, and the stack tree or an error.
 
 Treat `$ARGUMENTS` (if any) as an additional hint about the PR's intent — it does not override the steps below.
 
@@ -32,17 +35,17 @@ Treat `$ARGUMENTS` (if any) as an additional hint about the PR's intent — it d
 
 ## Step 1: Confirm `gh` is usable
 
-- If `gh auth status` above failed or `gh` is missing, **stop and ask the user** (`AskUserQuestion`) whether to fall back to the GitHub MCP server. 
+- If `gh auth status` reported no login, or `gh` is missing (`command not found`), **stop and ask the user** (`AskUserQuestion`) whether to fall back to the GitHub MCP server. 
   Do not install the `gh` CLI or configure an MCP server without explicit confirmation — both are environment-level changes.
 - See [references/gh-fallback-mcp.md](references/gh-fallback-mcp.md) for the fallback procedure once the user agrees.
 
 ### Stack detection
 
-Check `gh stack view --short` in the context block above:
+Read the result of `gh stack view --short` from Current state:
 
-- `gh-stack-exit=0` and the tree has a `» <branch> (current)` line → the current branch is a layer of a GitHub stack. **Stack mode**: follow [references/stack-mode.md](references/stack-mode.md), which replaces `git push` and `gh pr create` with `gh stack submit` + `gh pr edit` in Steps 4–7. Never create a plain PR for a stacked branch.
-- `gh-stack-exit=0` but no `(current)` line → the current branch is the stack's trunk; normal mode. `gh stack view` also succeeds on a trunk that has stacks on top of it.
-- Any other exit (2 = not in a stack; or `gh stack` isn't installed) → normal mode, the steps below as written. Don't install gh-stack for this.
+- Exit 0 and the tree has a `» <branch> (current)` line → the current branch is a layer of a GitHub stack. **Stack mode**: follow [references/stack-mode.md](references/stack-mode.md), which replaces `git push` and `gh pr create` with `gh stack submit` + `gh pr edit` in Steps 4–7. Never create a plain PR for a stacked branch.
+- Exit 0 but no `(current)` line → the current branch is the stack's trunk; normal mode. `gh stack view` also succeeds on a trunk that has stacks on top of it.
+- Any non-zero exit (2 = not in a stack; `unknown command` = `gh stack` isn't installed) → normal mode, the steps below as written. Don't install gh-stack for this, and don't retry the command.
 - The MCP fallback can't create stacks. If `gh` is unusable and the branch is stacked, say so when asking in Step 1.
 
 ## Step 2: Discover project rules for PRs (highest priority)
@@ -61,7 +64,7 @@ Glob for a candidate file before reading it.
 
 Stack mode: skip this step (`gh stack submit` pushes). See [references/stack-mode.md](references/stack-mode.md).
 
-- Compare local branch to its upstream (`@{u}..HEAD` above). If there are unpushed commits, run `git push` (set upstream with `-u` only if no upstream is configured).
+- Use the status line and the unpushed subjects from Current state. No upstream → `git push -u origin <branch>`. Upstream with unpushed commits → `git push`. Nothing unpushed → skip the push.
 - If the push fails for any reason (rejected, no remote, auth), **stop entirely** — do not attempt PR creation. Report the failure and ask how to proceed.
 - Never force-push.
 
@@ -70,7 +73,7 @@ Stack mode: skip this step (`gh stack submit` pushes). See [references/stack-mod
 - Search the locations in [references/pr-template-discovery.md](references/pr-template-discovery.md), in order.
 - If exactly one template is found, use it.
 - If multiple are found (e.g. multiple files under `.github/PULL_REQUEST_TEMPLATE/`), either pick the one whose name most closely matches the change (e.g. `bug_fix.md` for a fix) or, if ambiguous, ask the user via `AskUserQuestion`.
-- If none is found, generate title and body per [references/pr-message.md](references/pr-message.md) — title prefixed with a GitHub emoji code, body with 理由 (why) / 影響範囲 (scope & impact) / デバッグ方法 (how to verify) sections.
+- If none is found, generate title and body per [references/pr-message.md](references/pr-message.md) — title prefixed with a GitHub emoji code, body with なぜ (why) / 影響範囲 (scope & impact) / デバッグ方法 (how to verify) sections.
 - Always append the required attribution line to the body: `🤖 Generated with [Claude Code](https://claude.com/claude-code)`
 
 ## Step 6: Present the plan and get approval

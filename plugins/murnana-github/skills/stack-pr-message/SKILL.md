@@ -12,9 +12,11 @@ Write a title and body for each open PR in the current stack — each describing
 
 ## Current state
 
+Run these first, each as its own Bash call, exactly as written:
+
 ```bash
 gh auth status 2>&1 || true
-gh stack view --json 2>&1 || true
+gh stack view --json
 ```
 
 Treat `$ARGUMENTS` (if any) as a hint about the overall goal of the stack — it doesn't override the steps below.
@@ -40,7 +42,7 @@ Copy this checklist into your response and tick it off:
 - `gh stack view --json` failed (exit 2) → the current branch isn't in a stack. Stop and say so.
 - From `branches[]` (bottom to top), take the layers that have `pr.number` and `pr.state == "OPEN"`. Skip merged and queued PRs; they are not edited.
 - Branches without a PR → tell the user to run `/murnana-github:stack-create` (or `gh stack submit --auto`) first; draft messages only for layers that have PRs.
-- `gh auth status` failed → stop and ask, per `${CLAUDE_PLUGIN_ROOT}/skills/pr-create/references/gh-fallback-mcp.md`.
+- `gh auth status` reported no login, or `gh` is missing → stop and ask, per `${CLAUDE_PLUGIN_ROOT}/skills/pr-create/references/gh-fallback-mcp.md`.
 
 ## Step 2: Read each layer
 

@@ -12,12 +12,14 @@ Turn a change into a GitHub stack — an ordered chain of small PRs where each P
 
 ## Current state
 
+Run these first, each line as its own Bash call, exactly as written. Send the first four together in one message, then run the last one on its own (it exits 2 when the current branch is not in a stack, which is expected here):
+
 ```bash
 gh auth status 2>&1 || true
 gh extension list 2>&1 || true
 git status --short --branch
 git remote -v
-gh stack view --json 2>/dev/null || true
+gh stack view --json
 ```
 
 Treat `$ARGUMENTS` (if any) as a hint about what to stack, or as existing branch names listed bottom to top. It doesn't skip any step below.

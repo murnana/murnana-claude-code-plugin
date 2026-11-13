@@ -1,6 +1,6 @@
 # Stack mode
 
-Applies when `gh stack view --short` in the dynamic context block exited 0 and the current branch is one of the stack's layers (Stacked PRs managed by the `gh stack` extension).
+Applies when `gh stack view --short` (run in SKILL.md's Current state) exited 0 and the current branch is one of the stack's layers (Stacked PRs managed by the `gh stack` extension).
 
 A stacked branch must not get a plain PR: `gh pr create` would target the wrong base (or the trunk) and leave the PR outside the stack on GitHub. Use `gh stack` commands instead, as below. Everything not mentioned here (Steps 2, 3, 5's template discovery, 6's approval) works as in SKILL.md.
 
