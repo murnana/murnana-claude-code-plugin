@@ -1,7 +1,6 @@
 ---
 name: comment
-description: Write and clean up C# comments, placing How/What/Why/Why not where each belongs and writing XML documentation comments (///) for the API.
-when_to_use: C#のコメントを書いて / このクラスにXMLドキュメントコメントを付けて / 不要なコメントを整理して
+description: Write, review or clean up C# code comments (XML documentation comments (///) for the API, Why-not comments in implementations). Not for commit messages or prose docs.
 argument-hint: "[file, directory, type or member to comment]"
 model: sonnet
 allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/cs_comments.py *) Bash(dotnet build *) Bash(git log *) Bash(git blame *) Bash(git show *) Bash(git diff *) Bash(git status *)

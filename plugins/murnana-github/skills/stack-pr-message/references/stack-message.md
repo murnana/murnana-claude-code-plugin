@@ -16,7 +16,7 @@ The format is pr-create's (project rules → template → `pr-message.md` fallba
 
 ## Stack section
 
-Insert directly before the attribution line. Heading and labels stay in Japanese to match the fallback format:
+Insert at the end of the body. Heading and labels stay in Japanese to match the fallback format:
 
 ```markdown
 ## スタック
@@ -70,6 +70,4 @@ Good (bottom layer of 3, fallback format):
 - 位置: 1 / 3（下: main ・ 上: #42）
 - この層の役割: 認証情報モデルを追加し、次の層の API が認証に使えるようにする
 - 後の層に回したもの: ログイン API（#42）、ログインフォーム（#43）
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```

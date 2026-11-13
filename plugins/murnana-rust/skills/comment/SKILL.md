@@ -1,10 +1,9 @@
 ---
 name: comment
-description: Write and clean up Rust comments, placing How/What/Why/Why not where each belongs and writing rustdoc doc comments for public items.
-when_to_use: Rustのコメントを書いて / このモジュールにドキュメントコメントを付けて / 不要なコメントを整理して
+description: Write, review or clean up Rust code comments (rustdoc comments for the API, Why-not comments in implementations). Not for commit messages or prose docs.
 argument-hint: "[file, module or item to comment]"
 model: sonnet
-allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/rust_comments.py *) Bash(cargo doc:*) Bash(cargo test:*) Bash(cargo clippy:*) Bash(git log:*) Bash(git blame:*) Bash(git show:*) Bash(git diff:*) Bash(git status:*)
+allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/rust_comments.py *) Bash(cargo doc *) Bash(cargo test *) Bash(cargo clippy *) Bash(git log *) Bash(git blame *) Bash(git show *) Bash(git diff *) Bash(git status *)
 ---
 
 # Rust Comment

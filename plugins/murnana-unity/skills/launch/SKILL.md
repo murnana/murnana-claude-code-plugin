@@ -3,16 +3,32 @@ name: launch
 description: Launches a Unity project in the Unity Editor on a chosen platform, and saves the first platform given as the project default.
 disable-model-invocation: true
 argument-hint: "[platform: android|ios|webgl|win64|osx|linux64|tvos|visionos|…] [project path]"
-allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity *) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(mkdir -p *) Bash(date *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *) Bash(/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash(C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash("/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity" *) Bash("/opt/Unity/Hub/Editor/*/Editor/Unity" *) Bash("/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *) Bash("C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *)
+allowed-tools: Read Glob Grep Write AskUserQuestion Bash(unity version) Bash(unity install-path) Bash(unity editors *) Bash(unity open *) Bash(unity status *) Bash(unity install-modules -e * -l) Bash(unity mcp configure --list) Bash(UNITY_CLI_FTUE=1 unity auth status *) Bash(cat */ProjectSettings/ProjectVersion.txt) Bash(ls *) Bash(mkdir -p *) Bash(date *) Bash(uname *) Bash(pgrep *) Bash(/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity *) Bash(/opt/Unity/Hub/Editor/*/Editor/Unity *) Bash(/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash(C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe *) Bash("/Applications/Unity/Hub/Editor/*/Unity.app/Contents/MacOS/Unity" *) Bash("/opt/Unity/Hub/Editor/*/Editor/Unity" *) Bash("/c/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *) Bash("C:/Program Files/Unity/Hub/Editor/*/Editor/Unity.exe" *)
 ---
 
 # Launch Unity
 
-Start with `UNITY_CLI_FTUE=1 unity auth status --json`
-
 Open a Unity project in the right Editor version on the right platform, and remember the platform so the next launch needs no argument.
 
 Treat `$ARGUMENTS` as an optional platform and an optional project path, in either order.
+
+## Asking the user
+
+- Every question to the user goes through the `AskUserQuestion` tool, never as a plain-text question at the end of a reply. The dialog can hide the reply, so each question must make sense on its own.
+- Ask as few times as possible. Don't ask what `$ARGUMENTS`, the conversation, the files or command output already answer.
+- Collect the open questions and send them in one call (up to 4 questions per call).
+- If `AskUserQuestion` is unavailable (a non-interactive run), don't guess: stop and list the questions in the reply.
+
+## Step 0: Check the Unity CLI
+
+Run this first, exactly as written. The `UNITY_CLI_FTUE=1` prefix is part of the pre-approved command; without it the call asks for permission:
+
+```sh
+UNITY_CLI_FTUE=1 unity auth status --json
+```
+
+- `command not found` → the `unity` CLI is not installed. Use the "without the CLI" path in Steps 3, 5 and 6.
+- Any other result → the CLI is installed. If it reports that the user is signed out, say so in the Step 7 report. Don't sign in for them.
 
 ## Step 1: Find the project
 
@@ -20,7 +36,7 @@ The project root is the folder that has `Assets/`, `Packages/`, and `ProjectSett
 
 1. If `$ARGUMENTS` has a path, use it.
 2. Otherwise use the working directory, then look for the nearest folder below it that matches (`Glob` `**/ProjectSettings/ProjectVersion.txt`).
-3. If several projects match, ask which one. If none, stop and say so.
+3. If several projects match, ask which one (in the same `AskUserQuestion` call as the platform, when Step 2 also needs to ask). If none, stop and say so.
 
 ## Step 2: Decide the platform
 
@@ -49,20 +65,20 @@ platform: android
 ## Step 3: Find the Editor
 
 1. Read the version from `m_EditorVersion:` in `ProjectSettings/ProjectVersion.txt` (e.g. `6000.3.7f1`).
-2. If the `unity` CLI exists (`unity version`), run `unity editors -i --json` (each entry has `version`, `location`, `moduleNames`) and look for that version. The CLI is documented at <https://docs.unity.com/en-us/unity-cli/unity-cli-reference>.
+2. If the `unity` CLI is installed (Step 0), run `unity editors -i --json` (each entry has `version`, `location`, `moduleNames`) and look for that version. The CLI is documented at <https://docs.unity.com/en-us/unity-cli/unity-cli-reference>.
 3. Without the CLI, look at the default Hub path in [references/editor-cli.md](references/editor-cli.md) for the current OS (`ls`).
 
 Outcomes:
 
 - **Found**: continue.
-- **Not installed**: tell the user which version is missing and ask before installing. With the CLI, install with `unity install <version> -m <module>`; take `-c <changeset>` from `ProjectVersion.txt`'s `m_EditorVersionWithRevision` (the hash in parentheses) when the version is not in the release list. Without the CLI, tell the user to install it from Unity Hub and stop.
-- **Platform module missing** (the chosen platform needs one, such as `android`, `ios`, `webgl`; see the table in the reference): list with `unity install-modules -e <version> -l`, then ask before running `unity install-modules -e <version> -m <module> --cm`. Without the CLI, tell the user to add the module in Unity Hub.
+- **Not installed**: tell the user which version is missing and ask (`AskUserQuestion`) before installing. If a platform module is missing too, ask about both in the same call. With the CLI, install with `unity install <version> -m <module>`; take `-c <changeset>` from `ProjectVersion.txt`'s `m_EditorVersionWithRevision` (the hash in parentheses) when the version is not in the release list. Without the CLI, tell the user to install it from Unity Hub and stop.
+- **Platform module missing** (the chosen platform needs one, such as `android`, `ios`, `webgl`; see the table in the reference): list with `unity install-modules -e <version> -l`, then ask (`AskUserQuestion`) before running `unity install-modules -e <version> -m <module> --cm`. Without the CLI, tell the user to add the module in Unity Hub.
 
-Installing downloads gigabytes and may need elevation. Never install without a yes.
+Installing downloads gigabytes and may need elevation. Never install without a yes. `unity install` and `unity install-modules … -m` are deliberately not pre-approved, so they also show a permission prompt.
 
 ## Step 4: Check the project is not already open
 
-Unity allows one instance per project. If `<project>/Temp/UnityLockfile` exists and a Unity process is running (`pgrep -fl Unity`), the project is probably open. Tell the user and ask whether to continue. Do not close it: `unity close` discards unsaved work.
+Unity allows one instance per project. If `<project>/Temp/UnityLockfile` exists and a Unity process is running (`pgrep -fl Unity`), the project is probably open. Tell the user and ask (`AskUserQuestion`) whether to continue. Do not close it: `unity close` discards unsaved work.
 
 A stale lockfile with no process is fine to ignore.
 

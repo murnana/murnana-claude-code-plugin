@@ -7,6 +7,16 @@
 
 ## [Unreleased]
 
+### Security
+
+- launch スキルの事前許可を `unity *` から、実際に使う読み取りと起動のサブコマンドだけに絞った。Editor やモジュールのインストール、`unity close`、`unity mcp configure <client>` には確認が出る
+
+### Changed
+
+- launch スキルで、ユーザーへの質問を必ず AskUserQuestion ツールで行い、プロジェクトとプラットフォーム、Editor とモジュールのインストール確認をそれぞれ 1 回の呼び出しにまとめるようにした
+- terms-checker サブエージェントの description を短くし、常時コンテキストに載る量を減らした
+- launch スキルの冒頭にあった Unity CLI の確認コマンドを「Step 0」として手順化し、CLI が無いときの分岐先を明記した
+
 ## [0.2.2] - 2026-11-01
 
 ### Changed

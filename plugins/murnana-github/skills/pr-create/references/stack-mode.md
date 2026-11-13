@@ -1,6 +1,6 @@
 # Stack mode
 
-Applies when `gh stack view --short` in the dynamic context block exited 0 and the current branch is one of the stack's layers (Stacked PRs managed by the `gh stack` extension).
+Applies when `gh stack view --short` (run in SKILL.md's Current state) exited 0 and the current branch is one of the stack's layers (Stacked PRs managed by the `gh stack` extension).
 
 A stacked branch must not get a plain PR: `gh pr create` would target the wrong base (or the trunk) and leave the PR outside the stack on GitHub. Use `gh stack` commands instead, as below. Everything not mentioned here (Steps 2, 3, 5's template discovery, 6's approval) works as in SKILL.md.
 
@@ -23,7 +23,7 @@ gh stack view --json
 - Each layer's **parent branch** is the previous entry in `branches[]`, or `trunk` for the bottom one. `branches[].base` is the parent's tip **commit SHA**, not a branch name — use it for diffs, never show it as the base branch.
 - If the current branch already has an open PR and there are no targets, there's nothing to create. Report the existing PR URL and stop; suggest `/murnana-github:stack-pr-message` if the user wants to rewrite messages.
 - Any branch with `needsRebase: true` → stop and suggest `/murnana-github:stack-rebase` first. Submitting a stale stack pushes layers whose diffs include their parent's old commits.
-- More than one remote in `git remote` and `git config remote.pushDefault` empty → pass `--remote <name>` to `submit` (ask which remote if unclear).
+- More than one remote in `git remote -v` and `git config --get remote.pushDefault` empty → pass `--remote <name>` to `submit` (ask which remote if unclear).
 
 ## S2: Pre-PR checks (Step 3)
 
@@ -41,7 +41,6 @@ Draft a title and body for **each target**, bottom to top, following `${CLAUDE_P
 - Each body describes only its own layer's diff (`git diff --stat <base>..<branch>`, then the full diff only if needed; `<base>` is the SHA from the JSON), plus the stack section from `stack-message.md` unless project rules forbid extra sections.
 - The stack section links neighbor PRs as `#n`, but new PRs have no number until S6. Write `#<branch-name>` as a placeholder for each not-yet-created neighbor; S6 replaces them with real numbers.
 - No position (`2/3`) in titles.
-- End every body with `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
 
 ## S5: Approval (Step 6)
 

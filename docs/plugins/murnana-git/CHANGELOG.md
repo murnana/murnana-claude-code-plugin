@@ -7,6 +7,24 @@
 
 ## [Unreleased]
 
+### Removed
+
+- commit スキルから、コミットメッセージに帰属行（`Co-Authored-By:` など）を追記する指示を削除した
+
+### Security
+
+- commit スキルの事前許可を `git config *` から読み取りだけの `git config --get *` に絞った。git 設定の書き換えには確認が出る
+
+### Changed
+
+- commit / gitignore スキルで、ユーザーへの質問と承認の確認を必ず AskUserQuestion ツールで行い、未回答の質問は 1 回の呼び出しにまとめるようにした
+- commit スキルの description を、スキルが行うことを表す文に書き直した
+
+### Fixed
+
+- gitignore スキルが、冒頭の動的コンテキスト注入の権限チェックで弾かれて起動できないことがあったのを修正した（パイプ先の `head` と素の `grep` が `allowed-tools` に無かったため。`git ls-files` と `git grep --no-index` だけで取得するようにした）
+- commit スキルの「Current state」が実際には注入されておらず、「注入済みなので再実行しない」という指示と食い違っていたのを修正した。ブランチ・未ステージ・ステージ済み・直近の履歴を、見出し付きで読み込み時に注入する
+
 ## [0.2.1] - 2026-11-01
 
 ### Changed

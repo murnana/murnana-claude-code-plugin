@@ -7,6 +7,11 @@
 
 ## [Unreleased]
 
+### Changed
+
+- comment スキルの description と when_to_use を 1 つの短い description にまとめ、常時コンテキストに載る量を減らした
+- `allowed-tools` の Bash 指定を、旧式の `:*` から ` *` に揃えた
+
 ## [0.0.1] - 2026-11-01
 
 ### Added

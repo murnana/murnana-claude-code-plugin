@@ -38,7 +38,13 @@ Read the conversation, uploaded files and any existing instructions (use Read if
 
 ### 2. Interview
 
-Ask with AskUserQuestion, one call per round, options where possible (the user can always answer freely via "Other"). Without AskUserQuestion, send a numbered list. Go Round 1 -> 2 -> 3 and skip questions already answered. Fill anything the user leaves open with a sensible default, and report the defaults in step 5.
+Ask only through the `AskUserQuestion` tool, with options where possible (the user can always answer freely via "Other"); never put a question in plain reply text. Only without the tool, send one numbered list.
+
+Keep the number of calls low, two at most:
+
+- Call 1: the Round 1 questions not already answered (up to 4 per call).
+- Call 2: only if needed, the Round 2 and 3 questions whose answer you can't reasonably default, the most important 4 at most.
+- Everything else gets a sensible default. Report the defaults in step 5, where the user can correct them. Skip a call entirely when nothing in it is open.
 
 **Round 1: required**
 1. **Goal and typical requests**: what the user wants to do here, what "done" looks like, 2-3 example prompts.
@@ -116,7 +122,7 @@ Good response: ...
 - Show the instructions in a code block so they can be copied as-is. If they contain code fences, wrap them in a longer outer fence.
 - In revision mode, add a short summary of what changed and why.
 - List any defaults you filled in.
-- Ask at most 3 confirmation questions (e.g. "Is this length guideline right?").
+- If something still needs the user's decision, ask it in one `AskUserQuestion` call (at most 3 questions, e.g. "Is this length guideline right?"). Don't ask when the defaults are safe.
 - Suggest 2-3 test prompts: a typical request, an edge case, and one that checks the language rule.
 - Remind the user that a new chat in the project is the surest way to apply updated instructions.
 

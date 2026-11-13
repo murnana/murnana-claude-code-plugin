@@ -1,10 +1,9 @@
 ---
 name: comment
-description: Write and clean up TypeScript comments, placing How/What/Why/Why not where each belongs and writing TSDoc doc comments (with declaration-reference links) for the API.
-when_to_use: TypeScriptのコメントを書いて / この関数にTSDocを付けて / 不要なコメントを整理して
+description: Write, review or clean up TypeScript code comments (TSDoc doc comments for the API, Why-not comments in implementations). Not for commit messages or prose docs.
 argument-hint: "[file, directory or declaration to comment]"
 model: sonnet
-allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/ts_comments.py *) Bash(git log:*) Bash(git blame:*) Bash(git show:*) Bash(git diff:*) Bash(git status:*) Bash(npx --no-install eslint *)
+allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/ts_comments.py *) Bash(git log *) Bash(git blame *) Bash(git show *) Bash(git diff *) Bash(git status *) Bash(npx --no-install eslint *)
 ---
 
 # TypeScript Comment
