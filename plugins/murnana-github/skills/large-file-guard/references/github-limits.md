@@ -1,7 +1,9 @@
 # GitHub file size limits
 
-Source: GitHub Docs, "About large files on GitHub" and "Repository limits"
-(https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits). Re-check the numbers there when GitHub changes them.
+Sources (checked 2026-11-13). Re-check the numbers there when GitHub changes them.
+
+- "About large files on GitHub" (https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github): a warning above 50 MiB, files above 100 MiB are blocked.
+- "Repository limits" (https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits): single object size, recommended 1 MB, enforced at 100 MB; push size enforced at 2 GB.
 
 | File size | What GitHub does on `git push` | What the hook does |
 |---|---|---|
@@ -19,5 +21,5 @@ GitHub applies these limits to files that are not stored in Git LFS. A file stor
 
 ## Limits of this check
 
-- It is a per-file check. It does not measure the size of the whole push or of the repository.
+- It is a per-file check. It does not measure the size of the whole push (GitHub enforces 2 GB per push on the compressed pack, which a sum of file sizes cannot predict) or of the repository.
 - It runs only for `git commit` issued through Claude Code's Bash tool.

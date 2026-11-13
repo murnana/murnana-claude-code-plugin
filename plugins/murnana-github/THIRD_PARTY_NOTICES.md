@@ -17,6 +17,7 @@
 - 出典
   - https://docs.github.com/en/pull-requests/reference/stacked-prs-cli-commands
   - https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits
+  - https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github
 - 著作権: GitHub, Inc.
 - ライセンス: Creative Commons Attribution 4.0 International (CC BY 4.0) https://creativecommons.org/licenses/by/4.0/
 
