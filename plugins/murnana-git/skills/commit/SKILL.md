@@ -112,7 +112,7 @@ Before reading a candidate rule file, `Glob` for it first — only `Read` files 
 - Never run `git push`, `git commit --amend`, or `git reset` unless explicitly instructed.
 - After each successful `git commit`, a hook injects `Commit created: <hash> <subject>` next to the tool result. Use those lines to report the result in Japanese after all commits — do not run `git log` to confirm.
 - If no `Commit created:` line follows a `git commit`, the commit failed: stop, report its output as-is, and ask how to proceed.
-- If the failure is about signing or the SSH agent (a 1Password key the sandbox blocks), follow [references/sandbox-signing.md](references/sandbox-signing.md): guide the user to exclude `git commit` from the sandbox instead of committing unsigned.
+- If the failure is about signing, a key or an agent (the sandbox can block the signing keys and credentials on the user's computer, such as an SSH agent, `gpg-agent` or 1Password), follow [references/sandbox-signing.md](references/sandbox-signing.md): guide the user to exclude `git commit` from the sandbox instead of committing unsigned.
 
 ## References
 
@@ -120,5 +120,5 @@ Before reading a candidate rule file, `Glob` for it first — only `Read` files 
   [references/commit-message.md](references/commit-message.md)
 - Where to look for project-specific rules:
   [references/project-rules.md](references/project-rules.md)
-- Signing fails under the sandbox (1Password key):
+- Signing fails because the sandbox blocks the computer's keys or credentials:
   [references/sandbox-signing.md](references/sandbox-signing.md)
