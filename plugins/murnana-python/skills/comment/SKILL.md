@@ -1,7 +1,6 @@
 ---
 name: comment
-description: Write and clean up Python comments, placing How/What/Why/Why not where each belongs and writing PEP 257 docstrings for the API.
-when_to_use: Pythonのコメントを書いて / この関数にdocstringを付けて / レビューの「なぜXを使わないの?」にコードで答えて. Not for commit messages, README or Sphinx prose, or other languages.
+description: Write, review or clean up Python code comments (PEP 257 docstrings for the API, Why-not comments in implementations). Not for commit messages or prose docs.
 argument-hint: "[file, directory or function to comment]"
 model: sonnet
 allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/py_comments.py *) Bash(ruff check *) Bash(git log *) Bash(git blame *) Bash(git show *) Bash(git diff *) Bash(git status *)

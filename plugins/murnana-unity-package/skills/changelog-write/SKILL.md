@@ -1,7 +1,6 @@
 ---
 name: changelog-write
-description: Creates or updates the CHANGELOG.md of a Unity Package Manager (UPM) package following Keep a Changelog and Unity's package versioning rules, and on request cuts a release that also bumps the version in the package's package.json.
-when_to_use: Use when the user asks to record changes in a UPM package's changelog, write its release notes, or release a new version of it. A UPM package is a folder with a package.json whose name is reverse-domain (com.company.package) and that has Unity fields such as `unity`. Example requests - "Unity パッケージの CHANGELOG を更新して", "UPM パッケージの変更履歴に追記して", "このパッケージを 1.2.0 でリリースして", "update the UPM package changelog", "release com.acme.foo 1.2.0". Not for npm or other non-Unity packages, Claude Code plugins, a Unity project's own version (bundleVersion), or dependency updates in Packages/manifest.json.
+description: Write or update the CHANGELOG.md of a Unity Package Manager (UPM) package (a folder whose package.json has a reverse-domain name such as com.company.pkg), or cut its release and bump the version in package.json. Use for UPM package changelogs, release notes and releases. Not for npm packages, Claude Code plugins, a Unity project's bundleVersion, or Packages/manifest.json.
 argument-hint: "[changes to record, or \"release\" / a version to cut]"
 allowed-tools: Read Grep Glob Edit Write AskUserQuestion WebFetch(domain:raw.githubusercontent.com) WebFetch(domain:keepachangelog.com) Bash(git status *) Bash(git log *) Bash(git diff *) Bash(git tag -l *) Bash(git tag --list *) Bash(git describe *) Bash(git remote get-url *) Bash(git show *) Bash(gh pr list *) Bash(gh pr view *) Bash(gh issue view *) Bash(uuidgen)
 ---
@@ -37,6 +36,13 @@ Copy this checklist into the response and update it as work proceeds:
 - [ ] 8 (Only if asked) Cut a release and update package.json
 ```
 
+## Asking the user
+
+- Every question to the user goes through the `AskUserQuestion` tool, never as a plain-text question at the end of a reply. This includes every "wait for approval" and every "ask how to proceed": show the plan or the failure in the reply, then call `AskUserQuestion` with options such as 「この内容で進める」 and 「修正する」. The dialog can hide the reply, so say in the question itself, in one line, what is being approved.
+- Ask as few times as possible. Don't ask what `$ARGUMENTS`, the conversation, the files or command output already answer. Where a step gives a default, use it and state it in the plan instead of asking.
+- Collect the open questions and send them in one call (up to 4 questions per call). A question that can wait goes into the approval call, not a call of its own.
+- If `AskUserQuestion` is unavailable (a non-interactive run), don't guess: stop before changing anything and list the questions in the reply.
+
 ## Step 1: Locate the package and its changelog
 
 - Find UPM packages with the procedure in [references/unity-package.md](references/unity-package.md) ("Finding the package"): a `package.json` with a reverse-domain `name`, outside the build and cache folders listed there.
@@ -52,7 +58,7 @@ Check the sources in [references/project-rules.md](references/project-rules.md).
 ## Step 3: New file only — pick format version, language, versioning
 
 1. **Format version**: always start a new changelog on the **latest** Keep a Changelog version. Check it each time with the procedure in [references/keep-a-changelog.md](references/keep-a-changelog.md). Don't rely on memory or on the upstream git tags.
-2. **Language**: default to the language of the current conversation. Confirm it with `AskUserQuestion`: offer that language first, then English if the conversation isn't already in English; "Other" covers the rest. Skip the question only if a project rule fixes the language.
+2. **Language**: use the language a project rule fixes; otherwise the language of the current conversation. Don't ask about it: name the chosen language in the Step 7 plan, where the user can change it.
 3. **Versioning**: follow the project's scheme if there is one. Otherwise use Semantic Versioning 2.0.0 with Unity's package rules ([references/unity-package.md](references/unity-package.md), "Version rules"). The preamble links to `https://semver.org/spec/v2.0.0.html`.
 4. Write the header preamble from the reference for that version, translated into the chosen language, then an empty `## [Unreleased]`.
 5. **`.meta`**: if `package.json.meta` exists next to `package.json`, also create `CHANGELOG.md.meta` from the template in [references/unity-package.md](references/unity-package.md) ("`.meta` files"). Get the GUID from `uuidgen`, then remove the hyphens and lowercase it by hand. Write the `.meta` before `CHANGELOG.md`, so an open Editor doesn't generate its own first.
@@ -85,7 +91,7 @@ Follow [references/entry-writing.md](references/entry-writing.md). The core rule
 - For **Deprecated** and **Removed**, name the API explicitly, plus its replacement, or say there is none.
 - For `**Breaking:**`, add the action users must take.
 - Start each entry with what the reader recognizes (component, window, menu, API). Merge commits that make up one change. No generic entries ("改善した", "Bug fixes and improvements").
-- If a change can't be described as behavior (internal refactor, test-only change, CI config, `.meta` churn), don't invent an entry. List those changes separately and ask with `AskUserQuestion` whether to record each one, and how.
+- If a change can't be described as behavior (internal refactor, test-only change, CI config, `.meta` churn), don't invent an entry. Leave it out of the draft, list it separately in the Step 7 plan, and ask about all of them in the Step 7 approval call (record them or not), not one by one.
 
 ## Step 7: Present and get approval
 

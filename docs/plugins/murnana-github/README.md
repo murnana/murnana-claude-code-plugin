@@ -18,6 +18,7 @@ claude plugin install murnana-github@murnana-claude-code-plugin
 | [pr-create](pr-create.md) | `/murnana-github:pr-create` | プロジェクトの規約に従い、チェック→push→テンプレート検出→承認を経て PR を作成する（スタック上のブランチなら `gh stack submit` を使う） |
 | [stack-create](stack-create.md) | `/murnana-github:stack-create` | 変更を層に分割する設計→承認→`gh stack init/add`→チェック→`gh stack submit --auto` で Stacked PR を作成する |
 | [stack-rebase](stack-rebase.md) | `/murnana-github:stack-rebase` | `gh stack rebase` / `sync` でスタックをカスケード rebase し、コンフリクトを解決して承認後に push する |
+| [large-file-guard](large-file-guard.md) | `/murnana-github:large-file-guard` | 非 LFS の 100 MiB 以上のファイルを含む `git commit` を止める Hook をリポジトリに設定する（50 MiB 以上は警告） |
 | [stack-pr-message](stack-pr-message.md) | `/murnana-github:stack-pr-message` | スタック内の各 PR のタイトル・本文を層ごとに作成し、承認後に `gh pr edit` で反映する |
 
 Stacked PR 系の 3 スキルは [`gh stack`](https://github.com/github/gh-stack) 拡張（`gh extension install github/gh-stack`）を前提とする。
@@ -42,6 +43,12 @@ plugins/murnana-github/
     │   └── references/
     │       ├── layer-design.md
     │       └── command-reference.md
+    ├── large-file-guard/
+    │   ├── SKILL.md
+    │   ├── scripts/
+    │   │   └── check-git-file-size.sh
+    │   └── references/
+    │       └── github-limits.md
     ├── stack-rebase/
     │   ├── SKILL.md
     │   └── references/

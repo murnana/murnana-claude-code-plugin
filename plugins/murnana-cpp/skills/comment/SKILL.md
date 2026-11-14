@@ -1,7 +1,6 @@
 ---
 name: comment
-description: Write and clean up C++ comments, placing How/What/Why/Why not where each belongs and writing Doxygen doc comments for the API contract.
-when_to_use: C++のコメントを書いて / この関数にDoxygenコメントを付けて / 不要なコメントを整理して
+description: Write, review or clean up C++ code comments (Doxygen doc comments for the API, Why-not comments in implementations). Not for commit messages or prose docs.
 argument-hint: "[files, symbols, or \"review\"]"
 model: sonnet
 allowed-tools: Read Grep Glob Edit LSP AskUserQuestion Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/cpp_comments.py *) Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/check_comments.py *) Bash(git log *) Bash(git blame *) Bash(git show *) Bash(git diff *) Bash(git status *)

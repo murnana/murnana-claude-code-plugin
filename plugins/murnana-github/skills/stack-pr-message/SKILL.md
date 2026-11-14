@@ -12,9 +12,11 @@ Write a title and body for each open PR in the current stack — each describing
 
 ## Current state
 
+Run these first, each as its own Bash call, exactly as written:
+
 ```bash
 gh auth status 2>&1 || true
-gh stack view --json 2>&1 || true
+gh stack view --json
 ```
 
 Treat `$ARGUMENTS` (if any) as a hint about the overall goal of the stack — it doesn't override the steps below.
@@ -35,12 +37,19 @@ Copy this checklist into your response and tick it off:
 - [ ] 6 Apply
 ```
 
+## Asking the user
+
+- Every question to the user goes through the `AskUserQuestion` tool, never as a plain-text question at the end of a reply. This includes every "wait for approval" and every "ask how to proceed": show the plan or the failure in the reply, then call `AskUserQuestion` with options such as 「この内容で進める」 and 「修正する」. The dialog can hide the reply, so say in the question itself, in one line, what is being approved.
+- Ask as few times as possible. Don't ask what `$ARGUMENTS`, the conversation, the files or command output already answer. Where a step gives a default, use it and state it in the plan instead of asking.
+- Collect the open questions and send them in one call (up to 4 questions per call). A question that can wait goes into the approval call, not a call of its own.
+- If `AskUserQuestion` is unavailable (a non-interactive run), don't guess: stop before changing anything and list the questions in the reply.
+
 ## Step 1: Read the stack
 
 - `gh stack view --json` failed (exit 2) → the current branch isn't in a stack. Stop and say so.
 - From `branches[]` (bottom to top), take the layers that have `pr.number` and `pr.state == "OPEN"`. Skip merged and queued PRs; they are not edited.
 - Branches without a PR → tell the user to run `/murnana-github:stack-create` (or `gh stack submit --auto`) first; draft messages only for layers that have PRs.
-- `gh auth status` failed → stop and ask, per `${CLAUDE_PLUGIN_ROOT}/skills/pr-create/references/gh-fallback-mcp.md`.
+- `gh auth status` reported no login, or `gh` is missing → stop and ask, per `${CLAUDE_PLUGIN_ROOT}/skills/pr-create/references/gh-fallback-mcp.md`.
 
 ## Step 2: Read each layer
 
@@ -69,7 +78,6 @@ Follow [references/stack-message.md](references/stack-message.md). Draft the bot
 
 - Each body describes **its own layer's diff**, framed by the stack's overall goal. Don't describe what other layers do beyond one line of context.
 - If an existing body contains human-written content (not the `submit --auto` placeholder), keep it and merge your sections around it; never silently drop it.
-- End every body with the attribution line: `🤖 Generated with [Claude Code](https://claude.com/claude-code)`
 
 ## Step 5: Present and get approval
 

@@ -57,3 +57,7 @@ Unity プロジェクトを Unity Editor で起動するスキル。
 Windows の Editor を直接起動するときの許可パターンは、Hub の既定パス（`C:\Program Files\Unity\Hub\Editor\<version>\Editor\Unity.exe`）を `/` 区切りで書いている。インストール先を変えている場合は一致せず、許可プロンプトが出る。
 
 起動テンプレートは実行ファイルのパスを引用符で囲む（`"<editor executable>" -projectPath …`）ため、コマンド文字列は `"` で始まる。許可パターンは引用符なしと引用符つきの両方を持つ。ただし、パターンが引用符つきのコマンドに一致するかは実機で未確認。許可パターンの対象は Bash ツールで、PowerShell ツールや `C:\` のバックスラッシュ形式は含まない。
+
+### 事前許可するコマンドを絞っている理由
+
+`allowed-tools` は `unity *` ではなく、読み取りと起動のサブコマンド（`version`、`install-path`、`editors`、`open`、`status`、モジュール一覧、`mcp configure --list`）だけを並べている。`unity install` やモジュールの追加、`unity close`、`unity mcp configure <client>` は本文で「必ず確認する」「実行しない」としている操作なので、事前許可から外して承認プロンプトが出るようにしている。

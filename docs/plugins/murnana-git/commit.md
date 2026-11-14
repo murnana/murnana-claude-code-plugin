@@ -30,12 +30,15 @@
 
 - **なぜ明示起動のみか** — commit のような副作用のある操作には `disable-model-invocation: true` を使うことが公式ドキュメントの推奨。起動タイミングを人間が握れる。スキル自体がスラッシュコマンドになるため、別途 `commands/` を作る必要もない。
 - **なぜ `allowed-tools` に `git push` / `git commit --amend` / `git reset` を含めていないか** — 承認プロンプトを安全弁として意図的に残している。
+- **なぜ `git config` は `--get` だけを許可しているか** — 使うのは `commit.template` の読み取りだけ。`git config *` のままだと設定の書き換えまで確認なしに通ってしまう。
 - **なぜ `git add -A` / `git add .` を禁じているか** — 無関係な変更を巻き込まないため。コミットごとに対象パスを明示する。
 - **なぜ `--no-verify` を禁じているか** — プロジェクトのコミット前チェックを迂回しないため。
 - **なぜ `references/` に規約を分離したか** — progressive disclosure。リンク先は明示的に参照されたときだけ読み込まれるので、常時コンテキストに乗るのは `SKILL.md` 本体だけで済む。
 - **なぜコミット前に必ず承認を取るか** — 意図しないコミットを防ぐため。1 コミットで済む場合も分割案を提示する。
 - **なぜコミット結果の確認を Hook にしたか** — 以前は全コミット後に Claude が `git log --oneline -<N>` を叩いて確認していた。これを `SKILL.md` frontmatter の `hooks`（`PostToolUse` + `if: "Bash(git commit *)"`）に置き換え、`git commit` が成功するたびに `git log --oneline -1` の結果を `additionalContext` として自動注入している。
   - 確認が Claude の判断に依存せず決定的に行われ、Bash 呼び出しも 1 回減る。
+  - フックのコマンド自身が、標準入力の `tool_input.command` に `git commit` が含まれるときだけ出力する。`if` は最善努力の絞り込みで、`Bash(git commit *)` のようにコマンド名より細かいパターンは、`$()` を含むコマンドや解析できないコマンドでは一致しなくてもフックが走る。スキルのフックはセッション終了まで残るため、`if` だけに頼ると、コミットと無関係な Bash 実行の後にも「Commit created」が注入されていた。
+  - 正規表現は `[[:space:]]` で書き、バックスラッシュを使わない。Windows の Git Bash からネイティブの `jq.exe` に引数を渡すとき、`\\s` が `\s` に変換されて jq の構文エラーになるため。
   - `PostToolUse` は成功時のみ発火し、失敗時は `PostToolUseFailure` になる。注入が無いこと自体がコミット失敗のシグナルになり、失敗を成功と誤報告しない。
   - plain stdout は Claude に届く保証がないため、`hookSpecificOutput.additionalContext` の JSON で返す。`jq` が必要。
   - スキル hook の相対パスや `${CLAUDE_SKILL_DIR}` の展開は公式 docs に記載が無いため、スクリプトファイルは置かずインラインコマンドにしている。
@@ -55,6 +58,8 @@ SKILL.md 冒頭の ```` ```! ```` ブロック（動的コンテキスト注入�
 対処は `HEAD` を参照しない形への書き換え（`git diff --stat` / `git diff --cached --stat` に分割）と、落ちうるコマンドを `2>/dev/null || true` でガードすること。
 
 **教訓**: 動的コンテキスト注入に置くコマンドは、異常系（空リポジトリ、対象ファイル不在など）でも終了コードを確かめてから採用する。
+
+注入は 1 ブロック 1 コマンドに分け、それぞれに見出しを付けている。1 つのブロックにまとめると出力が区切りなく連結され、未ステージとステージ済みの `--numstat` が見分けられないため。区切りに `echo` を挟む方法は、`echo` が `allowed-tools` に無く権限チェックで弾かれるので使えない。
 
 ## git コマンドの選択と根拠
 

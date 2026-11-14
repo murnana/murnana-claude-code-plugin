@@ -12,9 +12,11 @@ Restore a linear history across a GitHub stack — every branch containing the t
 
 ## Current state
 
+Run these first, each as its own Bash call, exactly as written:
+
 ```bash
 git status --short --branch
-gh stack view --json 2>&1 || true
+gh stack view --json
 ```
 
 Treat `$ARGUMENTS` as the requested mode (`--upstack`, `--downstack`, `--no-trunk`, or `sync`). With no argument, choose per Step 2.
@@ -34,6 +36,13 @@ Copy this checklist into your response and tick it off:
 - [ ] 4 Verify
 - [ ] 5 Approval → push
 ```
+
+## Asking the user
+
+- Every question to the user goes through the `AskUserQuestion` tool, never as a plain-text question at the end of a reply. This includes every "wait for approval" and every "ask how to proceed": show the plan or the failure in the reply, then call `AskUserQuestion` with options such as 「この内容で進める」 and 「修正する」. The dialog can hide the reply, so say in the question itself, in one line, what is being approved.
+- Ask as few times as possible. Don't ask what `$ARGUMENTS`, the conversation, the files or command output already answer. Where a step gives a default, use it and state it in the plan instead of asking.
+- Collect the open questions and send them in one call (up to 4 questions per call). A question that can wait goes into the approval call, not a call of its own.
+- If `AskUserQuestion` is unavailable (a non-interactive run), don't guess: stop before changing anything and list the questions in the reply.
 
 ## Step 1: Preconditions
 

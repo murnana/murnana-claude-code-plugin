@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [0.0.4] - 2026-11-14
+
+### Changed
+
+- changelog-write スキルで、ユーザーへの質問と承認の確認を必ず AskUserQuestion ツールで行い、未回答の質問は 1 回の呼び出しにまとめるようにした。新規作成時の言語は聞かずに会話の言語を使い、振る舞いとして書けない変更の扱いは承認の確認と同じ呼び出しで聞く
+- changelog-write スキルの description と when_to_use を 1 つの短い description にまとめ、常時コンテキストに載る量を減らした
+
 ## [0.0.3] - 2026-11-01
 
 ### Changed
@@ -25,7 +32,8 @@
 
 - Unity Package Manager (UPM) パッケージの CHANGELOG.md を、Keep a Changelog と Unity のバージョニング規則に沿って作成・追記できる changelog-write スキルを追加した。依頼されたときはバージョンを切り、`package.json` の `version` も更新する
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[0.0.4]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-unity-package
 [0.0.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-unity-package
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity-package
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/c013a3e/plugins/murnana-unity-package

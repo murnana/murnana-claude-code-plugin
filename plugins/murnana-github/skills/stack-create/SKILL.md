@@ -3,7 +3,7 @@ name: stack-create
 description: Create a stack of pull requests (GitHub Stacked PRs) with gh stack
 argument-hint: "[what to stack, or existing branch names bottom-to-top]"
 disable-model-invocation: true
-allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git branch *) Bash(git rev-parse *) Bash(git remote *) Bash(git config *) Bash(git add *) Bash(git restore --staged *) Bash(git commit *) Bash(gh auth status *) Bash(gh extension list *) Bash(gh repo view *) Bash(gh stack view *) Bash(gh stack init *) Bash(gh stack add *) Bash(gh stack submit *) Bash(gh stack link *) Bash(gh stack up *) Bash(gh stack down *) Bash(gh stack top *) Bash(gh stack bottom *) Read Grep Glob AskUserQuestion
+allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git branch --show-current) Bash(git rev-parse *) Bash(git remote -v) Bash(git remote get-url *) Bash(git config --get *) Bash(git add *) Bash(git restore --staged *) Bash(git commit *) Bash(gh auth status *) Bash(gh extension list *) Bash(gh repo view *) Bash(gh stack view *) Bash(gh stack init *) Bash(gh stack add *) Bash(gh stack submit *) Bash(gh stack link *) Bash(gh stack up *) Bash(gh stack down *) Bash(gh stack top *) Bash(gh stack bottom *) Read Grep Glob AskUserQuestion
 ---
 
 # Stack Create
@@ -12,12 +12,14 @@ Turn a change into a GitHub stack — an ordered chain of small PRs where each P
 
 ## Current state
 
+Run these first, each line as its own Bash call, exactly as written. Send the first four together in one message, then run the last one on its own (it exits 2 when the current branch is not in a stack, which is expected here):
+
 ```bash
 gh auth status 2>&1 || true
 gh extension list 2>&1 || true
 git status --short --branch
 git remote -v
-gh stack view --json 2>/dev/null || true
+gh stack view --json
 ```
 
 Treat `$ARGUMENTS` (if any) as a hint about what to stack, or as existing branch names listed bottom to top. It doesn't skip any step below.
@@ -49,11 +51,18 @@ Copy this checklist into your response and tick it off:
 - [ ] 8 Verify and hand off
 ```
 
+## Asking the user
+
+- Every question to the user goes through the `AskUserQuestion` tool, never as a plain-text question at the end of a reply. This includes every "wait for approval" and every "ask how to proceed": show the plan or the failure in the reply, then call `AskUserQuestion` with options such as 「この内容で進める」 and 「修正する」. The dialog can hide the reply, so say in the question itself, in one line, what is being approved.
+- Ask as few times as possible. Don't ask what `$ARGUMENTS`, the conversation, the files or command output already answer. Where a step gives a default, use it and state it in the plan instead of asking.
+- Collect the open questions and send them in one call (up to 4 questions per call). A question that can wait goes into the approval call, not a call of its own.
+- If `AskUserQuestion` is unavailable (a non-interactive run), don't guess: stop before changing anything and list the questions in the reply.
+
 ## Step 1: Confirm `gh` and `gh-stack` are usable
 
 - `gh auth status` failed → stop and ask, following `${CLAUDE_PLUGIN_ROOT}/skills/pr-create/references/gh-fallback-mcp.md`. Note that the MCP fallback cannot create stacks; it only helps for plain PRs.
 - No `stack` line in `gh extension list` → ask (`AskUserQuestion`) before running `gh extension install github/gh-stack`. Never install silently. Requires Git 2.36+.
-- More than one remote in `git remote -v` and `git config remote.pushDefault` empty → pass `--remote <name>` to every `init`/`submit`/`link` call (ask which remote if unclear).
+- More than one remote in `git remote -v` and `git config --get remote.pushDefault` empty → pass `--remote <name>` to every `init`/`submit`/`link` call (ask which remote if unclear).
 
 ## Step 2: Discover project rules
 
