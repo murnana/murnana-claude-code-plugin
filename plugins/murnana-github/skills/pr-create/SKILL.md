@@ -93,7 +93,11 @@ Stack mode: skip this step (`gh stack submit` pushes). See [references/stack-mod
 
 Stack mode: use `gh stack submit --auto` + `gh pr edit` per [references/stack-mode.md](references/stack-mode.md) instead of `gh pr create`.
 
-- Run `gh pr create --title <title> --body-file -` (heredoc/stdin) to avoid mangling Japanese text or line breaks — never pass a multi-line body as a `--body` shell arg.
+- Write the approved body to a temporary file first, then pass that file to `gh`. This keeps Japanese text and line breaks intact and keeps the `gh` call a single plain command:
+  1. Run `git rev-parse --absolute-git-dir` and use `<that dir>/PR_BODY.md` as the path. It lives inside `.git/`, so it is never committed, and it is overwritten on the next run.
+  2. Write the body there with the `Write` tool, exactly as approved.
+  3. Run `gh pr create --title "<title>" --body-file <that path>` as a Bash call of its own.
+- Never pass a multi-line body as a `--body` argument, through `$(...)`, or on stdin with a heredoc.
 - Use `--draft` only if the user asked for a draft; do not ask by default.
 - If no assignee is specified (neither by the template nor by the user), add `--assignee @me` so the skill's operator is assigned automatically.
 - If `gh pr create` fails on authentication, treat it as the sandbox case in [references/sandbox-credentials.md](references/sandbox-credentials.md).

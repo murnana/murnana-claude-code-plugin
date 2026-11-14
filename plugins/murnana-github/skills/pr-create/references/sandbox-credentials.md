@@ -28,4 +28,4 @@ Claude Code's Bash sandbox can keep commands away from the credentials stored on
 
 ## Keep the call matchable
 
-`excludedCommands` matches the text of the whole Bash call: every command in it must match, and a call with `cd`, `&&`/`||` chains, a `$(...)` substitution or an output redirect to a file stays sandboxed. Run `git push` and each `gh` command as a call of its own, and feed a body on stdin (`--body-file - <<'EOF'`), not through `$(...)`.
+`excludedCommands` matches the text of the whole Bash call: every command in it must match, and a call with `cd`, `&&`/`||` chains, a `$(...)` substitution or an output redirect to a file stays sandboxed. Run `git push` and each `gh` command as a call of its own, and pass a body as a file written beforehand (`--body-file <path>`), not through `$(...)` or a heredoc.
