@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- commit スキルで、1Password の鍵による署名が sandbox に塞がれて `git commit` が失敗したとき、署名なしで進めずに停止し、`sandbox.excludedCommands` に `git commit *` を加える設定を案内するようにした。除外設定が効くよう、コミットメッセージは `git commit -F -` で標準入力から渡す
+
 ## [0.3.0] - 2026-11-14
 
 ### Fixed

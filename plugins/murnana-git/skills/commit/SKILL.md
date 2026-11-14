@@ -107,11 +107,12 @@ Before reading a candidate rule file, `Glob` for it first — only `Read` files 
 
 - Stage explicit paths per commit with `git add <paths>` — never `git add -A` or `git add .`.
 - If a file was already staged as part of a different "why" than the commit you're about to make, unstage it first with `git restore --staged <paths>`, then re-add only the paths for this commit.
-- Pass the message via heredoc to avoid mangling Japanese text, line breaks, or punctuation.
+- Pass the message on stdin with a heredoc (`git commit -F - <<'EOF'`) to avoid mangling Japanese text, line breaks, or punctuation. Run `git commit` as a Bash call of its own, without `cd`, `&&` chains or `$(...)`, so a sandbox exclusion for `git commit *` can match it.
 - Never sweep in unrelated or unstaged changes that belong to a different why.
 - Never run `git push`, `git commit --amend`, or `git reset` unless explicitly instructed.
 - After each successful `git commit`, a hook injects `Commit created: <hash> <subject>` next to the tool result. Use those lines to report the result in Japanese after all commits — do not run `git log` to confirm.
 - If no `Commit created:` line follows a `git commit`, the commit failed: stop, report its output as-is, and ask how to proceed.
+- If the failure is about signing or the SSH agent (a 1Password key the sandbox blocks), follow [references/sandbox-signing.md](references/sandbox-signing.md): guide the user to exclude `git commit` from the sandbox instead of committing unsigned.
 
 ## References
 
@@ -119,3 +120,5 @@ Before reading a candidate rule file, `Glob` for it first — only `Read` files 
   [references/commit-message.md](references/commit-message.md)
 - Where to look for project-specific rules:
   [references/project-rules.md](references/project-rules.md)
+- Signing fails under the sandbox (1Password key):
+  [references/sandbox-signing.md](references/sandbox-signing.md)
