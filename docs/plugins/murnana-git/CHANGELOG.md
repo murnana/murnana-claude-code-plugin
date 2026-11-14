@@ -7,9 +7,13 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-14
+
 ### Fixed
 
 - commit スキルを一度使うと、そのセッション中、コミットと無関係なコマンド（`$()` を含むものなど）の後にも「Commit created」が表示されていた。`git commit` を実行したときだけ表示するようにした
+- gitignore スキルが、冒頭の動的コンテキスト注入の権限チェックで弾かれて起動できないことがあったのを修正した（パイプ先の `head` と素の `grep` が `allowed-tools` に無かったため。`git ls-files` と `git grep --no-index` だけで取得するようにした）
+- commit スキルの「Current state」が実際には注入されておらず、「注入済みなので再実行しない」という指示と食い違っていたのを修正した。ブランチ・未ステージ・ステージ済み・直近の履歴を、見出し付きで読み込み時に注入する
 
 ### Removed
 
@@ -23,11 +27,6 @@
 
 - commit / gitignore スキルで、ユーザーへの質問と承認の確認を必ず AskUserQuestion ツールで行い、未回答の質問は 1 回の呼び出しにまとめるようにした
 - commit スキルの description を、スキルが行うことを表す文に書き直した
-
-### Fixed
-
-- gitignore スキルが、冒頭の動的コンテキスト注入の権限チェックで弾かれて起動できないことがあったのを修正した（パイプ先の `head` と素の `grep` が `allowed-tools` に無かったため。`git ls-files` と `git grep --no-index` だけで取得するようにした）
-- commit スキルの「Current state」が実際には注入されておらず、「注入済みなので再実行しない」という指示と食い違っていたのを修正した。ブランチ・未ステージ・ステージ済み・直近の履歴を、見出し付きで読み込み時に注入する
 
 ## [0.2.1] - 2026-11-01
 
@@ -63,7 +62,8 @@
 
 - コミット0件のリポジトリで commit スキルが起動できない不具合
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-git
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-git
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/0f332ec/plugins/murnana-git
 [0.1.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/795acc0/plugins/murnana-git

@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-14
+
 ### Added
 
 - large-file-guard スキルを追加した。`/murnana-github:large-file-guard` でリポジトリに Hook を設定すると、Git LFS を使っていない 100 MiB 以上のファイルを含む `git commit` を Claude が実行する前に止める。50 MiB 以上は警告だけでコミットは通す
@@ -54,7 +56,8 @@
 
 - pr-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-github
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-github
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/014d844/plugins/murnana-github
 [0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/4cf5e55/plugins/murnana-github

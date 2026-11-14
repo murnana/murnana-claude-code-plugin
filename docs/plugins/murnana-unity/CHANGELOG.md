@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-11-14
+
 ### Security
 
 - launch スキルの事前許可を `unity *` から、実際に使う読み取りと起動のサブコマンドだけに絞った。Editor やモジュールのインストール、`unity close`、`unity mcp configure <client>` には確認が出る
@@ -58,7 +60,8 @@
 
 - Unity プロジェクトを指定したプラットフォームで Unity Editor に開く launch スキルを追加した。Unity CLI で Editor の検索・インストールを行い、Editor 本体の `-projectPath` と `-buildTarget` で起動する。最初に指定したプラットフォームをプロジェクトの既定として保存し、指定がなければそれを使う
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[0.2.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-unity
 [0.2.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-unity
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity

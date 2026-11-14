@@ -14,7 +14,7 @@
         "path": "plugins/murnana-unreal-engine"
       },
       "description": "Unreal Engine knowledges",
-      "version": "0.0.2"
+      "version": "0.0.3"
     },
     {
       "name": "murnana-git",
@@ -24,7 +24,7 @@
         "path": "plugins/murnana-git"
       },
       "description": "Git workflow helpers",
-      "version": "0.2.1"
+      "version": "0.3.0"
     },
     {
       "name": "murnana-github",
@@ -34,7 +34,7 @@
         "path": "plugins/murnana-github"
       },
       "description": "GitHub workflow helpers",
-      "version": "0.2.1"
+      "version": "0.3.0"
     },
     {
       "name": "murnana-agent-config",
@@ -44,7 +44,7 @@
         "path": "plugins/murnana-agent-config"
       },
       "description": "Helpers for authoring Claude Code configuration (rules, skills, subagents, etc.)",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "name": "murnana-tech-docs",
@@ -54,7 +54,7 @@
         "path": "plugins/murnana-tech-docs"
       },
       "description": "Helpers for writing technical documents (CHANGELOG, etc.)",
-      "version": "0.0.2"
+      "version": "0.0.3"
     },
     {
       "name": "murnana-unity-package",
@@ -64,7 +64,7 @@
         "path": "plugins/murnana-unity-package"
       },
       "description": "Helpers for maintaining Unity Package Manager (UPM) packages (CHANGELOG, etc.)",
-      "version": "0.0.3"
+      "version": "0.0.4"
     },
     {
       "name": "murnana-unity",
@@ -74,7 +74,7 @@
         "path": "plugins/murnana-unity"
       },
       "description": "Helpers for working with the Unity Editor (launch a project on a chosen platform, check work against Unity's terms, etc.)",
-      "version": "0.2.2"
+      "version": "0.2.3"
     },
     {
       "name": "murnana-cpp",
@@ -84,7 +84,7 @@
         "path": "plugins/murnana-cpp"
       },
       "description": "C++開発用ツールキット(コードコメントとDoxygenドキュメントコメントを書く・見直すスキル)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-csharp",
@@ -94,7 +94,7 @@
         "path": "plugins/murnana-csharp"
       },
       "description": "C#の開発を手伝うセット(Roslyn公式言語サーバーの接続、コードコメントとXMLドキュメントコメントを書く・見直すスキル)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-java",
@@ -104,7 +104,7 @@
         "path": "plugins/murnana-java"
       },
       "description": "Java開発用ツールキット(コードコメントとJavadocを書く・見直すスキル)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-kotlin",
@@ -114,7 +114,7 @@
         "path": "plugins/murnana-kotlin"
       },
       "description": "Kotlin のコードを書くためのツールキット(KDoc とコードコメントを書くスキル)",
-      "version": "0.1.0"
+      "version": "0.1.1"
     },
     {
       "name": "murnana-python",
@@ -124,7 +124,7 @@
         "path": "plugins/murnana-python"
       },
       "description": "Python開発用ツールキット(コードコメントとdocstringを書く・見直すスキル)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-rust",
@@ -134,7 +134,7 @@
         "path": "plugins/murnana-rust"
       },
       "description": "Rust 開発の補助セット(コードコメントとドキュメントコメントを書くスキル)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-swift",
@@ -144,7 +144,7 @@
         "path": "plugins/murnana-swift"
       },
       "description": "Swift開発用ツールキット(コードコメント・DocCドキュメントコメントを書くスキル)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "murnana-typescript",
@@ -154,7 +154,7 @@
         "path": "plugins/murnana-typescript"
       },
       "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル)",
-      "version": "0.0.1"
+      "version": "0.0.2"
     },
     {
       "name": "unity-ariadne",
