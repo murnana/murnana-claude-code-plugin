@@ -9,7 +9,7 @@
 
 ### Changed
 
-- pr-create スキルで、1Password の SSH 鍵が sandbox に塞がれて `git push`（スタックモードでは `gh stack submit`）や `gh pr create` が失敗したとき、`sandbox.excludedCommands` に失敗したコマンドを加える設定を案内し、設定後に再試行できるようにした
+- pr-create / stack-create / stack-pr-message スキルで、sandbox が PC に保存された GitHub の認証情報（`gh` のトークン、git の認証情報、1Password を含む SSH エージェント）を塞いで `gh auth status`・`gh pr create`・`git push` などが失敗したとき、未ログイン扱いで MCP への切り替えを勧めるのではなく、`sandbox.excludedCommands` に `gh` と `git push` のコマンドを加える設定を案内し、設定後に再試行できるようにした
 
 ## [0.3.0] - 2026-11-14
 

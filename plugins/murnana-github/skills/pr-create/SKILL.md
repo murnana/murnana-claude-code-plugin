@@ -42,7 +42,8 @@ Treat `$ARGUMENTS` (if any) as an additional hint about the PR's intent — it d
 
 ## Step 1: Confirm `gh` is usable
 
-- If `gh auth status` reported no login, or `gh` is missing (`command not found`), **stop and ask the user** (`AskUserQuestion`) whether to fall back to the GitHub MCP server. 
+- If `gh auth status` reported no login or a keyring/token error while `gh` is installed, the sandbox may be blocking the credentials stored on the user's computer. **Stop** and follow [references/sandbox-credentials.md](references/sandbox-credentials.md): guide the user to exclude the `gh` commands from the sandbox, and offer the MCP fallback in the same question.
+- If `gh` is missing (`command not found`), **stop and ask the user** (`AskUserQuestion`) whether to fall back to the GitHub MCP server.
   Do not install the `gh` CLI or configure an MCP server without explicit confirmation — both are environment-level changes.
 - See [references/gh-fallback-mcp.md](references/gh-fallback-mcp.md) for the fallback procedure once the user agrees.
 
@@ -73,7 +74,7 @@ Stack mode: skip this step (`gh stack submit` pushes). See [references/stack-mod
 
 - Use the status line and the unpushed subjects from Current state. No upstream → `git push -u origin <branch>`. Upstream with unpushed commits → `git push`. Nothing unpushed → skip the push.
 - If the push fails for any reason (rejected, no remote, auth), **stop entirely** — do not attempt PR creation. Report the failure and ask how to proceed.
-- If the push fails on the SSH key or agent (a 1Password key the sandbox blocks), follow [references/sandbox-1password.md](references/sandbox-1password.md): guide the user to exclude the command from the sandbox, then retry after they confirm.
+- If the push fails on credentials (HTTPS credential helper, or the SSH key/agent such as 1Password, which the sandbox can block), follow [references/sandbox-credentials.md](references/sandbox-credentials.md): guide the user to exclude the command from the sandbox, then retry after they confirm.
 - Never force-push. Only plain `git push` and `git push -u origin <branch>` are pre-approved; any other form asks for permission.
 
 ## Step 5: Find or generate the PR template
@@ -95,7 +96,7 @@ Stack mode: use `gh stack submit --auto` + `gh pr edit` per [references/stack-mo
 - Run `gh pr create --title <title> --body-file -` (heredoc/stdin) to avoid mangling Japanese text or line breaks — never pass a multi-line body as a `--body` shell arg.
 - Use `--draft` only if the user asked for a draft; do not ask by default.
 - If no assignee is specified (neither by the template nor by the user), add `--assignee @me` so the skill's operator is assigned automatically.
-- If `gh pr create` fails on authentication even though `gh auth status` succeeded, treat it as the sandbox case in [references/sandbox-1password.md](references/sandbox-1password.md).
+- If `gh pr create` fails on authentication, treat it as the sandbox case in [references/sandbox-credentials.md](references/sandbox-credentials.md).
 - After creation, report the PR URL from `gh pr create`'s output; do not re-fetch it with a separate `gh pr view` call.
 
 ## References
@@ -110,5 +111,5 @@ Stack mode: use `gh stack submit --auto` + `gh pr edit` per [references/stack-mo
   [references/gh-fallback-mcp.md](references/gh-fallback-mcp.md)
 - Current branch is in a `gh stack` stack → Steps 4–7 replacements:
   [references/stack-mode.md](references/stack-mode.md)
-- Push or `gh` fails under the sandbox (1Password key) → how to guide the user:
-  [references/sandbox-1password.md](references/sandbox-1password.md)
+- `gh` login or push fails because the sandbox blocks the computer's credentials → how to guide the user:
+  [references/sandbox-credentials.md](references/sandbox-credentials.md)
