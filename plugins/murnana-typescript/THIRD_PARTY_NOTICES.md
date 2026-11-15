@@ -49,6 +49,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 - Joshua Bloch『Effective Java』(公開 API のドキュメンテーションコメント)
 - 利用箇所: `skills/comment/references/comment-routing.md`
 
+## TypeScript Coding guidelines（命名）
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: 「Names」の節の 7 項目を、独自の文章と表で要約したもの。本文は複製していない
+- 出典: https://github.com/microsoft/TypeScript/wiki/Coding-guidelines#names
+- ライセンス: 判断できず（Wiki にライセンスの表示がない。TypeScript 本体のリポジトリーは Apache License 2.0）。このため複製や翻案は行わず、リンクと独自の要約にとどめている
+- 著作権: Copyright (c) Microsoft Corporation
+
 ## 商標
 
 - TypeScript、TSDoc は Microsoft Corporation の商標または登録商標です。

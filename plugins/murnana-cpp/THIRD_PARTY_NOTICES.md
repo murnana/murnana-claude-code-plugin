@@ -21,6 +21,14 @@
 - 出典: https://x.com/t_wada/status/904916106153828352
 - ライセンス: なし（出典を明示した引用として掲載）
 
+### C++ Core Guidelines（命名）
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: 命名に関する項目（NL.5、NL.8、NL.9、NL.10、ES.9）が挙げる ISO C++ 標準ライブラリーの命名の書き方を、項目番号とリンクで参照し、独自の文章で短くまとめたもの。本文と例は複製していない
+- 出典: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines / https://github.com/isocpp/CppCoreGuidelines
+- ライセンス: 独自のライセンス（リポジトリーの `LICENSE`）。複製・改変・派生物の作成を「個人利用または社内業務利用に限り」認めている。このため本文の複製や翻案は行わず、参照と独自の要約にとどめている
+- 著作権: Copyright (c) Standard C++ Foundation and its contributors
+
 ## 商標
 
 - Visual Studio は Microsoft Corporation の米国およびその他の国における商標または登録商標です。

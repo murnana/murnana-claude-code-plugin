@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- Kotlin のコードをレビューする review スキル（`/murnana-kotlin:review`）を追加した。メモリーリーク・リソースリーク、不具合、プロジェクトのルール違反、命名を確かめて報告する。ファイルは変更しない
+- プロジェクトに命名規則がないときは、言語の開発元が使っている命名規則で確かめる
+- 同じ基準で独立にレビューする読み取り専用のサブエージェント code-reviewer（`@agent-murnana-kotlin:code-reviewer`）を追加した
+
 ### Changed
 
 - comment スキルの description と when_to_use を 1 つの短い description にまとめ、常時コンテキストに載る量を減らした
