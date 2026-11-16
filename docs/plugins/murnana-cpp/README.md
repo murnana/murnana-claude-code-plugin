@@ -18,6 +18,8 @@ C++(プログラムを書くための言語のひとつ)で書いたプログラ
 | 説明書きを書く・見直す | [C++ のコメント作成](comment.md) | 書く内容をふさわしい場所に振り分けて、必要な説明書きだけを書く |
 | プログラムを見てもらう | [C++ のコードレビュー](review.md) | 片づけ忘れ（メモリーリーク）、動きの誤り、名前の付け方を確かめて報告する。プログラムは書きかえない |
 | 別の目で見てもらう | [code-reviewer サブエージェント](code-reviewer.md) | 同じ基準で、会話とは別の場所でレビューして報告だけを返す |
+| テストを書く・見直す | [C++ のテストケース作成](test-case.md) | 確かめたい動きを先に書き出してから、1 つずつテストにする |
+| テストをまとめて任せる | [test-case-writer](test-case-writer.md) | すでにあるプログラムのテストを別の Claude に書かせて、報告だけを受け取る |
 
 ## インストール
 
@@ -56,3 +58,4 @@ Claude が勝手にこれらの道具を入れることはありません。
 
 - 説明書きの置き場所の考え方は、和田卓人さん(@t_wada)の「コードには How テストコードには What コミットログには Why コードコメントには Why not を書こう」(https://x.com/t_wada/status/904916106153828352)をもとにしています。
 - 使い方の説明の書き方は、Doxygen のマニュアル(https://www.doxygen.nl/manual/、GNU General Public License version 2)をもとに、AI(Claude)が独自の文章で要約したものです。
+- テストの書き方は、Kent Beck「Canon TDD」(https://newsletter.kentbeck.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。
