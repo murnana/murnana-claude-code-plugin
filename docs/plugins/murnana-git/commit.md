@@ -35,6 +35,9 @@
 - **なぜ `--no-verify` を禁じているか** — プロジェクトのコミット前チェックを迂回しないため。
 - **なぜ `references/` に規約を分離したか** — progressive disclosure。リンク先は明示的に参照されたときだけ読み込まれるので、常時コンテキストに乗るのは `SKILL.md` 本体だけで済む。
 - **なぜコミット前に必ず承認を取るか** — 意図しないコミットを防ぐため。1 コミットで済む場合も分割案を提示する。
+- **なぜ署名の失敗で sandbox の除外設定を案内するか** — Claude Code の sandbox は、PC にある署名用の鍵や認証情報（1Password を含む SSH エージェント、`gpg-agent` と pinentry、パスフレーズを保持する OS のキーチェーン）にコマンドが届くのを塞ぐことがあり、ユーザーの端末では通る署名付きの `git commit` が失敗する。署名なしでコミットし直すと署名の方針を黙って崩し、スキルが sandbox を外して再実行するのは安全弁を勝手に外すことになる。そのため停止して、`sandbox.excludedCommands` に `git commit *` を加える設定を案内し、設定後に再試行するか確認する（手順は [`references/sandbox-signing.md`](../../../plugins/murnana-git/skills/commit/references/sandbox-signing.md)）。
+  - `excludedCommands` は Bash 呼び出しの文字列全体と照合され、`$(...)` を含む呼び出しは sandbox 内に残る。そのためメッセージは `-m "$(cat <<'EOF' ...)"` ではなく `git commit -F - <<'EOF'` で標準入力から渡す。
+  - Claude Code の `/sandbox` はパネルを開くだけで、除外を追加するサブコマンドは公式ドキュメントに無い。そのため設定ファイルへの記述を案内している。
 - **なぜコミット結果の確認を Hook にしたか** — 以前は全コミット後に Claude が `git log --oneline -<N>` を叩いて確認していた。これを `SKILL.md` frontmatter の `hooks`（`PostToolUse` + `if: "Bash(git commit *)"`）に置き換え、`git commit` が成功するたびに `git log --oneline -1` の結果を `additionalContext` として自動注入している。
   - 確認が Claude の判断に依存せず決定的に行われ、Bash 呼び出しも 1 回減る。
   - フックのコマンド自身が、標準入力の `tool_input.command` に `git commit` が含まれるときだけ出力する。`if` は最善努力の絞り込みで、`Bash(git commit *)` のようにコマンド名より細かいパターンは、`$()` を含むコマンドや解析できないコマンドでは一致しなくてもフックが走る。スキルのフックはセッション終了まで残るため、`if` だけに頼ると、コミットと無関係な Bash 実行の後にも「Commit created」が注入されていた。

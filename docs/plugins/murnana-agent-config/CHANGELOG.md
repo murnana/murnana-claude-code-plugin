@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-14
+
 ### Added
 
 - agent-create スキル（サブエージェントを、仕事・置き場所・できること・任せ方のヒアリングを先に行ってから作成・更新する）
@@ -36,6 +38,7 @@
 - rule-create スキル
 - skill-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-agent-config
 [0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-agent-config
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/278ceff/plugins/murnana-agent-config

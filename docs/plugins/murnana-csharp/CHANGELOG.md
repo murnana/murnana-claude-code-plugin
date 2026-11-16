@@ -13,6 +13,8 @@
 - プロジェクトに命名規則がないときは、言語の開発元が使っている命名規則で確かめる
 - 同じ基準で独立にレビューする読み取り専用のサブエージェント code-reviewer（`@agent-murnana-csharp:code-reviewer`）を追加した
 
+## [0.0.2] - 2026-11-14
+
 ### Changed
 
 - comment スキルの description と when_to_use を 1 つの短い description にまとめ、常時コンテキストに載る量を減らした
@@ -27,5 +29,6 @@
 
 - evals をリポジトリルートの `evals/plugins/murnana-csharp/` に移した
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/8502458...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-csharp
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-csharp
