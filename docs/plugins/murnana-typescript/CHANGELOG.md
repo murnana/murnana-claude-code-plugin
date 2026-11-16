@@ -9,6 +9,9 @@
 
 ### Added
 
+- TypeScript のコードをレビューする review スキル（`/murnana-typescript:review`）を追加した。メモリーリーク・リソースリーク、不具合、プロジェクトのルール違反、命名を確かめて報告する。ファイルは変更しない
+- プロジェクトに命名規則がないときは、言語の開発元が使っている命名規則で確かめる
+- 同じ基準で独立にレビューする読み取り専用のサブエージェント code-reviewer（`@agent-murnana-typescript:code-reviewer`）を追加した
 - `/murnana-typescript:test-case` スキルを追加した。テストリストを先に書き、1 つずつテストにして、失敗するところを一度確かめてから報告する
 - `test-case-writer` サブエージェントを追加した。すでにあるプログラムのテストを別の Claude に任せて、報告だけを受け取れる
 

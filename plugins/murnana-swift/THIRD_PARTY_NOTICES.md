@@ -18,6 +18,14 @@
 - 補足の出典: John Ousterhout『A Philosophy of Software Design』(考え方の要約のみ。本文の複製はしていません)
 - 利用箇所: `skills/comment/references/comment-placement.md`(考え方を独自の言葉で要約。コード例は独自に作成)
 
+## Swift API Design Guidelines（命名）
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: 命名に関する指針（大文字・小文字、プロトコル名、Bool、変更の有無による対、ファクトリーメソッド）を、独自の文章と表で要約したもの。本文は複製していない。例の識別子は指針と同じ短い名前を一部使っている
+- 出典: https://www.swift.org/documentation/api-design-guidelines/ （ソース: https://github.com/swiftlang/swift-org-website ）
+- ライセンス: Apache License 2.0（swift-org-website の `LICENSE.txt`。Apache License 2.0 の全文はこのファイルの末尾にある）
+- 著作権: Copyright (c) Apple Inc. and the Swift project authors
+
 ## Canon TDD(Kent Beck)と日本語訳「テスト駆動開発の定義」(t_wada)
 
 - 対象: `test-case` スキル(`skills/test-case/SKILL.md`、`skills/test-case/references/test-design.md`)、`test-case-writer` サブエージェント(`agents/test-case-writer.md`)

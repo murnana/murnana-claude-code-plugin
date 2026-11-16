@@ -26,6 +26,14 @@
 - ライセンス: 未確認。記事のコード例(`value.equals(null)` の判定)をもとに、自分で書き直した例を載せています。
 - 利用箇所: `skills/comment/references/comment-routing.md`(例の翻案)
 
+## Code Conventions for the Java Programming Language（命名）/ Java 言語仕様 6.1 節
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: 第 9 章「Naming Conventions」と JLS 6.1 節の命名の慣習を、独自の文章と表で要約したもの。本文は複製していない。例の識別子は規約と同じ短い名前を一部使っている
+- 出典: https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html / https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.html#jls-6.1
+- ライセンス: 再利用を認めるライセンスの表示はない（Oracle の著作物）。このため複製や翻案は行わず、リンクと独自の要約にとどめている
+- 著作権: Copyright (c) Oracle and/or its affiliates
+
 ## Canon TDD(Kent Beck)と日本語訳「テスト駆動開発の定義」(t_wada)
 
 - 対象: `test-case` スキル(`skills/test-case/SKILL.md`、`skills/test-case/references/test-design.md`)、`test-case-writer` サブエージェント(`agents/test-case-writer.md`)

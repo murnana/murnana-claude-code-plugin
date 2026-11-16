@@ -21,6 +21,14 @@
 - 出典: https://x.com/t_wada/status/904916106153828352 （和田卓人、2017-09-05）
 - ライセンス: 明示なし（X への投稿）。考え方の要約と出典の明記にとどめている
 
+### PEP 8 – Style Guide for Python Code（命名）
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: 「Naming Conventions」の節の命名規約を、独自の文章と表で要約したもの。本文は複製していない
+- 出典: https://peps.python.org/pep-0008/#naming-conventions
+- ライセンス: パブリックドメイン（文書の末尾に「This document has been placed in the public domain.」とある）
+- 著者: Guido van Rossum, Barry Warsaw, Alyssa Coghlan
+
 ### Canon TDD(Kent Beck)と日本語訳「テスト駆動開発の定義」(t_wada)
 
 - 対象: `test-case` スキル(`skills/test-case/SKILL.md`、`skills/test-case/references/test-design.md`)、`test-case-writer` サブエージェント(`agents/test-case-writer.md`)

@@ -49,6 +49,14 @@ DEALINGS IN THE SOFTWARE.
 - ライセンス: 不明(投稿にライセンスの表示がありません)。1文を出典を明示して引用し、それ以外はこのスキル独自の解説として書いています。
 - 利用箇所: `skills/comment/references/comment-placement.md`、`skills/comment/SKILL.md`
 
+## Rust API Guidelines「Naming」
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: 命名の章（C-CASE、C-CONV、C-GETTER、C-ITER など）を、独自の文章と表で要約したもの。本文は複製していない。例の識別子は標準ライブラリーの名前を一部使っている
+- 出典: https://rust-lang.github.io/api-guidelines/naming.html （ソース: https://github.com/rust-lang/api-guidelines ）
+- ライセンス: MIT License または Apache License 2.0 のデュアルライセンス（リポジトリーの `README.md`、`LICENSE-MIT`、`LICENSE-APACHE`）
+- 著作権: Copyright (c) The Rust Project Developers
+
 ## Canon TDD(Kent Beck)と日本語訳「テスト駆動開発の定義」(t_wada)
 
 - 対象: `test-case` スキル(`skills/test-case/SKILL.md`、`skills/test-case/references/test-design.md`)、`test-case-writer` サブエージェント(`agents/test-case-writer.md`)

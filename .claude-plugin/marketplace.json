@@ -83,7 +83,7 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-cpp"
       },
-      "description": "C++開発用ツールキット(コードコメントとDoxygenドキュメントコメントを書く・見直すスキル、テストケースを書くスキルとサブエージェント)",
+      "description": "C++開発用ツールキット(コードコメントとDoxygenドキュメントコメントを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
       "version": "0.0.2"
     },
     {
@@ -93,7 +93,7 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-csharp"
       },
-      "description": "C#の開発を手伝うセット(Roslyn公式言語サーバーの接続、コードコメントとXMLドキュメントコメントを書く・見直すスキル、テストケースを書くスキルとサブエージェント)",
+      "description": "C#の開発を手伝うセット(Roslyn公式言語サーバーの接続、コードコメントとXMLドキュメントコメントを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
       "version": "0.0.2"
     },
     {
@@ -103,7 +103,7 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-java"
       },
-      "description": "Java開発用ツールキット(コードコメントとJavadocを書く・見直すスキル、テストケースを書くスキルとサブエージェント)",
+      "description": "Java開発用ツールキット(コードコメントとJavadocを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
       "version": "0.0.2"
     },
     {
@@ -113,7 +113,7 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-kotlin"
       },
-      "description": "Kotlin のコードを書くためのツールキット(KDoc とコードコメントを書くスキル、テストケースを書くスキルとサブエージェント)",
+      "description": "Kotlin のコードを書くためのツールキット(KDoc とコードコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
       "version": "0.1.1"
     },
     {
@@ -123,7 +123,7 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-python"
       },
-      "description": "Python開発用ツールキット(コードコメントとdocstringを書く・見直すスキル、テストケースを書くスキルとサブエージェント)",
+      "description": "Python開発用ツールキット(コードコメントとdocstringを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
       "version": "0.0.2"
     },
     {
@@ -133,7 +133,7 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-rust"
       },
-      "description": "Rust 開発の補助セット(コードコメントとドキュメントコメントを書くスキル、テストケースを書くスキルとサブエージェント)",
+      "description": "Rust 開発の補助セット(コードコメントとドキュメントコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
       "version": "0.0.2"
     },
     {
@@ -143,7 +143,7 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-swift"
       },
-      "description": "Swift開発用ツールキット(コードコメント・DocCドキュメントコメントを書くスキル、テストケースを書くスキルとサブエージェント)",
+      "description": "Swift開発用ツールキット(コードコメント・DocCドキュメントコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
       "version": "0.0.2"
     },
     {
@@ -153,7 +153,7 @@
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-typescript"
       },
-      "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル、テストケースを書くスキルとサブエージェント)",
+      "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
       "version": "0.0.2"
     },
     {
