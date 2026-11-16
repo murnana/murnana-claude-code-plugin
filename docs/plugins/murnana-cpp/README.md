@@ -55,4 +55,4 @@ Claude が勝手にこれらの道具を入れることはありません。
 
 - 説明書きの置き場所の考え方は、和田卓人さん(@t_wada)の「コードには How テストコードには What コミットログには Why コードコメントには Why not を書こう」(https://x.com/t_wada/status/904916106153828352)をもとにしています。
 - 使い方の説明の書き方は、Doxygen のマニュアル(https://www.doxygen.nl/manual/、GNU General Public License version 2)をもとに、AI(Claude)が独自の文章で要約したものです。
-- テストの書き方は、Kent Beck「Canon TDD」(https://tidyfirst.substack.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。
+- テストの書き方は、Kent Beck「Canon TDD」(https://newsletter.kentbeck.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。

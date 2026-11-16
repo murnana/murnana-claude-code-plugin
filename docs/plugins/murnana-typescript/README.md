@@ -47,5 +47,5 @@ claude plugin install murnana-typescript@murnana-claude-code-plugin
 
 - 説明書きの置き場所の考え方は、和田卓人さん(@t_wada)の「コードには How テストコードには What コミットログには Why コードコメントには Why not を書こう」(https://x.com/t_wada/status/904916106153828352)をもとにしています。
 - 使い方の説明の書き方と、ほかの部品へのつなぎ方(リンクの書き方)は、Microsoft の TSDoc(https://github.com/microsoft/tsdoc、MIT ライセンス)をもとに、AI(Claude)が要約・翻案したものです。
-- テストの書き方は、Kent Beck「Canon TDD」(https://tidyfirst.substack.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。
+- テストの書き方は、Kent Beck「Canon TDD」(https://newsletter.kentbeck.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。
 - TypeScript、TSDoc は Microsoft Corporation の商標または登録商標です。

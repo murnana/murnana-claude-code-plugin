@@ -21,8 +21,8 @@
 
 - 対象: `test-case` スキル(`skills/test-case/SKILL.md`、`skills/test-case/references/test-design.md`)、`test-case-writer` サブエージェント(`agents/test-case-writer.md`)
 - 内容: テストリストを書き、1 つずつテストにして進める手順と、避けるべき失敗の考え方を、自分の言葉で要約したもの。原文・訳文の転載はしていない
-- 出典: https://tidyfirst.substack.com/p/canon-tdd (Kent Beck、2023 年) / https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck (和田卓人による日本語訳)
-- ライセンス: 確認できていない(作成時に出典のページを取得できなかったため)。考え方の要約と出典の明記にとどめている
+- 出典: https://newsletter.kentbeck.com/p/canon-tdd (Kent Beck、2023-12-11。旧 URL の tidyfirst.substack.com から転送される) / https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck (和田卓人による日本語訳、2023-12-11)
+- ライセンス: 原文のページに利用許諾の表示はなく、ページ末尾に「© 2026 Kent Beck」とある(確認日 2026-11-16)。日本語訳は和田卓人氏が Kent Beck 本人の許可を得て公開したもので、訳ページにもライセンスの表示はない。そのため原文・訳文は転載せず、考え方の要約と出典の明記にとどめている
 
 ## 『テスト駆動開発』(Kent Beck 著、和田卓人 訳)
 

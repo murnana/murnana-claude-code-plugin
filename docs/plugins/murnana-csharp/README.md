@@ -41,4 +41,4 @@ claude plugin install murnana-csharp@murnana-claude-code-plugin
 
 - コメントの考え方は、和田卓人(@t_wada)氏の投稿「コードには How テストコードには What コミットログには Why コードコメントには Why not を書こう」(https://x.com/t_wada/status/904916106153828352)をもとにしています。
 - 説明用コメント(XML ドキュメントコメント)の決まりは、Microsoft Learn の「Generate XML API documentation comments」と「Recommended XML tags for C# documentation comments」(© Microsoft Corporation、CC BY 4.0)を、AI(Claude)が要約・加工して作成したものです。原文そのものではなく、Microsoft の見解でもありません。
-- テストの書き方は、Kent Beck「Canon TDD」(https://tidyfirst.substack.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。
+- テストの書き方は、Kent Beck「Canon TDD」(https://newsletter.kentbeck.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。

@@ -100,6 +100,6 @@ Check every test you wrote against this table in Step 5.
 
 Ideas summarized in this skill's own words:
 
-- Kent Beck, "Canon TDD" (2023): https://tidyfirst.substack.com/p/canon-tdd . Japanese translation by Takuto Wada (t_wada), 「【翻訳】テスト駆動開発の定義」: https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck . The test list, one test at a time, and the listed mistakes (tests without assertions, converting the whole list at once, copying actual values into expected values, mixing refactoring into making a test pass).
+- Kent Beck, "Canon TDD" (2023): https://newsletter.kentbeck.com/p/canon-tdd . Japanese translation by Takuto Wada (t_wada), 「【翻訳】テスト駆動開発の定義」: https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck . The test list, one test at a time, and the listed mistakes (tests without assertions, converting the whole list at once, copying actual values into expected values, mixing refactoring into making a test pass).
 - Takuto Wada (t_wada), 「コードには How、テストコードには What、コミットログには Why、コードコメントには Why not」: https://x.com/t_wada/status/904916106153828352 .
 - Kent Beck, "Test-Driven Development: By Example" (2002; Japanese edition 『テスト駆動開発』 translated by Takuto Wada, 2017): fake it, triangulate, obvious implementation.

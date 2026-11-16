@@ -84,5 +84,5 @@ AI にテストを頼むと、プログラムを読んで、その作りをな�
 
 ## 出典
 
-- Kent Beck「Canon TDD」(https://tidyfirst.substack.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「【翻訳】テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方を、自分の言葉でまとめています。
+- Kent Beck「Canon TDD」(https://newsletter.kentbeck.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「【翻訳】テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方を、自分の言葉でまとめています。
 - 「テストコードには What」は、和田卓人さんの投稿(https://x.com/t_wada/status/904916106153828352)をもとにしています。
