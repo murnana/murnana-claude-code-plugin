@@ -14,6 +14,8 @@
 | やりたいこと | 使う機能 | 説明 |
 |---|---|---|
 | コメントを書く・整理する | [Rust のコメント作成](comment.md) | 書くべき内容を決まった場所に振り分けて、コメントと説明文を書く |
+| テストを書く・見直す | [Rust のテストケース作成](test-case.md) | 確かめたい動きを先に書き出してから、1 つずつテストにする |
+| テストをまとめて任せる | [test-case-writer](test-case-writer.md) | すでにあるプログラムのテストを別の Claude に書かせて、報告だけを受け取る |
 
 ## インストール
 
@@ -44,5 +46,6 @@ claude plugin install rust-analyzer-lsp@claude-plugins-official
 
 - コメントに何を書くかの考え方は、和田卓人さん(@t_wada)の投稿「コードには How テストコードには What コミットログには Why コードコメントには Why not を書こう」(https://x.com/t_wada/status/904916106153828352)にもとづきます。その行を読むのに欠かせない理由はコメントにも残す、という補足は、John Ousterhout『A Philosophy of Software Design』などの考え方を参考にしています。
 - 説明文の書き方は、Rust by Example「Documentation」(https://doc.rust-lang.org/rust-by-example/meta/doc.html、MIT License)の一部を抜粋・加工したものと、RFC 1574(https://rust-lang.github.io/rfcs/1574-more-api-documentation-conventions.html)の要約にもとづきます。
+- テストの書き方は、Kent Beck「Canon TDD」(https://tidyfirst.substack.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。
 
 Rust、Cargo は Rust Foundation の商標または登録商標です。

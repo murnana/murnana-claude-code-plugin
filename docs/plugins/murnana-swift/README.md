@@ -15,6 +15,8 @@ Swift(Apple が作ったプログラミング言語)で書いたプログラム�
 | やりたいこと | 使う機能 | 説明 |
 |---|---|---|
 | 説明書きを書く・見直す | [Swift のコメント作成](comment.md) | 書く内容をふさわしい場所に振り分けて、必要な説明書きだけを書く |
+| テストを書く・見直す | [Swift のテストケース作成](test-case.md) | 確かめたい動きを先に書き出してから、1 つずつテストにする |
+| テストをまとめて任せる | [test-case-writer](test-case-writer.md) | すでにあるプログラムのテストを別の Claude に書かせて、報告だけを受け取る |
 
 ## インストール
 
@@ -46,4 +48,5 @@ claude plugin install swift-lsp@claude-plugins-official
 
 - 説明書きの置き場所の考え方は、和田卓人さん(@t_wada)の「コードには How テストコードには What コミットログには Why コードコメントには Why not を書こう」(https://x.com/t_wada/status/904916106153828352)をもとにしています。
 - 使い方の説明の書き方は、Swift-DocC のドキュメント(https://www.swift.org/documentation/docc/writing-symbol-documentation-in-your-source-files 、https://www.swift.org/documentation/docc/formatting-your-documentation-content 、Copyright (c) 2021-2026 Apple Inc. and the Swift project authors、Apache License 2.0)を、AI(Claude)が要約・加工して作成したものです。
+- テストの書き方は、Kent Beck「Canon TDD」(https://tidyfirst.substack.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。
 - Swift、Xcode は Apple Inc. の商標です。

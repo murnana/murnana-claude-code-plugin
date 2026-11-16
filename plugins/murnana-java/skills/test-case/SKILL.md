@@ -1,0 +1,199 @@
+---
+name: test-case
+description: Write or review Java test cases (JUnit 5, JUnit 4, TestNG) from a test list, one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
+argument-hint: "[file, class or function to test, or the behavior to specify]"
+allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(./gradlew test *) Bash(gradle test *) Bash(./mvnw test *) Bash(./mvnw -q test *) Bash(mvn test *) Bash(mvn -q test *) Bash(git status *) Bash(git diff *)
+---
+
+# Java Test Case
+
+Write Java tests that state **what** the code must do, so that a failing test tells the reader which behavior broke.
+
+- **What a test is for**: t_wada's principle 「コードには How、テストコードには What、コミットログには Why、コードコメントには Why not」. A test is a readable, executable statement of one behavior.
+- **How the work proceeds**: Kent Beck's "Canon TDD" (Japanese translation by t_wada: 「テスト駆動開発の定義」): write a test list, turn exactly one item into a test, make it pass, optionally refactor, repeat.
+
+Read [references/test-design.md](references/test-design.md) before Step 3: it holds the ways to find test cases and the table of test smells used in Step 5. Ask the user questions in Japanese. Write test names, messages and comments in the language the existing tests use; if there are none, use English.
+
+## Hard rules
+
+Follow these in every step. When a step seems to conflict with one, the rule wins.
+
+1. **Test behavior, not implementation.** Assert on what a caller can observe: return values, raised errors, public state, and messages sent across a boundary (a saved record, a sent mail). Never assert on private members, on the order of internal helper calls, or by repeating the implementation's formula in the test.
+2. **Expected values come from the specification, never from running the code.** A specification source is: the user's request, a doc comment or document, an issue, an existing test, or a caller that depends on the behavior. Work the expected value out by hand and write it as a literal. If the only way to get it is to run the code, that test is a characterization test: allowed in Mode C only, and labeled as one.
+3. **One list item at a time.** Never turn the whole test list into tests in one go: what you learn from one test changes the next. Mode A: exactly one test, then run. Modes B and C: at most 5 tests, then run.
+4. **See every new test fail once, for the reason you expect.** A test that has never failed has not shown it can fail. Mode A: it fails because the behavior does not exist yet. Modes B and C: use the failure check in Step 4. Never break production code to make a test fail.
+5. **Never bend a test to get green.** Do not delete an assertion, loosen an expected value, add a skip/ignore marker, a retry or a sleep, or change the expected value to what the code returns. A test that states the specification and fails against existing code is a finding: handle it by Step 4's "the code looks wrong" branch.
+6. **Change test code only**, unless the user asked you to implement or fix the behavior (Mode A with implementation). Test code means test files, test fixtures and helpers, and the one build entry that registers a new test file. Changes to production code that would make it testable are proposals for the report.
+7. **No logic in tests.** No `if`, loops or `try/catch` that decide what is asserted, and no computed expected values. Several inputs for one behavior become a parameterized test. Each test builds its own data, leaves nothing behind, and passes when run alone or in any order. No real clock, randomness, network, or files outside a temporary directory, and no sleeping.
+8. **If you cannot ask** (no `AskUserQuestion` tool, a non-interactive run, or the user said they are away), don't stop and don't guess silently: take the default the step names, mark the item `assumed` in the test list, and list it in the report.
+
+## Working efficiently
+
+- Use Bash only for the test commands in "Java specifics" and the `git` commands written here, exactly as written, one command per call: no shell variables, `;`, `&&`, pipes or `cd`. Other forms don't match the pre-approved tools and trigger a permission prompt. List files with Glob, search with Grep, read with Read.
+- Do not install a framework, plugin or dependency, and do not create a test project. If something needed is missing, or a test command is denied, write the tests anyway, say they were not run, and name what is missing.
+- Never report a test as passing, or as seen failing, unless you ran it and read the output. "0 tests run" is not a pass.
+- Code pasted into the conversation instead of a file: skip the commands, apply every other step to the pasted code, reply with the full test file, and write 「未実行」 under 実行結果.
+
+## Step 1: Fix the scope and the mode
+
+1. Target = `$ARGUMENTS` (a file, class, function, or a behavior in words). If empty, take it from the conversation. If there is none, ask.
+2. Choose the mode. Take the **first** row that matches, and say which mode you chose in your reply:
+
+   | Mode | When | What you may change |
+   |---|---|---|
+   | **A. Test-first** | The behavior does not exist yet, the user asks for TDD, or the user reports a bug to fix. For a bug, the first test reproduces the bug. | Tests. Production code only if the user asked you to implement or fix it. |
+   | **C. Characterization** | The code exists, no specification can be found, and the user wants to pin the current behavior before changing it (refactoring, migration, legacy code). | Tests only. |
+   | **B. Test-after** | The code exists and its specification can be found. This is the default when unsure. | Tests only. |
+
+3. Find the framework and conventions with the detection steps in "Java specifics". Project instructions (`CLAUDE.md`, `.claude/rules/`, `CONTRIBUTING.md`) override this skill.
+4. Read the one or two existing test files closest to the target, and imitate them: file location, naming, assertion style, fixtures, the language of test names.
+5. Run the existing tests for the target area once ("Run the file" command) and record the result as the baseline.
+   - Passes → continue.
+   - Fails before you changed anything → record which tests fail, do not fix them, continue.
+   - Cannot run (tool missing, build broken) → continue, and report every later run as 「未実行」 with the error's first lines.
+
+## Step 2: Understand the contract
+
+1. Read the target once, its doc comments, and two or three call sites (Grep for the name). Do not read every caller.
+2. Write down, for each public entry point in scope: inputs and their valid ranges, outputs, errors, side effects, and state it keeps.
+3. List the dependencies a test cannot control: current time, randomness, network, database, filesystem, environment variables, global or static state, threads.
+4. For each such dependency, decide in this order:
+   1. The code already accepts it as a parameter or constructor argument → pass a fixed value or a hand-written fake.
+   2. The framework has a supported way to replace it (see "Java specifics") → use that, and restore it after the test.
+   3. Neither → do not reach in with reflection, private access or global patching. Test what can be tested, and put a proposal in the report: the smallest change that lets the dependency be passed in.
+
+## Step 3: Write the test list
+
+Write the list in your reply **before any test code**, using [references/test-design.md](references/test-design.md) to find the cases:
+
+```
+Test list: <target> (Mode <A/B/C>)
+- [ ] <condition> → <expected result> | normal / boundary / error / state | source: <where the expected result comes from>
+```
+
+1. One line per behavior, in words a user of the code would use. "returns 0 when the subtotal is exactly 5000", not "covers the else branch".
+2. Derive the lines from the contract in Step 2, not from the branches of the implementation. Then read the implementation once more only to find inputs the contract forgot (a special case, an early return) and ask what the specification says about them.
+3. Leave off: private functions, trivial accessors, behavior of the language, the framework or a library, and anything the type system already guarantees.
+4. Mark a line `[x] existing: <test name>` when an existing test already states it. Do not write it again.
+5. Order: the simplest normal case first, then boundaries, then errors, then state and combinations.
+6. A line whose expected result has no source gets `?`. Batch all `?` lines into one `AskUserQuestion` call (up to 4 questions; show the input and the candidate results as options, and include 「現在の動作を仕様とする」 when the code exists). If there are more than 4, ask the 4 that change the most tests and treat the rest by rule 8, whose default is: leave the line untested and report it.
+7. In Mode C the source of every line is `current behavior`. Say so once above the list.
+
+The list is a working document: when writing a test shows a new case, add a line instead of handling it at once.
+
+## Step 4: Turn the list into tests
+
+Take the lines in order. For each line:
+
+1. **Name** the test so that it states the condition and the expected result (naming row in "Java specifics"). A reader should learn the behavior from the list of test names alone. Never `test1`, `testShippingFee`, `works`, `正常系`.
+2. **Write the assertion first**, then the call that produces the value, then the setup the call needs. Lay the test out as Arrange, Act, Assert, separated by blank lines, with exactly one Act. When there is nothing to arrange, a single line that calls and asserts is fine.
+3. **One behavior per test.** Several assertions are fine when they describe one result (the fields of one returned object). A second Act, or assertions about a different behavior, means a second test.
+4. **Data**: use the smallest input that shows the behavior, and write the values that matter in the test itself. Put values that do not matter behind a helper or builder with defaults. No value shared through a mutable global.
+5. **Test doubles**: use the real collaborator when it is fast and deterministic. Replace only the dependencies listed in Step 2, with a hand-written fake or stub first. Verify that a call happened only when the call is the behavior (the mail was sent). Never replace the unit under test or part of it.
+6. **Run** it with the "Run one test" command and read the output:
+
+   | Mode | Result | Do |
+   |---|---|---|
+   | A | Fails, and the message shows the missing behavior | This is the expected red. If you may implement: write the least production code that passes this test and every earlier one, run the file, then refactor only while everything passes, and add any new case you noticed to the list. If you may not: leave the test red and say so in the report. |
+   | A | Passes at once | The behavior already exists or the test checks nothing. Do the failure check below; if it holds, mark the line `[x] already satisfied` and treat the target as Mode B from here. |
+   | A | Fails for another reason (syntax, import, wrong setup) | Fix the test and run again. |
+   | B, C | Passes | Do the failure check below. |
+   | B | Fails | Read the source of the expected value again. The test misreads the specification → fix the test. The test is right → "the code looks wrong" below. |
+   | C | Fails | The expected value was copied wrongly; correct it from the actual output and run again. |
+
+7. **Failure check** (Modes B and C, and Mode A tests that passed at once): change the expected value in the test to a wrong one (or, for an expected error, an input that does not raise), run the test, and confirm that it fails and that the message shows both the expected and the actual value. Restore the test and run it again to confirm it passes. Do this for every test; for a parameterized test, once per test function. If the test still passes with the wrong value, the assertion is not being executed: fix the test.
+8. **The code looks wrong** (Mode B, the test states the specification and the code does something else): do not change the expected value and do not change the code. Ask, together with any other open question, which holds: 「コードの不具合(テストを残し、修正は別途)」, 「現在の動作が仕様(テストを直す)」 or 「このテストは書かない」. If you cannot ask: delete the test from the test file (do not park it in another file), and put its full code, the expected and actual values and the specification source in the report, so the suite stays green and the finding is not lost.
+9. Tick the line in the test list.
+
+## Step 5: Verify
+
+Run each check, fix what your tests caused, and re-run until clean, at most 3 rounds:
+
+1. Run the whole test file, then the suite it belongs to ("Run the file / all" commands). Every test passes, except the Mode A tests you reported as red and the failures recorded in Step 1's baseline.
+2. Run the test file a second time. A different result means a test depends on order, time or shared state: find the cause with rule 7. Do not add a retry.
+3. Run `git status --short`. Outside Mode A with implementation, only test code may be listed (rule 6). Undo anything else, and delete any scratch or temporary file you created.
+4. Read every test you wrote against the smell table in [references/test-design.md](references/test-design.md), and answer for each test: Would it still pass if the implementation were rewritten without changing behavior? Would it fail if the behavior in its name broke? Does its failure message say what was expected and what happened?
+5. Confirm every line of the test list is ticked, or listed in the report with the reason it was left.
+
+## Step 6: Report
+
+Reply in Japanese with exactly these headings, writing 「なし」 under an empty one:
+
+```
+## モードと前提
+## テストリスト
+## 書いたテスト
+## 失敗の確認
+## 見つかった問題
+## 提案(未適用)
+## 実行結果
+```
+
+- モードと前提: the mode, the framework, the baseline from Step 1, and every `assumed` item.
+- テストリスト: the final list with its ticks, including lines left untested and why.
+- 書いたテスト: `file` and test name, one line each, in the order of the list.
+- 失敗の確認: how each test was seen failing (Mode A red, or the failure check), or 「未実行」.
+- 見つかった問題: suspected bugs (expected, actual, specification source, and the test code if it was taken out), and specification gaps with the question to answer.
+- 提案(未適用): changes to production code that would make it testable, and refactorings. Not applied.
+- 実行結果: each command you ran with its outcome (for example `12 passed`), or 「未実行」 with the reason.
+
+Do not commit unless the user asks.
+
+## Java specifics
+
+### Detect the framework
+
+1. Glob `pom.xml`, `build.gradle`, `build.gradle.kts` and read the test dependencies; Grep the existing tests for `org.junit.jupiter`, `org.junit.Test`, `org.testng`.
+2. `junit-jupiter` → **JUnit 5**. Only `junit:junit` 4.x → **JUnit 4** (do not mix Jupiter annotations in). `testng` → TestNG.
+3. Assertions: AssertJ (`assertThat`) if the project already depends on it, otherwise the framework's own `Assertions`. Do not add a dependency.
+4. Build tool: `./gradlew` or `./mvnw` when the wrapper exists, else `gradle` / `mvn`.
+
+### Conventions and commands
+
+| Topic | Use |
+|---|---|
+| Test file | `src/test/java/<same package>/<Class>Test.java`. One test class per class under test; group related cases with `@Nested`. |
+| Test name | A method name that states the behavior (`shipsFreeWhenSubtotalIsAtThreshold`) plus `@DisplayName("...")` when the existing tests use it. The display name may be Japanese. |
+| Run one test | Gradle: `./gradlew test --tests '<package.Class>.<method>'`. Maven: `./mvnw -q test -Dtest='<Class>#<method>'` |
+| Run the class / all | `./gradlew test --tests '<package.Class>'` / `./gradlew test` (Maven: `./mvnw -q test -Dtest='<Class>'` / `./mvnw -q test`) |
+| Many inputs, one behavior | `@ParameterizedTest(name = "...")` with `@CsvSource`, `@ValueSource` or `@MethodSource` (needs `junit-jupiter-params`). |
+| Expected error | `assertThrows(IllegalArgumentException.class, () -> ...)` (AssertJ: `assertThatThrownBy(...).isInstanceOf(...)`). JUnit 4: `assertThrows` from 4.13, not `@Test(expected=...)`. |
+| Floats | `assertEquals(expected, actual, delta)` or AssertJ `isCloseTo`. |
+| Time, randomness, environment | Inject `java.time.Clock` and use `Clock.fixed(...)`; pass a seeded `Random`. Files go in `@TempDir`. |
+| Test doubles | Hand-written fakes first. Mockito only if the project already uses it, and only for the hard-to-control dependencies. |
+
+### Example
+
+```java
+class ShippingTest {
+
+    @Test
+    @DisplayName("subtotal below the threshold costs the flat fee")
+    void costsFlatFeeWhenSubtotalIsBelowThreshold() {
+        int fee = Shipping.shippingFee(4999);
+
+        assertEquals(500, fee);
+    }
+
+    @ParameterizedTest(name = "subtotal {0} ships free")
+    @ValueSource(ints = {5000, 5001})
+    void shipsFreeWhenSubtotalIsAtOrAboveThreshold(int subtotal) {
+        assertEquals(0, Shipping.shippingFee(subtotal));
+    }
+
+    @Test
+    void rejectsNegativeSubtotal() {
+        assertThrows(IllegalArgumentException.class, () -> Shipping.shippingFee(-1));
+    }
+}
+```
+
+The three boundary values in the example (4999, 5000, 5001) come from the specification "5000 or more ships free", not from reading the comparison operator in the code.
+
+## Gotchas
+
+- `assertEquals(expected, actual)`: expected comes first. Swapped arguments produce a misleading failure message.
+- Gradle reports `BUILD SUCCESSFUL` when the `--tests` filter matches nothing only if `failOnNoMatchingTests` is off, and Maven needs `-DfailIfNoSpecifiedTests=false` only in multi-module builds. Read the count of tests run; zero tests run is not a pass.
+- JUnit 5 test classes and methods need no `public`; JUnit 4 needs both `public`. Copy what the existing tests do.
+- Do not use `Thread.sleep` to wait for async work. Use the returned `CompletableFuture`, or Awaitility if the project has it.
+- A `static` field in a test class is shared by every test in the JVM fork. Build fixtures in `@BeforeEach`.

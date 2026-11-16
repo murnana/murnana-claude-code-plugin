@@ -1,11 +1,11 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-swift",
-  "description": "Swift開発用ツールキット(コードコメント・DocCドキュメントコメントを書くスキル)",
+  "description": "Swift開発用ツールキット(コードコメント・DocCドキュメントコメントを書くスキル、テストケースを書くスキルとサブエージェント)",
   "version": "0.0.2",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
-  "keywords": ["swift", "comment", "docc"],
+  "keywords": ["swift", "comment", "docc", "test", "tdd", "swift-testing", "xctest"],
   "defaultEnabled": false,
   "author": {
     "name": "murnana"

@@ -49,6 +49,20 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 - Joshua Bloch『Effective Java』(公開 API のドキュメンテーションコメント)
 - 利用箇所: `skills/comment/references/comment-routing.md`
 
+## Canon TDD(Kent Beck)と日本語訳「テスト駆動開発の定義」(t_wada)
+
+- 対象: `test-case` スキル(`skills/test-case/SKILL.md`、`skills/test-case/references/test-design.md`)、`test-case-writer` サブエージェント(`agents/test-case-writer.md`)
+- 内容: テストリストを書き、1 つずつテストにして進める手順と、避けるべき失敗の考え方を、自分の言葉で要約したもの。原文・訳文の転載はしていない
+- 出典: https://tidyfirst.substack.com/p/canon-tdd (Kent Beck、2023 年) / https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck (和田卓人による日本語訳)
+- ライセンス: 確認できていない(作成時に出典のページを取得できなかったため)。考え方の要約と出典の明記にとどめている
+
+## 『テスト駆動開発』(Kent Beck 著、和田卓人 訳)
+
+- 対象: `test-case` スキル(`skills/test-case/references/test-design.md`)
+- 内容: 仮実装・三角測量・明白な実装という進め方の名前と考え方を、自分の言葉で要約したもの。本文の転載はしていない
+- 出典: Kent Beck, "Test-Driven Development: By Example", Addison-Wesley, 2002 / 『テスト駆動開発』オーム社、2017 年
+- ライセンス: 書籍(著作権は各権利者に帰属)。考え方の要約と出典の明記にとどめている
+
 ## 商標
 
 - TypeScript、TSDoc は Microsoft Corporation の商標または登録商標です。
