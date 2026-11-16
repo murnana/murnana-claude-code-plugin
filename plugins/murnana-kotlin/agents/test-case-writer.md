@@ -108,6 +108,7 @@ At most 3 rounds:
 2. `io.kotest` → **Kotest**, in the spec style the existing tests use. Otherwise `kotlin.test` assertions on **JUnit 5** (or JUnit 4 if that is what the project runs).
 3. Source set: JVM → `src/test/kotlin`. Kotlin Multiplatform → `src/commonTest/kotlin` with `kotlin.test` only. Android → `src/test` (local JVM tests). Do not write or run `src/androidTest` (needs a device) unless the user asks; report it instead.
 4. Mocks: MockK only if the project already depends on it. Coroutines: `kotlinx-coroutines-test` (`runTest`) only if it is a dependency.
+5. Command name: every Gradle command below starts with `./gradlew`. If the file `gradlew` does not exist in the project root, run the same command with `gradle` instead (for example `gradle test --tests '...'`). Never generate a wrapper, and do not give up on running the tests because the wrapper is missing.
 
 ### Conventions and commands
 
