@@ -1,6 +1,6 @@
 ---
 name: test-case-writer
-description: Writes TypeScript test cases (Vitest, Jest, node:test) for existing code named by the caller, from a test list, and returns one report; changes test code only. Use when asked to add tests for a TypeScript file, class or function without filling the main conversation. Not for implementing features or fixing failing code.
+description: Writes TypeScript unit tests (Vitest, Jest, node:test) for existing code named by the caller, from a test list, and returns one report; changes test code only. Use when asked to add tests for a TypeScript file, class or function without filling the main conversation. Not for implementing features or fixing failing code.
 tools: Read, Grep, Glob, Edit, Write, Bash
 model: inherit
 ---

@@ -1,6 +1,6 @@
 ---
 name: test-case
-description: Write or review C# test cases (xUnit, NUnit, MSTest) from a test list, one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
+description: Write, add or review C# unit tests (xUnit, NUnit, MSTest), one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
 argument-hint: "[file, class or function to test, or the behavior to specify]"
 allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(dotnet test *) Bash(git status *) Bash(git diff *)
 ---

@@ -1,6 +1,6 @@
 ---
 name: test-case
-description: Write or review TypeScript test cases (Vitest, Jest, node:test) from a test list, one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
+description: Write, add or review TypeScript unit tests (Vitest, Jest, node:test), one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
 argument-hint: "[file, class or function to test, or the behavior to specify]"
 allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(npx vitest run *) Bash(npx jest *) Bash(npm test *) Bash(npm run test *) Bash(pnpm test *) Bash(yarn test *) Bash(node --test *) Bash(git status *) Bash(git diff *)
 ---

@@ -1,6 +1,6 @@
 ---
 name: test-case
-description: Write or review Kotlin test cases (kotlin.test, JUnit 5, Kotest) from a test list, one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
+description: Write, add or review Kotlin unit tests (kotlin.test, JUnit 5, Kotest), one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
 argument-hint: "[file, class or function to test, or the behavior to specify]"
 allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(./gradlew test *) Bash(./gradlew testDebugUnitTest *) Bash(./gradlew allTests *) Bash(gradle test *) Bash(./mvnw test *) Bash(mvn test *) Bash(git status *) Bash(git diff *)
 ---

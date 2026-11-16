@@ -1,6 +1,6 @@
 ---
 name: test-case-writer
-description: Writes Python test cases (pytest, unittest) for existing code named by the caller, from a test list, and returns one report; changes test code only. Use when asked to add tests for a Python file, class or function without filling the main conversation. Not for implementing features or fixing failing code.
+description: Writes Python unit tests (pytest, unittest) for existing code named by the caller, from a test list, and returns one report; changes test code only. Use when asked to add tests for a Python file, class or function without filling the main conversation. Not for implementing features or fixing failing code.
 tools: Read, Grep, Glob, Edit, Write, Bash
 model: inherit
 ---

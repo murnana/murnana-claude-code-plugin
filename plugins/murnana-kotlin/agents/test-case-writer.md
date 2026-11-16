@@ -1,6 +1,6 @@
 ---
 name: test-case-writer
-description: Writes Kotlin test cases (kotlin.test, JUnit 5, Kotest) for existing code named by the caller, from a test list, and returns one report; changes test code only. Use when asked to add tests for a Kotlin file, class or function without filling the main conversation. Not for implementing features or fixing failing code.
+description: Writes Kotlin unit tests (kotlin.test, JUnit 5, Kotest) for existing code named by the caller, from a test list, and returns one report; changes test code only. Use when asked to add tests for a Kotlin file, class or function without filling the main conversation. Not for implementing features or fixing failing code.
 tools: Read, Grep, Glob, Edit, Write, Bash
 model: inherit
 ---

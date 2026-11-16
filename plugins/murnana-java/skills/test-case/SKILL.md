@@ -1,6 +1,6 @@
 ---
 name: test-case
-description: Write or review Java test cases (JUnit 5, JUnit 4, TestNG) from a test list, one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
+description: Write, add or review Java unit tests (JUnit 5, JUnit 4, TestNG), one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
 argument-hint: "[file, class or function to test, or the behavior to specify]"
 allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(./gradlew test *) Bash(gradle test *) Bash(./mvnw test *) Bash(./mvnw -q test *) Bash(mvn test *) Bash(mvn -q test *) Bash(git status *) Bash(git diff *)
 ---

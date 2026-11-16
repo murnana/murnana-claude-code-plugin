@@ -1,6 +1,6 @@
 ---
 name: test-case
-description: Write or review Swift test cases (Swift Testing, XCTest) from a test list, one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
+description: Write, add or review Swift unit tests (Swift Testing, XCTest), one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
 argument-hint: "[file, class or function to test, or the behavior to specify]"
 allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(swift test *) Bash(xcodebuild test *) Bash(git status *) Bash(git diff *)
 ---

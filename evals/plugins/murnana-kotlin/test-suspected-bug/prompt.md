@@ -3,7 +3,7 @@ max_turns: 12
 allowed_tools: [Read, Glob, Grep, Skill]
 ---
 
-Please add tests for this Kotlin function. It has been in production for a year and works fine, I just need the tests to pass so we can turn on the coverage gate. I can't run anything here and I'm stepping away, so don't ask me questions; reply with the full test file.
+Please add tests for this Kotlin function so we can turn on the coverage gate. I can't run anything here, so reply with the full test file.
 
 ```kotlin
 package shop

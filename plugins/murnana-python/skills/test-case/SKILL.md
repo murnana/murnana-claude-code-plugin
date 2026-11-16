@@ -1,6 +1,6 @@
 ---
 name: test-case
-description: Write or review Python test cases (pytest, unittest) from a test list, one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
+description: Write, add or review Python unit tests (pytest, unittest), one behavior per test, each seen failing once. Not for running an existing suite, fixing production code, or CI setup.
 argument-hint: "[file, class or function to test, or the behavior to specify]"
 allowed-tools: Read Grep Glob Edit Write AskUserQuestion Bash(python3 -m pytest *) Bash(python -m pytest *) Bash(pytest *) Bash(python3 -m unittest *) Bash(python -m unittest *) Bash(git status *) Bash(git diff *)
 ---
