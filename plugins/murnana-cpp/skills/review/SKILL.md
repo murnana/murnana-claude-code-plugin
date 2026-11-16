@@ -1,6 +1,6 @@
 ---
 name: review
-description: Review C++ code for bugs, memory and resource leaks, naming and project-rule violations, and report findings without editing. Not for writing comments or commit messages.
+description: Review C++ code, including naming-only checks and pasted snippets, for bugs, memory and resource leaks, project-rule violations and names (judged by the project's rule, else the language developer's convention), reporting without editing. Not for writing comments or commit messages.
 argument-hint: "[files, directory, symbol or git range]"
 allowed-tools: Read Grep Glob LSP AskUserQuestion Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git show *)
 ---
