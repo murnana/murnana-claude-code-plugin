@@ -21,6 +21,14 @@
 - ライセンス: 不明(X の投稿。短い一文を出典付きで引用しています)
 - 利用箇所: `skills/comment/references/comment-roles.md`(2017年の投稿文の引用と、返信・2019年の投稿の要旨、それらをもとに AI(Claude)が書いた解説)
 
+## Kotlin コーディング規約（命名規則）
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: 「Naming rules」の節の命名規約を、独自の文章と表で要約したもの。本文は複製していない。例の識別子は規約と同じ短い名前を一部使っている
+- 出典: https://kotlinlang.org/docs/coding-conventions.html#naming-rules （ソース: https://github.com/JetBrains/kotlin-web-site ）
+- ライセンス: Apache License 2.0（kotlin-web-site の `LICENSE`。全文はこのファイルの末尾）
+- 著作権: Copyright JetBrains s.r.o. and Kotlin Programming Language contributors
+
 ## 商標
 
 - Kotlin は Kotlin Foundation により保護された商標です。

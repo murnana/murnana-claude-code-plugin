@@ -17,6 +17,14 @@
 - 出典: 和田卓人(@t_wada)氏の投稿(2017年9月5日) https://x.com/t_wada/status/904916106153828352
 - 利用箇所: `skills/comment/SKILL.md`、`skills/comment/references/implementation-comments.md`(考え方を自分の言葉で説明し、要旨を短く引用したもの)
 
+## Microsoft Learn: C# 識別子の名前付け規則と表記規則 / Framework Design Guidelines
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: C# の識別子の命名規約（大文字・小文字の使い分け、接頭辞と接尾辞）を独自の文章と表で要約したもの。本文と例は複製していない
+- 出典: https://learn.microsoft.com/dotnet/csharp/fundamentals/coding-style/identifier-names / https://learn.microsoft.com/dotnet/standard/design-guidelines/naming-guidelines （ソース: https://github.com/dotnet/docs ）
+- ライセンス: Creative Commons Attribution 4.0 International（dotnet/docs の `LICENSE`）
+- 著作権: Copyright (c) Microsoft Corporation
+
 ## 商標
 
 - Microsoft、C#、.NET、Visual Studio、IntelliSense は Microsoft Corporation の商標または登録商標です。
