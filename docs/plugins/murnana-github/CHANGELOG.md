@@ -11,6 +11,7 @@
 
 - pr-create / stack-pr-message スキルで、PR の本文をいったん `.git/PR_BODY.md` に書き出してから `gh pr create --body-file` / `gh pr edit --body-file` で渡すようにした。`gh` のコマンドが本文を含まない短いものになり、承認時に確認しやすくなる
 - pr-create / stack-create / stack-pr-message スキルで、sandbox が PC に保存された GitHub の認証情報（`gh` のトークン、git の認証情報、1Password を含む SSH エージェント）を塞いで `gh auth status`・`gh pr create`・`git push` などが失敗したとき、未ログイン扱いで MCP への切り替えを勧めるのではなく、`sandbox.excludedCommands` に `gh` と `git push` のコマンドを加える設定を案内し、設定後に再試行できるようにした
+- `plugin.json` から `version` を外し、バージョン番号はマーケットプレイス（`.claude-plugin/marketplace.json`）のエントリーだけで管理するようにした。正式版のマーケットプレイス `murnana-claude-code-plugin` から入れた場合のバージョン番号は変わらない。`develop` ブランチを追従するアーリーアクセス版を、別のマーケットプレイス `murnana-claude-code-plugin-dev` で配布するための変更
 
 ## [0.3.0] - 2026-11-14
 

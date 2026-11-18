@@ -2,7 +2,6 @@
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-typescript",
   "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-  "version": "0.0.2",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
   "keywords": ["typescript", "comment", "tsdoc", "review", "test", "tdd", "vitest", "jest"],

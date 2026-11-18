@@ -11,4 +11,4 @@ Check all of these. Whatever they say overrides this skill's defaults and Keep a
 
 Before reading a candidate, Glob for it. Read only the files that exist.
 
-Example from the murnana-claude-code-plugin marketplace repository: `.claude/rules/plugin-version-bump.md` says plugin changelogs live at `docs/plugins/<plugin-name>/CHANGELOG.md`. Entries go under `## [Unreleased]`, written in Japanese with the Keep a Changelog categories. The version in `plugin.json` and `marketplace.json` is bumped in the same PR.
+Example from the murnana-claude-code-plugin marketplace repository: `.claude/rules/plugin-version-bump.md` says plugin changelogs live at `docs/plugins/<plugin-name>/CHANGELOG.md`. Entries go under `## [Unreleased]`, written in Japanese with the Keep a Changelog categories. The version lives only on the plugin's `marketplace.json` entry, not in `plugin.json`, and is bumped in the `develop` → `main` release PR.

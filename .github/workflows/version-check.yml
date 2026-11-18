@@ -27,23 +27,30 @@ jobs:
         run: |
           set -uo pipefail
           status=0
+          manifest=.claude-plugin/marketplace.json
+          # ベースにまだ marketplace.json が無い場合に備え、空の plugins で受ける。
+          base_manifest=$({ git show "origin/$BASE_REF:$manifest" 2>/dev/null || true; })
+          [ -n "$base_manifest" ] || base_manifest='{"plugins":[]}'
+
           for dir in plugins/*/; do
             name=$(basename "$dir")
-            manifest="plugins/$name/.claude-plugin/plugin.json"
-            [ -f "$manifest" ] || continue
-            head_version=$(jq -r '.version // empty' "$manifest")
-            # ベースにまだ無い新規プラグインでは git show が失敗する。pipefail と -e で止まらないよう || true で受ける。
-            base_version=$({ git show "origin/$BASE_REF:$manifest" 2>/dev/null || true; } | jq -r '.version // empty')
-            listed_version=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty' .claude-plugin/marketplace.json)
+            plugin_json="plugins/$name/.claude-plugin/plugin.json"
+            [ -f "$plugin_json" ] || continue
+
+            # plugin.json の version はマーケットプレイスのエントリーより優先される。
+            # 書くと dev チャンネルがコミットを追従しなくなるため、version はエントリーだけに置く。
+            if jq -e 'has("version")' "$plugin_json" >/dev/null; then
+              echo "::error file=$plugin_json::$name: remove version from plugin.json; set it only on the marketplace.json entry"
+              status=1
+            fi
+
+            head_version=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty' "$manifest")
+            base_version=$(printf '%s' "$base_manifest" | jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty')
 
             if ! printf '%s' "$head_version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-              echo "::error file=$manifest::$name: version must be MAJOR.MINOR.PATCH (got '$head_version')"
+              echo "::error file=$manifest::$name: entry version must be MAJOR.MINOR.PATCH (got '$head_version')"
               status=1
               continue
-            fi
-            if [ -n "$listed_version" ] && [ "$listed_version" != "$head_version" ]; then
-              echo "::error file=.claude-plugin/marketplace.json::$name: marketplace.json version ($listed_version) differs from plugin.json ($head_version)"
-              status=1
             fi
             [ -n "$base_version" ] || continue
 
