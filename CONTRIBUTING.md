@@ -76,12 +76,13 @@
 `develop` から `main` へのマージ PR（リリース PR）で、変更のあったプラグインのバージョンを上げます。
 
 1. 変更のあったプラグインを調べます: `git diff --name-only origin/main...origin/develop -- plugins/`
-2. `.claude-plugin/marketplace.json` の該当プラグインのエントリーの `version` を上げます。`plugin.json` には `version` を書きません（書くとエントリーより優先され、ブランチを追従するインストールに更新が届かなくなります）。
-3. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。
+2. 該当プラグインごとに `sh scripts/set-plugin-version.sh <plugin-name> <x.y.z>` を実行します。`.claude-plugin/marketplace.json` のエントリーの `version` と、取得元のタグ `source.ref`（`<plugin-name>--v<x.y.z>`）を書き換え、アーリーアクセス版のカタログも作り直します。`plugin.json` には `version` を書きません（書くとエントリーより優先され、ブランチを追従するインストールに更新が届かなくなります）。
+3. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。新しいリンクはタグ（`tree/<plugin-name>--vx.y.z/plugins/<plugin-name>`、`compare/<plugin-name>--vx.y.z...main`）を指します。
 4. `claude plugin validate .` を実行し、変更のあったプラグインごとに `claude plugin validate plugins/<plugin-name>` も実行します。
-5. `main` にマージします。その後、バージョン更新が `develop` にも反映されるよう `main` を `develop` にマージします。
+5. `main` にマージします。マージ後、`Tag plugin releases` ワークフローが `<plugin-name>--v<version>` のタグを作ります。タグができるまでの間（通常 1 分以内）は、正式版の新しいバージョンをインストールできません。ワークフローが成功したことを確認します。
+6. バージョン更新が `develop` にも反映されるよう、`main` を `develop` にマージします。
 
-Git のタグと GitHub Release は使いません。プラグインごとにバージョンが違うため、リポジトリー単位のタグは意味を持たず、プラグインごとのタグは数が増えて見通しが悪くなるためです。バージョンは `marketplace.json` の各エントリーで管理します。
+バージョンは `marketplace.json` の各エントリーで管理し、リリースごとにプラグイン単位のタグ `<plugin-name>--v<version>` を付けます。正式版のエントリーはこのタグに固定されるため、`main` が先に進んでも、利用者にはリリースした時点のファイルが届きます。タグは手で作らず、ワークフローに任せます。GitHub Release は使いません。
 
 バージョンは [Semantic Versioning](https://semver.org/) に従います（`v` は付けません）。
 

@@ -52,6 +52,14 @@ jobs:
               status=1
               continue
             fi
+
+            # 正式版はプラグインごとのリリースタグに固定する。タグはマージ後に release-tags.yml が作る。
+            tag="$name--v$head_version"
+            head_ref=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .source.ref // empty' "$manifest")
+            if [ "$head_ref" != "$tag" ]; then
+              echo "::error file=$manifest::$name: source.ref must be '$tag' (got '$head_ref'); run: sh scripts/set-plugin-version.sh $name $head_version"
+              status=1
+            fi
             [ -n "$base_version" ] || continue
 
             if [ "$BASE_REF" = "main" ]; then
@@ -60,6 +68,10 @@ jobs:
               newest=$(printf '%s\n%s\n' "$base_version" "$head_version" | sort -V | tail -n 1)
               if [ "$head_version" = "$base_version" ] || [ "$newest" != "$head_version" ]; then
                 echo "::error file=$manifest::$name changed but its version was not raised ($base_version -> $head_version)"
+                status=1
+              elif git rev-parse -q --verify "refs/tags/$tag" >/dev/null \
+                && [ "$(git rev-parse "$tag:plugins/$name")" != "$(git rev-parse "HEAD:plugins/$name")" ]; then
+                echo "::error file=$manifest::$name: tag $tag already exists with different files; choose a version that has not been released"
                 status=1
               fi
             elif [[ "$HEAD_REF" == feature/* || "$HEAD_REF" == bugfix/* ]]; then

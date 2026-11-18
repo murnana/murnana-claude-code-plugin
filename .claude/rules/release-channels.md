@@ -11,7 +11,7 @@ This repository publishes two marketplaces from the same plugin sources:
 
 | Channel | Catalog | Marketplace `name` | Plugins come from | Version |
 |---|---|---|---|---|
-| stable | `.claude-plugin/marketplace.json` on `main` | `murnana-claude-code-plugin` | `main` (see `.claude/rules/marketplace-manifest.md`) | the entry's `version` |
+| stable | `.claude-plugin/marketplace.json` on `main` | `murnana-claude-code-plugin` | the release tag `<plugin-name>--v<version>` on `main` (see `.claude/rules/marketplace-manifest.md`) | the entry's `version` |
 | dev (early access) | `channels/dev/.claude-plugin/marketplace.json` on `develop` | `murnana-claude-code-plugin-dev` | `ref: "develop"` | none: Claude Code uses the commit SHA |
 
 - Users add the dev channel by the raw URL of the `develop` copy:
