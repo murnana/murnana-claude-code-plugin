@@ -30,7 +30,7 @@
 
 リリース済みの内容に緊急の問題があるときだけ使います。
 
-1. `main` から `hotfix/<topic>` を切って修正し、変更したプラグインのパッチバージョンを同じ PR で上げます（`plugin.json`、`marketplace.json`、CHANGELOG）。
+1. `main` から `hotfix/<topic>` を切って修正し、変更したプラグインのパッチバージョンを同じ PR で上げます（`marketplace.json` のエントリーと CHANGELOG）。
 2. `claude plugin validate .` を実行し、`main` 向けに PR を作ってマージします。
 3. 修正とバージョン更新が失われないよう、すぐに `main` を `develop` にマージします。
 
@@ -66,13 +66,12 @@
 `develop` から `main` へのマージ PR（リリース PR）で、変更のあったプラグインのバージョンを上げます。
 
 1. 変更のあったプラグインを調べます: `git diff --name-only origin/main...origin/develop -- plugins/`
-2. 該当プラグインの `plugins/<plugin-name>/.claude-plugin/plugin.json` の `version` を上げます。
-3. `.claude-plugin/marketplace.json` の同じプラグインの `version` を `plugin.json` と一致させます。
-4. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。
-5. `claude plugin validate .` を実行し、変更のあったプラグインごとに `claude plugin validate plugins/<plugin-name>` も実行します。
-6. `main` にマージします。その後、バージョン更新が `develop` にも反映されるよう `main` を `develop` にマージします。
+2. `.claude-plugin/marketplace.json` の該当プラグインのエントリーの `version` を上げます。`plugin.json` には `version` を書きません（書くとエントリーより優先され、ブランチを追従するインストールに更新が届かなくなります）。
+3. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。
+4. `claude plugin validate .` を実行し、変更のあったプラグインごとに `claude plugin validate plugins/<plugin-name>` も実行します。
+5. `main` にマージします。その後、バージョン更新が `develop` にも反映されるよう `main` を `develop` にマージします。
 
-Git のタグと GitHub Release は使いません。プラグインごとにバージョンが違うため、リポジトリー単位のタグは意味を持たず、プラグインごとのタグは数が増えて見通しが悪くなるためです。バージョンは各 `plugin.json` で管理します。
+Git のタグと GitHub Release は使いません。プラグインごとにバージョンが違うため、リポジトリー単位のタグは意味を持たず、プラグインごとのタグは数が増えて見通しが悪くなるためです。バージョンは `marketplace.json` の各エントリーで管理します。
 
 バージョンは [Semantic Versioning](https://semver.org/) に従います（`v` は付けません）。
 
