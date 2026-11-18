@@ -37,10 +37,10 @@ Unity プロジェクトの依存関係グラフ（SQLite）を MCP で照会す
    curl -fsSL https://raw.githubusercontent.com/murnana/unity-ariadne/main/claude-plugins/.claude-plugin/plugin.json | jq -r .version
    ```
 2. このリポジトリーで `develop`（なければ `main` から作成して push）から `feature/unity-ariadne-<version>` を切ります。
-3. `.claude-plugin/marketplace.json` の `unity-ariadne` エントリーの `version` を、手順 1 で確認した値に書き換え、`sha` をそのリリースタグのコミット SHA に書き換えます（`git ls-remote https://github.com/murnana/unity-ariadne.git 'refs/tags/vX.Y.Z*'`。注釈付きタグなら `^{}` の行の値）。説明文（`description`）が変わっていれば、`plugin.json` に合わせて直します。
-4. `claude plugin validate .` を実行します。`git-subdir` のプラグインは `plugin.json` を読まないので、`version` の一致は目視で確認します。
+3. `.claude-plugin/marketplace.json` の `unity-ariadne` エントリーの `version` を、手順 1 で確認した値に書き換え、`sha` をそのリリースタグのコミット SHA に書き換えます（`git ls-remote https://github.com/murnana/unity-ariadne.git 'refs/tags/vX.Y.Z*'`。注釈付きタグなら `^{}` の行の値）。説明文（`description`）が変わっていれば、`plugin.json` に合わせて直します。続けて `sh scripts/build-dev-marketplace.sh` を実行し、アーリーアクセス版のカタログ（`channels/dev/.claude-plugin/marketplace.json`）にも同じエントリーを反映します。
+4. `claude plugin validate .` と `claude plugin validate channels/dev` を実行します。`git-subdir` のプラグインは `plugin.json` を読まないので、`version` の一致は目視で確認します。
 5. コミットして `develop` 向けに PR を作ります。タイトルとコミットの例: `:bookmark: unity-ariadne を x.y.z に更新する`
-6. 利用者に届くのは、`develop` → `main` のリリース PR がマージされた後です（[CONTRIBUTING.md](../../../CONTRIBUTING.md) の「リリースの流れ」）。
+6. アーリーアクセス版（`murnana-claude-code-plugin-dev`）の利用者には `develop` へのマージ後に、正式版の利用者には `develop` → `main` のリリース PR がマージされた後に届きます（[CONTRIBUTING.md](../../../CONTRIBUTING.md) の「リリースチャンネル」「リリースの流れ」）。
 
 `unity-ariadne` が `ariadne` コマンドの新しい版を必要とする変更（MCP ツールの追加など）のときは、利用者が先に `ariadne` を入れ直す必要があります。`unity-ariadne` 側のリリースノートに書かれていることを確認し、必要ならこのプラグインの `description` にも反映します。
 

@@ -97,7 +97,7 @@
 `unity-ariadne` は [murnana/unity-ariadne](https://github.com/murnana/unity-ariadne) の `claude-plugins/` にあり、このリポジトリーの `plugins/` にはありません。`marketplace.json` のエントリーだけを管理します。
 
 - `unity-ariadne` を更新（リリース）したら、このリポジトリーの `marketplace.json` の `unity-ariadne` の `version` を、`unity-ariadne` 側の `claude-plugins/.claude-plugin/plugin.json` の `version` に合わせます。これを上げないと、利用者のキャッシュが更新されません。
-- 通常の `feature/*` と同じく `develop` から `feature/unity-ariadne-<version>` を切り、`develop` 向けに PR を作ります。利用者に届くのはリリース PR（`develop` → `main`）のマージ後です。
+- 通常の `feature/*` と同じく `develop` から `feature/unity-ariadne-<version>` を切り、`develop` 向けに PR を作ります。エントリーを変えたら `sh scripts/build-dev-marketplace.sh` も実行します。アーリーアクセス版には `develop` へのマージ後、正式版にはリリース PR（`develop` → `main`）のマージ後に届きます。
 - `Check plugin versions` ワークフローはこのプラグインを調べません。バージョンの一致は手で確認します。
 - 詳しい手順と参照方式（`git-subdir` / `archive`）は [docs/plugins/unity-ariadne/README.md](docs/plugins/unity-ariadne/README.md) を参照してください。
 
