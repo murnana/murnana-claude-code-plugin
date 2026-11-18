@@ -9,7 +9,11 @@ Format details live in `plugins/murnana-agent-config/skills/skill-create/referen
 
 ## Frontmatter
 
-- Write `description` as one short English sentence (what it does, then "Not for X" if a near-miss exists). Do not add `when_to_use` or Japanese trigger phrases: descriptions of auto-invocable skills stay in context for as long as the plugin is enabled.
+- Write `description` as one short English sentence that says what the skill is or does (about 15 words). Put no trigger phrases, example prompts or "Use when" in it.
+- For an auto-invocable skill, put its triggers in `when_to_use`, in English, as a block scalar: `when_to_use: |`, then 2–5 indented `- ` bullets, plus one `- Not for: …` bullet if a near-miss exists. Not a YAML list: the field is a string.
+- Keep `description` + `when_to_use` to about 100 tokens (about 60 English words); fewer is better. Both are sent with every request for as long as the plugin is enabled.
+- Leave out `when_to_use` on `disable-model-invocation: true` skills: their listing is not in Claude's context.
+- Older skills still keep triggers and "Not for X" in `description`. When you change one's frontmatter, move them into `when_to_use`.
 - Set `disable-model-invocation: true` on any skill with side effects (commit, push, create a PR, launch an app, write outside the target file).
 - List in `allowed-tools` only the exact command shapes the body runs, as `Bash(git log *)`, space-separated. Never the old `Bash(git log:*)` form, and never a whole tool family such as `Bash(git config *)` when the body only reads (`Bash(git config --get *)`). A broad grant lets through the very operations the body says to confirm first.
 - Leave out any tool the body says must be confirmed or must not run (`git push`, `git commit --amend`, `git reset`). The approval prompt is the safety valve.
@@ -35,6 +39,6 @@ Format details live in `plugins/murnana-agent-config/skills/skill-create/referen
 
 ## Check before committing
 
-- `.claude/hooks/check-plugin-authoring.sh` runs after every Edit or Write of a `SKILL.md` and rejects the mechanical mistakes above (`when_to_use`, a non-ASCII `description`, old or broad `allowed-tools` forms, inline injection syntax, compound commands in injected blocks). Fix what it reports; do not work around it. It cannot judge the rest of this file.
+- `.claude/hooks/check-plugin-authoring.sh` runs after every Edit or Write of a `SKILL.md` and rejects the mechanical mistakes above (a non-ASCII `description` or `when_to_use`, "Use when" in `description`, `when_to_use` as a YAML list or on an explicit-only skill, the two fields over 70 words together, old or broad `allowed-tools` forms, inline injection syntax, compound commands in injected blocks). Fix what it reports; do not work around it. It cannot judge the rest of this file.
 - Run `claude plugin validate plugins/<plugin-name>`.
 - Invoke each changed skill once with `claude --plugin-dir plugins/<plugin-name>` and confirm it loads without `Shell command failed for pattern` or `This command requires approval`.
