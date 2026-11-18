@@ -7,7 +7,7 @@ Authoritative spec for Claude Code skills, condensed from the official docs (`co
 - Locations and precedence
 - Directory layout
 - Frontmatter fields
-- Portability subset
+- Claude Code only
 - Invocation control
 - Arguments and variables
 - Dynamic context injection
@@ -49,8 +49,8 @@ Frontmatter must start on line 1. Every field is optional, and `description` is 
 | Field | Meaning / constraints |
 |---|---|
 | `name` | Command name; defaults to the directory name. Lowercase letters, digits, hyphens; ≤ 64 chars; no `claude` / `anthropic`. Keep it equal to the directory name |
-| `description` | What it does + when to use it. Defaults to the first body line. `description` + `when_to_use` are truncated at 1,536 chars in the listing. Spec / API limit is 1,024 chars, no XML tags |
-| `when_to_use` | Extra trigger phrases, appended to `description` (shares the 1,536 cap). Not portable |
+| `description` | What the skill is, in one short sentence. Defaults to the first body line. `description` + `when_to_use` are truncated at 1,536 chars in the listing (this skill's own budget is about 100 tokens) |
+| `when_to_use` | When to load it: trigger requests and situations, appended to `description` in the listing (shares the 1,536 cap). A string; write bullets as a block scalar (`when_to_use: \|` followed by indented `- …` lines), not a YAML list |
 | `argument-hint` | Autocomplete hint, e.g. `[issue-number]` |
 | `arguments` | Named positional args for `$name` substitution (space-separated string or YAML list) |
 | `disable-model-invocation` | `true` = only the user can invoke; description is not in Claude's context; can't be preloaded into subagents |
@@ -66,11 +66,13 @@ Frontmatter must start on line 1. Every field is optional, and `description` is 
 | `paths` | Globs limiting *auto* loading to sessions touching matching files (same format as rules) |
 | `shell` | `bash` (default) or `powershell` for injected commands |
 | `metadata` | Free-form map for your tooling; ignored by Claude Code |
-| `license`, `compatibility` | Agent Skills spec fields; accepted, not acted on |
+| `license`, `compatibility` | Agent Skills spec fields; accepted, not acted on by Claude Code. Leave them out |
 
-## Portability subset
+Boolean fields accept `true`/`false`, `yes`/`no`, `on`/`off` and `1`/`0`.
 
-claude.ai uploads, the Skills API and `package_skill.py` accept **only** `name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`. Any other key is a hard upload error. If the user may share the skill outside Claude Code, stick to that subset and ≤ 1,024-char descriptions.
+## Claude Code only
+
+Skills made with skill-create target Claude Code. Use any field above. claude.ai uploads and the Skills API reject most of them (`when_to_use`, `disable-model-invocation`, `context`, …), so a skill made here is not meant to be uploaded there.
 
 ## Invocation control
 
@@ -100,7 +102,7 @@ Escape a literal `$` as `\$`. Values are inserted literally and not re-expanded.
 
 - `` !`command` `` (at line start or after whitespace) and fenced ` ```! ` blocks run **before** Claude sees the skill. Their output replaces them.
 - **Any non-zero exit aborts the whole invocation** (except exit 1 from search/compare commands), so Claude never sees the skill. Append `|| true` to anything that can legitimately fail, e.g. listing a directory that may not exist.
-- Commands are checked against permission rules without prompting. Anything not allowed aborts unless it's pre-approved in `allowed-tools`. **Every part of a compound command** must be allowed: `git rev-parse --show-toplevel || pwd` with only `Bash(git rev-parse *)` allowed fails with `This command requires approval` (verified on v2.1.296 in `-p` mode). A trailing redirect plus `|| true` is the one compound form that passes: `git log -5 2>/dev/null || true` with `Bash(git log *)` allowed loads fine, while a pipe into `head` or `grep`, or an `echo`, is refused (verified on v2.1.323). Keep each injected line to one allowed command in that form, or use a plain ` ```bash ` block that Claude runs itself. Quote arguments with braces (`'@{u}..HEAD'`): unquoted, they are refused as brace expansion.
+- Commands are checked against permission rules without prompting. A deny rule always aborts; anything else not allowed aborts (outside auto mode) unless it's pre-approved in `allowed-tools`. **Every part of a compound command** must be allowed: `git rev-parse --show-toplevel || pwd` with only `Bash(git rev-parse *)` allowed fails with `This command requires approval` (verified on v2.1.296 in `-p` mode). A trailing redirect plus `|| true` is the one compound form that passes: `git log -5 2>/dev/null || true` with `Bash(git log *)` allowed loads fine, while a pipe into `head` or `grep`, or an `echo`, is refused (verified on v2.1.323). Keep each injected line to one allowed command in that form, or use a plain ` ```bash ` block that Claude runs itself. Quote arguments with braces (`'@{u}..HEAD'`): unquoted, they are refused as brace expansion.
 - They run in the session's cwd, with a 2-minute timeout. `disableSkillShellExecution` policy replaces them with a placeholder.
 - The inline pattern is matched **anywhere in SKILL.md, including prose and inline code**. A checklist line that merely mentions it (a space, then a bang and a backtick) runs as a command and can abort the skill (verified on v2.1.296). When documenting the syntax inside SKILL.md, describe it in words. Reference files aren't rendered, so they're safe.
 - A plain ` ```bash ` block is *not* injected. It's just text Claude may choose to run.
@@ -115,14 +117,16 @@ Escape a literal `$` as `\$`. Values are inserted literally and not re-expanded.
 
 - When invoked, the rendered SKILL.md is added to the conversation **once** and is not re-read. Write standing instructions ("run tests after every edit"), not one-shot ones.
 - After compaction, the most recent invocation of each skill is re-attached, up to 5,000 tokens each (25,000 total). Put the critical instructions at the top.
-- Descriptions of all auto-invocable skills are always in context. The listing budget is about 1% of the context window, and when it overflows, the least-used skills lose their descriptions first. Shorter, front-loaded descriptions survive.
+- `description` + `when_to_use` of all auto-invocable skills are always in context, on every request. The listing budget is about 1% of the context window (`skillListingBudgetFraction`), and when it overflows, the least-used skills lose their descriptions first. Shorter entries survive.
+- A loaded body stays in context for the rest of the session, so every line is a recurring cost. Loading the same rendered content again adds only a short note, not a second copy.
+- `/context` shows the listing's size, `/doctor` its biggest contributors, and `/skill-doctor` which skills cost the most and are rarely used.
 
 ## Troubleshooting
 
 | Symptom | Check |
 |---|---|
-| Never triggers | Description lacks the user's words; YAML broken (`claude --debug`); `disable-model-invocation: true`; task too simple to need a skill |
-| Triggers too often | Description too broad: add what it does *not* cover, or make it explicit-only |
+| Never triggers | `when_to_use` lacks the user's words; YAML broken (`claude --debug`); `disable-model-invocation: true`; `paths` doesn't match; task too simple to need a skill |
+| Triggers too often | `when_to_use` too broad: add a `Not for:` bullet, add `paths`, or make it explicit-only |
 | Stops being followed mid-session | Rule must hold every time → move it to a hook (skill `hooks` frontmatter); compacted → re-invoke |
 | `Shell command failed for pattern …` | An injected command exited non-zero or wasn't allowed: fix it, add `|| true`, or add to `allowed-tools` |
 | Frontmatter parse errors | `claude plugin validate <skills-dir>` (also works on `.claude/skills`, `~/.claude/skills`) |
