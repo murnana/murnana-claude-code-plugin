@@ -27,11 +27,29 @@ if [ "$kind" = skill ]; then
   # allowed-tools: the value on its own line plus any YAML list lines that follow.
   tools=$(printf '%s\n' "$fm" | awk '/^allowed-tools:/ { on=1; print; next } on && /^[A-Za-z_-]+:/ { on=0 } on { print }')
 
-  if printf '%s\n' "$fm" | grep -q '^when_to_use:'; then
-    add "Remove 'when_to_use': fold it into one short English 'description'."
+  # A frontmatter field: its own line plus any indented lines that follow (block scalars).
+  field() { printf '%s\n' "$fm" | awk -v k="$1" '$0 ~ ("^" k ":") { on=1; print; next } on && /^[A-Za-z_-]+:/ { on=0 } on { print }'; }
+  desc=$(field description)
+  wtu=$(field when_to_use)
+
+  if printf '%s\n%s\n' "$desc" "$wtu" | LC_ALL=C grep -q '[^ -~]'; then
+    add "'description' or 'when_to_use' has non-ASCII characters: write both in English, without Japanese trigger phrases."
   fi
-  if printf '%s\n' "$fm" | grep '^description:' | LC_ALL=C grep -q '[^ -~]'; then
-    add "'description' has non-ASCII characters: write it in English, without Japanese trigger phrases."
+  if printf '%s\n' "$desc" | grep -qiE 'use (this skill |this |it )?when'; then
+    add "'description' says when to use the skill: keep it to one sentence on what the skill is, and move triggers to 'when_to_use' bullets."
+  fi
+  if [ -n "$wtu" ]; then
+    if printf '%s\n' "$fm" | grep -qiE '^disable-model-invocation:[[:space:]]*(true|yes|on|1)[[:space:]]*$'; then
+      add "Remove 'when_to_use': an explicit-only skill's listing is not in Claude's context."
+    fi
+    if printf '%s\n' "$wtu" | head -n 1 | grep -qE '^when_to_use:[[:space:]]*(\[.*)?$'; then
+      add "'when_to_use' is a YAML list or empty: it is a string, so write 'when_to_use: |' followed by indented '- ' bullets."
+    fi
+  fi
+  # About 60 words (~100 tokens) is the target; reject clearly oversized listings.
+  words=$(printf '%s\n%s\n' "$desc" "$wtu" | sed -E 's/^(description|when_to_use):[[:space:]]*[|>]?[-+]?//; s/^[[:space:]]*- //' | wc -w | tr -d ' ')
+  if [ "${words:-0}" -gt 70 ]; then
+    add "'description' + 'when_to_use' is ${words} words: keep it to about 60 words (about 100 tokens); fewer is better."
   fi
   old=$(printf '%s\n' "$tools" | grep -oE 'Bash\([^)]*:\*\)' | tr '\n' ' ')
   if [ -n "$old" ]; then
