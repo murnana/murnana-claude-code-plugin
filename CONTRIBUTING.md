@@ -16,8 +16,8 @@
 
 | ブランチ | 役割 |
 |---|---|
-| `main` | 公開状態。マーケットプレイスの各プラグインは `main` から配布されます |
-| `develop` | 開発の統合先。リリース前の変更が集まります |
+| `main` | 公開状態。正式版のマーケットプレイス（`murnana-claude-code-plugin`）は `main` から配布されます |
+| `develop` | 開発の統合先。リリース前の変更が集まり、アーリーアクセス版のマーケットプレイス（`murnana-claude-code-plugin-dev`）から配布されます |
 | `feature/*` | 機能追加・変更・ドキュメント更新用。`develop` から切ります |
 | `bugfix/*` | バグ修正用。`develop` から切ります |
 | `hotfix/*` | リリース済みの `main` の緊急修正用。`main` から切ります |
@@ -57,9 +57,19 @@
 1. `develop` ブランチを探します（`git fetch origin develop`）。ない場合は、最新の `main` から `develop` を作成してプッシュします。
 2. `develop` から `feature/<topic>` または `bugfix/<topic>` を切ります。
 3. 変更し、`docs/plugins/<plugin-name>/CHANGELOG.md` の `## [Unreleased]` に日本語で追記します（[Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) のカテゴリー）。
-4. `develop` 向けに PR を作り、マージします。**この時点ではプラグインのバージョンを上げません。**
+4. `.claude-plugin/marketplace.json` を変えたときは、`sh scripts/build-dev-marketplace.sh` で `channels/dev/.claude-plugin/marketplace.json` を作り直して一緒にコミットします。手では編集しません。
+5. `develop` 向けに PR を作り、マージします。**この時点ではプラグインのバージョンを上げません。** マージした時点で、アーリーアクセス版の利用者に届きます。
 
-手元で動作確認するときは、`claude --plugin-dir plugins/<plugin-name>` を使います。マーケットプレイス経由では `main` の内容しか取得されないためです。
+手元で動作確認するときは、`claude --plugin-dir plugins/<plugin-name>` を使います。マーケットプレイス経由では、push 済みの `main`（正式版）か `develop`（アーリーアクセス版）の内容しか取得されないためです。
+
+## リリースチャンネル
+
+| チャンネル | カタログ | 取得元 | バージョン |
+|---|---|---|---|
+| 正式版 `murnana-claude-code-plugin` | `main` の `.claude-plugin/marketplace.json` | `main` | エントリーの `version` |
+| アーリーアクセス版 `murnana-claude-code-plugin-dev` | `develop` の `channels/dev/.claude-plugin/marketplace.json`（raw URL で追加） | `develop` | なし（コミット SHA） |
+
+アーリーアクセス版のカタログは、正式版のカタログから `scripts/build-dev-marketplace.sh` で生成します。名前に `-dev` を付け、このリポジトリーのプラグインの `version` を消して取得元を `develop` にします。`unity-ariadne` は正式版と同じエントリーのままです。詳しくは `.claude/rules/release-channels.md` を参照してください。
 
 ## リリースの流れ
 
@@ -99,6 +109,7 @@ Git のタグと GitHub Release は使いません。プラグインごとにバ
 - `.claude/rules/branch-workflow.md`: ブランチ運用
 - `.claude/rules/plugin-version-bump.md`: バージョン更新
 - `.claude/rules/marketplace-manifest.md`: `marketplace.json` の書き方
+- `.claude/rules/release-channels.md`: 正式版とアーリーアクセス版のチャンネル
 - `.claude/rules/commit-message.md`: コミットメッセージ（`murnana-git` の `commit` スキルに準拠）
 - `.claude/rules/commit-message-sync.md`: スキル更新時にコミットメッセージのルールを合わせる手順
 - `.claude/rules/pr-message.md`: PR のタイトルと本文（`murnana-github` の `pr-create` スキルに準拠）

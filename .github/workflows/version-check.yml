@@ -70,3 +70,6 @@ jobs:
             fi
           done
           exit $status
+      - name: Check dev channel catalog
+        # channels/dev は .claude-plugin/marketplace.json から生成する。手で編集した差分や再生成忘れを止める。
+        run: sh scripts/build-dev-marketplace.sh --check
