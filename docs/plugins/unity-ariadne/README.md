@@ -28,14 +28,24 @@ Unity プロジェクトの依存関係グラフ（SQLite）を MCP で照会す
 - `Check plugin versions` ワークフローは `plugins/*/` だけを調べるため、このプラグインは対象外です。バージョンの一致は手で確認します。
 - プラグイン名は `unity-ariadne` です（`murnana-<name>` の命名規則の例外）。名前は `unity-ariadne` 側の `plugin.json` の `name` と一致している必要があります。
 
+## アーリーアクセス版
+
+`murnana-claude-code-plugin-dev` では、`unity-ariadne` も `ref: "develop"` の `git-subdir` になり、`version` も `sha` も付きません。`murnana/unity-ariadne` の `develop` のコミットに追従します（カタログは `scripts/build-dev-marketplace.sh` が生成します）。
+
+```sh
+claude plugin marketplace add https://raw.githubusercontent.com/murnana/murnana-claude-code-plugin/develop/channels/dev/.claude-plugin/marketplace.json
+claude plugin install unity-ariadne@murnana-claude-code-plugin-dev
+```
+
+- 追従が効くのは、`unity-ariadne` 側の `plugin.json` に `version` が無いからです（あるとその値に固定されます）。`develop` で `version` を外した 0.3.0 より後のコミットから有効です。
+- `develop` のプラグインは、まだリリースされていない `ariadne` の機能（新しい MCP ツールなど）を前提にすることがあります。`ariadne` コマンドは `develop` から自分でビルドして入れてください。
+- 正式版（`murnana-claude-code-plugin`）と同じ版を両方から入れないでください。切り替えるときは `claude plugin uninstall unity-ariadne@<元のマーケットプレイス>` が先です。
+
 ## unity-ariadne のプラグインを更新したとき
 
 利用者は、`marketplace.json` の `version` 文字列が変わるまでキャッシュ済みのコピーを使い続けます。`unity-ariadne` 側を更新したら、次の手順でこのリポジトリーのエントリーを追従させます。
 
-1. `unity-ariadne` 側のリリース作業（`develop` → `main`、`claude-plugins/.claude-plugin/plugin.json` の `version` 更新、タグ付け）が終わり、`main` に新しい `version` が入っていることを確認します。手順は [unity-ariadne のリリース手順](https://github.com/murnana/unity-ariadne/blob/main/docs/development/release.md) にあります。
-   ```sh
-   curl -fsSL https://raw.githubusercontent.com/murnana/unity-ariadne/main/claude-plugins/.claude-plugin/plugin.json | jq -r .version
-   ```
+1. `unity-ariadne` 側のリリース作業（`develop` → `main`、タグ付け）が終わっていることを確認し、新しいバージョンをタグ（`vX.Y.Z`）から決めます。手順は [unity-ariadne のリリース手順](https://github.com/murnana/unity-ariadne/blob/main/docs/development/release.md) にあります。`unity-ariadne` 側の `plugin.json` には `version` を書きません。
 2. このリポジトリーで `develop`（なければ `main` から作成して push）から `feature/unity-ariadne-<version>` を切ります。
 3. `.claude-plugin/marketplace.json` の `unity-ariadne` エントリーの `version` を、手順 1 で確認した値に書き換え、`sha` をそのリリースタグのコミット SHA に書き換えます（`git ls-remote https://github.com/murnana/unity-ariadne.git 'refs/tags/vX.Y.Z*'`。注釈付きタグなら `^{}` の行の値）。説明文（`description`）が変わっていれば、`plugin.json` に合わせて直します。続けて `sh scripts/build-dev-marketplace.sh` を実行し、アーリーアクセス版のカタログ（`channels/dev/.claude-plugin/marketplace.json`）にも同じエントリーを反映します。
 4. `claude plugin validate .` と `claude plugin validate channels/dev` を実行します。`git-subdir` のプラグインは `plugin.json` を読まないので、`version` の一致は目視で確認します。
