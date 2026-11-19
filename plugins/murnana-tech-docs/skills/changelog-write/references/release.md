@@ -43,7 +43,7 @@ Match the format already at the bottom of the file. Typical patterns:
 
   Point `[unreleased]` at the new tag, and add the new version comparing it with the previous one. The tag usually doesn't exist yet. Use the name it will get, and remind the user to create it.
 
-- **Commit-based (repositories without tags):** Point the new version's link at the release commit, and `[unreleased]` at a compare from that commit to `main`/`HEAD`. If the release commit doesn't exist yet, use the current `HEAD` short SHA (`git log -1 --format=%h`) and say that the link should be checked after committing.
+- **Commit-based (repositories without tags, such as murnana-claude-code-plugin):** Point the new version's link at the release commit, and `[unreleased]` at a compare from that commit to `main`/`HEAD`. If the release commit doesn't exist yet, use the current `HEAD` short SHA (`git log -1 --format=%h`) and say that the link should be checked after committing.
 
 - **No link references yet:** build them from `git remote get-url origin`. Convert SSH remotes (`git@github.com:owner/repo.git`) to `https://github.com/owner/repo`. The oldest version links to its tag (`/releases/tag/<tag>`). For non-GitHub hosts, use that host's compare URL format, or ask.
 

@@ -76,13 +76,13 @@
 `develop` から `main` へのマージ PR（リリース PR）で、変更のあったプラグインのバージョンを上げます。
 
 1. 変更のあったプラグインを調べます: `git diff --name-only origin/main...origin/develop -- plugins/`
-2. 該当プラグインごとに `sh scripts/set-plugin-version.sh <plugin-name> <x.y.z>` を実行します。`.claude-plugin/marketplace.json` のエントリーの `version` と、取得元のタグ `source.ref`（`<plugin-name>--v<x.y.z>`）を書き換え、アーリーアクセス版のカタログも作り直します。`plugin.json` には `version` を書きません（書くとエントリーより優先され、ブランチを追従するインストールに更新が届かなくなります）。
-3. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。新しいリンクはタグ（`tree/<plugin-name>--vx.y.z/plugins/<plugin-name>`、`compare/<plugin-name>--vx.y.z...main`）を指します。
+2. 該当プラグインごとに `sh scripts/set-plugin-version.sh <plugin-name> <x.y.z>` を実行します。`.claude-plugin/marketplace.json` のエントリーの `version` と、取得元のコミット `source.sha` を書き換え、アーリーアクセス版のカタログも作り直します。`sha` には、今のブランチで `plugins/<plugin-name>/` を最後に変えたコミットが入るので、プラグインの変更はコミットして push しておきます。`plugin.json` には `version` を書きません（書くとエントリーより優先され、ブランチを追従するインストールに更新が届かなくなります）。
+3. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。新しいバージョンのリンクはエントリーの `sha`（`tree/<短縮 SHA>/plugins/<plugin-name>`）を、`[unreleased]` は `compare/<短縮 SHA>...main` を指します。
 4. `claude plugin validate .` を実行し、変更のあったプラグインごとに `claude plugin validate plugins/<plugin-name>` も実行します。
-5. `main` にマージします。マージ後、`Tag plugin releases` ワークフローが `<plugin-name>--v<version>` のタグを作ります。タグができるまでの間（通常 1 分以内）は、正式版の新しいバージョンをインストールできません。ワークフローが成功したことを確認します。
+5. `main` に**マージコミットで**マージします（squash や rebase はしません）。固定した `sha` は PR のブランチ上のコミットなので、マージコミットでないと `main` の履歴から外れます。
 6. バージョン更新が `develop` にも反映されるよう、`main` を `develop` にマージします。
 
-バージョンは `marketplace.json` の各エントリーで管理し、リリースごとにプラグイン単位のタグ `<plugin-name>--v<version>` を付けます。正式版のエントリーはこのタグに固定されるため、`main` が先に進んでも、利用者にはリリースした時点のファイルが届きます。タグは手で作らず、ワークフローに任せます。GitHub Release は使いません。
+Git のタグと GitHub Release は使いません。バージョンは `marketplace.json` の各エントリーで管理し、正式版の取得元はエントリーの `sha` でリリースしたコミットに固定します。`main` が先に進んでも、利用者にはリリースした時点のファイルが届きます。
 
 バージョンは [Semantic Versioning](https://semver.org/) に従います（`v` は付けません）。
 

@@ -7,7 +7,7 @@ paths:
 
 - Use one name, `murnana-<name>`, for `plugins/<name>/`, `plugin.json` `name`, the `marketplace.json` entry, `docs/plugins/<name>/` and `evals/plugins/<name>/`.
 - Copy the field set of `plugins/murnana-git/.claude-plugin/plugin.json`: `$schema`, `name`, `description`, `license` (`0BSD`), `repository`, `keywords`, `defaultEnabled: false`, `author.name` (`murnana`).
-- Do not put `version` in `plugin.json` (`.claude/rules/plugin-version-bump.md`). Start a new plugin at `version` `0.0.1` on its `marketplace.json` entry, with `source.ref` `<plugin-name>--v0.0.1`, then run `sh scripts/build-dev-marketplace.sh`. This is the one case where a `feature/*` PR sets a version.
+- Do not put `version` in `plugin.json` (`.claude/rules/plugin-version-bump.md`). Commit the plugin's files, then run `sh scripts/set-plugin-version.sh <plugin-name> 0.0.1` to start it at `version` `0.0.1` with `source.sha` on its `marketplace.json` entry. This is the one case where a `feature/*` PR sets a version.
 - Create these in the same PR as the plugin:
   - the `marketplace.json` entry (`.claude/rules/marketplace-manifest.md`)
   - `docs/plugins/<name>/README.md`, `CHANGELOG.md` (with `## [Unreleased]`) and one `<skill>.md` per skill, in Japanese
