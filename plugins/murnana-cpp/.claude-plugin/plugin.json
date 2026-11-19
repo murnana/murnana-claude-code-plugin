@@ -2,7 +2,6 @@
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-cpp",
   "description": "C++開発用ツールキット(コードコメントとDoxygenドキュメントコメントを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-  "version": "0.0.2",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
   "keywords": ["cpp", "comment", "doxygen", "review", "test", "tdd", "googletest", "catch2"],
