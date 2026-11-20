@@ -11,8 +11,10 @@ hooks:
         - type: command
           if: "Bash(git commit *)"
           command: >-
-            jq --arg log "$(git log -1 --format='%H %s' 2>/dev/null)"
-            'if ((.tool_input.command // "") | test("(^|[;&|([:space:]])git[[:space:]]+commit([[:space:]]|$)"))
+            jq '((.tool_response | if type == "object" then (.stdout // "") else (. // "") end | tostring)
+            | [scan("^[[][^ ]+ (?:[(]root-commit[)] )?([0-9a-f]{7,40})[]] (.*)")]
+            | map(.[0] + " " + .[1]) | join("; ")) as $log
+            | if ((.tool_input.command // "") | test("(^|[;&|([:space:]])git[[:space:]]+commit([[:space:]]|$)")) and ($log != "")
             then {hookSpecificOutput:{hookEventName:"PostToolUse",additionalContext:("Commit created: " + $log)}}
             else empty end'
 ---
