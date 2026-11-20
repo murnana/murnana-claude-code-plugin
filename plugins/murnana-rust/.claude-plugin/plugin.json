@@ -1,11 +1,10 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-rust",
-  "description": "Rust 開発の補助セット(コードコメントとドキュメントコメントを書くスキル)",
-  "version": "0.0.2",
+  "description": "Rust 開発の補助セット(コードコメントとドキュメントコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
-  "keywords": ["rust", "comment", "rustdoc"],
+  "keywords": ["rust", "comment", "rustdoc", "review", "test", "tdd", "cargo-test"],
   "defaultEnabled": false,
   "author": {
     "name": "murnana"

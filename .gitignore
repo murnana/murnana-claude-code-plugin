@@ -1,3 +1,3 @@
 .DS_Store
-# 実行時だけ張る eval へのシンボリックリンク(配布しない)
+# eval のケースをプラグイン内に置いてしまったときの保険(配布しない)。実行手順は .claude/rules/plugin-evals.md
 plugins/*/evals

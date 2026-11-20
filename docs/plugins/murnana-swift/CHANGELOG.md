@@ -7,6 +7,18 @@
 
 ## [Unreleased]
 
+### Added
+
+- Swift のコードをレビューする review スキル（`/murnana-swift:review`）を追加した。メモリーリーク・リソースリーク、不具合、プロジェクトのルール違反、命名を確かめて報告する。ファイルは変更しない
+- プロジェクトに命名規則がないときは、言語の開発元が使っている命名規則で確かめる
+- 同じ基準で独立にレビューする読み取り専用のサブエージェント code-reviewer（`@agent-murnana-swift:code-reviewer`）を追加した
+- `/murnana-swift:test-case` スキルを追加した。テストリストを先に書き、1 つずつテストにして、失敗するところを一度確かめてから報告する
+- `test-case-writer` サブエージェントを追加した。すでにあるプログラムのテストを別の Claude に任せて、報告だけを受け取れる
+
+### Changed
+
+- `plugin.json` から `version` を外し、バージョン番号はマーケットプレイス（`.claude-plugin/marketplace.json`）のエントリーだけで管理するようにした。正式版のマーケットプレイス `murnana-claude-code-plugin` から入れた場合のバージョン番号は変わらない。`develop` ブランチを追従するアーリーアクセス版を、別のマーケットプレイス `murnana-claude-code-plugin-dev` で配布するための変更
+
 ## [0.0.2] - 2026-11-14
 
 ### Changed

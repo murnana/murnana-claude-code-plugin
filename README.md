@@ -24,6 +24,25 @@ claude plugin install <plugin-name>@murnana-claude-code-plugin
 
 各プラグインは、インストール時にそのディレクトリーだけが取得されます。
 
+## アーリーアクセス版（dev チャンネル）
+
+リリース前の変更を先に試したいときは、`develop` ブランチを追従する別のマーケットプレイス `murnana-claude-code-plugin-dev` を追加します。
+
+```
+claude plugin marketplace add https://raw.githubusercontent.com/murnana/murnana-claude-code-plugin/develop/channels/dev/.claude-plugin/marketplace.json
+claude plugin install <plugin-name>@murnana-claude-code-plugin-dev
+```
+
+| チャンネル | マーケットプレイス | 中身 | バージョン |
+|---|---|---|---|
+| 正式版 | `murnana-claude-code-plugin` | `main`（リリース済み） | `0.3.0` のようなバージョン番号 |
+| アーリーアクセス版 | `murnana-claude-code-plugin-dev` | `develop`（リリース前） | コミット SHA（正式なバージョン番号は付きません） |
+
+- アーリーアクセス版は未リリースの変更を含み、予告なく変わったり壊れたりします。
+- `develop` にコミットが入るたびに、変更のないプラグインにも更新が届きます。
+- 同じプラグインを両方のマーケットプレイスから入れないでください。名前が重なり、片方のフックが動かなくなります。切り替えるときは、先に `claude plugin uninstall <plugin-name>@<今のマーケットプレイス>` で外してから、もう一方から入れます。
+- どちらのマーケットプレイスも、自動更新は既定でオフです。`/plugin` の **Marketplaces** で **Enable auto-update** を選ぶか、`claude plugin marketplace update <マーケットプレイス名>` で更新します。
+
 ## 公開プラグイン
 
 | プラグイン | 説明 |

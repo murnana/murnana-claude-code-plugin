@@ -7,5 +7,6 @@
 ## 商標
 
 - GitHub は GitHub, Inc. の商標または登録商標です。
+- 1Password は AgileBits Inc. の商標または登録商標です。
 
 その他の製品名・会社名は、各社の商標または登録商標です。

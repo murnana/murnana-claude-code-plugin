@@ -9,12 +9,17 @@ Python(プログラムを書くための言語のひとつ)で書いたプログ
 - 自分の書いた Python のプログラムに、説明書き(コメント)を付けたい
 - ほかの人が使う部品に、使い方の説明(docstring という決まった形の説明)を付けたい
 - いまある説明書きが、本当に必要なものか見直したい
+- 書いた Python のプログラムに、片づけ忘れ（メモリーリーク）や誤りがないか見てもらいたい
 
 ## できること
 
 | やりたいこと | 使う機能 | 説明 |
 |---|---|---|
 | 説明書きを書く・見直す | [Python のコメント作成](comment.md) | 書く内容をふさわしい場所に振り分けて、必要な説明書きだけを書く |
+| プログラムを見てもらう | [Python のコードレビュー](review.md) | 片づけ忘れ（メモリーリーク）、動きの誤り、名前の付け方を確かめて報告する。プログラムは書きかえない |
+| 別の目で見てもらう | [code-reviewer サブエージェント](code-reviewer.md) | 同じ基準で、会話とは別の場所でレビューして報告だけを返す |
+| テストを書く・見直す | [Python のテストケース作成](test-case.md) | 確かめたい動きを先に書き出してから、1 つずつテストにする |
+| テストをまとめて任せる | [test-case-writer](test-case-writer.md) | すでにあるプログラムのテストを別の Claude に書かせて、報告だけを受け取る |
 
 ## インストール
 
@@ -47,4 +52,5 @@ claude plugin install murnana-python@murnana-claude-code-plugin
 
 - 説明書きの置き場所の考え方は、和田卓人さん(@t_wada)の「コードには How テストコードには What コミットログには Why コードコメントには Why not を書こう」(https://x.com/t_wada/status/904916106153828352)をもとにしています。
 - 使い方の説明(docstring)の書き方は、PEP 257(https://peps.python.org/pep-0257/、パブリックドメイン)をもとに、AI(Claude)が要約・翻案したものです。
+- テストの書き方は、Kent Beck「Canon TDD」(https://newsletter.kentbeck.com/p/canon-tdd)と、和田卓人さん(@t_wada)による日本語訳「テスト駆動開発の定義」(https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck)の考え方をもとに、AI(Claude)が自分の言葉でまとめたものです。
 - Python は Python Software Foundation の登録商標です。

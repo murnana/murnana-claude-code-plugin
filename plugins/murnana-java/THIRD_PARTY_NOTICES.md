@@ -26,6 +26,28 @@
 - ライセンス: 未確認。記事のコード例(`value.equals(null)` の判定)をもとに、自分で書き直した例を載せています。
 - 利用箇所: `skills/comment/references/comment-routing.md`(例の翻案)
 
+## Code Conventions for the Java Programming Language（命名）/ Java 言語仕様 6.1 節
+
+- 対象: `review` スキル（`skills/review/SKILL.md` の命名の表）
+- 内容: 第 9 章「Naming Conventions」と JLS 6.1 節の命名の慣習を、独自の文章と表で要約したもの。本文は複製していない。例の識別子は規約と同じ短い名前を一部使っている
+- 出典: https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html / https://docs.oracle.com/javase/specs/jls/se21/html/jls-6.html#jls-6.1
+- ライセンス: 再利用を認めるライセンスの表示はない（Oracle の著作物）。このため複製や翻案は行わず、リンクと独自の要約にとどめている
+- 著作権: Copyright (c) Oracle and/or its affiliates
+
+## Canon TDD(Kent Beck)と日本語訳「テスト駆動開発の定義」(t_wada)
+
+- 対象: `test-case` スキル(`skills/test-case/SKILL.md`、`skills/test-case/references/test-design.md`)、`test-case-writer` サブエージェント(`agents/test-case-writer.md`)
+- 内容: テストリストを書き、1 つずつテストにして進める手順と、避けるべき失敗の考え方を、自分の言葉で要約したもの。原文・訳文の転載はしていない
+- 出典: https://newsletter.kentbeck.com/p/canon-tdd (Kent Beck、2023-12-11。旧 URL の tidyfirst.substack.com から転送される) / https://t-wada.hatenablog.jp/entry/canon-tdd-by-kent-beck (和田卓人による日本語訳、2023-12-11)
+- ライセンス: 原文のページに利用許諾の表示はなく、ページ末尾に「© 2026 Kent Beck」とある(確認日 2026-11-16)。日本語訳は和田卓人氏が Kent Beck 本人の許可を得て公開したもので、訳ページにもライセンスの表示はない。そのため原文・訳文は転載せず、考え方の要約と出典の明記にとどめている
+
+## 『テスト駆動開発』(Kent Beck 著、和田卓人 訳)
+
+- 対象: `test-case` スキル(`skills/test-case/references/test-design.md`)
+- 内容: 仮実装・三角測量・明白な実装という進め方の名前と考え方を、自分の言葉で要約したもの。本文の転載はしていない
+- 出典: Kent Beck, "Test-Driven Development: By Example", Addison-Wesley, 2002 / 『テスト駆動開発』オーム社、2017 年
+- ライセンス: 書籍(著作権は各権利者に帰属)。考え方の要約と出典の明記にとどめている
+
 ## 商標
 
 - Java および Javadoc は、Oracle およびその関連会社の商標または登録商標です。
