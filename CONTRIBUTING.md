@@ -69,7 +69,7 @@
 | 正式版 `murnana-claude-code-plugin` | `main` の `.claude-plugin/marketplace.json` | `main` | エントリーの `version` |
 | アーリーアクセス版 `murnana-claude-code-plugin-dev` | `develop` の `channels/dev/.claude-plugin/marketplace.json`（raw URL で追加） | `develop` | なし（コミット SHA） |
 
-アーリーアクセス版のカタログは、正式版のカタログから `scripts/build-dev-marketplace.sh` で生成します。名前に `-dev` を付け、このリポジトリーのプラグインと `unity-ariadne` の `version` と `sha` を消して取得元を `develop` にします。詳しくは `.claude/rules/release-channels.md` を参照してください。
+アーリーアクセス版のカタログは、正式版のカタログから `scripts/build-dev-marketplace.sh` で生成します。名前に `-dev` を付け、このリポジトリーのプラグインの `version` と `sha` を消して取得元を `develop` にします。詳しくは `.claude/rules/release-channels.md` を参照してください。
 
 ## リリースの流れ
 
@@ -91,15 +91,6 @@ Git のタグと GitHub Release は使いません。バージョンは `marketp
 - メジャー: 破壊的変更（スキルやコマンドの改名・削除など）。`0.y.z` の間はマイナーで構いません
 
 上げ幅は、`[Unreleased]` に溜まった変更のうち最大のものに合わせます。`plugins/` の外の変更（README、`docs/`、`.claude/`、CLAUDE.md）ではバージョンを上げません。
-
-## 外部リポジトリーのプラグイン（unity-ariadne）
-
-`unity-ariadne` は [murnana/unity-ariadne](https://github.com/murnana/unity-ariadne) の `claude-plugins/` にあり、このリポジトリーの `plugins/` にはありません。`marketplace.json` のエントリーだけを管理します。
-
-- `unity-ariadne` を更新（リリース）したら、このリポジトリーの `marketplace.json` の `unity-ariadne` の `version` を新しいリリースの値に、`source.sha` をそのリリースのコミットに更新します。これを上げないと、正式版の利用者のキャッシュが更新されません。`unity-ariadne` 側の `plugin.json` には `version` を書きません（書くとアーリーアクセス版が固定されます）。
-- 通常の `feature/*` と同じく `develop` から `feature/unity-ariadne-<version>` を切り、`develop` 向けに PR を作ります。エントリーを変えたら `sh scripts/build-dev-marketplace.sh` も実行します。アーリーアクセス版には `develop` へのマージ後、正式版にはリリース PR（`develop` → `main`）のマージ後に届きます。
-- `Check plugin versions` ワークフローはこのプラグインを調べません。バージョンの一致は手で確認します。
-- 詳しい手順と参照方式（`git-subdir` / `archive`）は [docs/plugins/unity-ariadne/README.md](docs/plugins/unity-ariadne/README.md) を参照してください。
 
 ## サードパーティーの資料
 
