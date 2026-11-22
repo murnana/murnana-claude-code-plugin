@@ -73,8 +73,8 @@
 
 - コミット0件のリポジトリで commit スキルが起動できない不具合
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/e7e9b31...main
-[0.4.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/e7e9b31/plugins/murnana-git
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.4.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-git
 [0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-git
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-git
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/0f332ec/plugins/murnana-git

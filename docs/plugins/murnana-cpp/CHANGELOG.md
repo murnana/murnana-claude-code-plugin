@@ -37,7 +37,7 @@
 
 - evals をリポジトリルートの `evals/plugins/murnana-cpp/` に移した
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
-[0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-cpp
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-cpp
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-cpp
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-cpp

@@ -52,8 +52,8 @@
 - rule-create スキル
 - skill-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
-[0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-agent-config
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-agent-config
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-agent-config
 [0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-agent-config
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/278ceff/plugins/murnana-agent-config

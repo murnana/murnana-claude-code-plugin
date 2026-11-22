@@ -64,8 +64,8 @@
 
 - pr-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
-[0.4.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-github
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.4.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-github
 [0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-github
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-github
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/014d844/plugins/murnana-github

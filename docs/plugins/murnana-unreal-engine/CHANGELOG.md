@@ -34,8 +34,8 @@
 
 - ue5-docs スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
-[0.0.4]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-unreal-engine
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.0.4]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-unreal-engine
 [0.0.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-unreal-engine
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-unreal-engine
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/6c53594/plugins/murnana-unreal-engine
