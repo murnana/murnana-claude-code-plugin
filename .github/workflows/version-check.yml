@@ -38,9 +38,17 @@ jobs:
             [ -f "$plugin_json" ] || continue
 
             # plugin.json の version はマーケットプレイスのエントリーより優先される。
-            # 書くと dev チャンネルがコミットを追従しなくなるため、version はエントリーだけに置く。
-            if jq -e 'has("version")' "$plugin_json" >/dev/null; then
-              echo "::error file=$plugin_json::$name: remove version from plugin.json; set it only on the marketplace.json entry"
+            # main（正式版）ではエントリーと同じ値を書き、develop（アーリーアクセス版）では書かない
+            # （書くと dev チャンネルがコミットを追従しなくなる）。
+            pj_version=$(jq -r '.version // empty' "$plugin_json")
+            if [ "$BASE_REF" = "main" ]; then
+              entry_version=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty' "$manifest")
+              if [ "$pj_version" != "$entry_version" ]; then
+                echo "::error file=$plugin_json::$name: plugin.json version ('$pj_version') must equal the marketplace.json entry version ('$entry_version') on main; run: sh scripts/set-plugin-version.sh $name $entry_version"
+                status=1
+              fi
+            elif [ -n "$pj_version" ]; then
+              echo "::error file=$plugin_json::$name: remove version from plugin.json on develop; run: sh scripts/strip-plugin-json-version.sh"
               status=1
             fi
 

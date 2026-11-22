@@ -20,7 +20,7 @@ This repository publishes two marketplaces from the same plugin sources:
   The copy of `channels/dev/` on `main` is never read by users.
 - Generate the dev catalog; never edit it by hand. After any change to `.claude-plugin/marketplace.json`, run `sh scripts/build-dev-marketplace.sh` and commit both files. The `Check plugin versions` workflow fails when they differ (`--check`).
 - The generator renames the marketplace with `-dev`, and for this repository's entries drops `version` and `source.sha` and sets `source.ref` to `develop`. Entries from any other repository would be copied unchanged.
-- The dev channel tracks commits only because no `version` is set anywhere. Keep `version` out of `plugin.json` (`.claude/rules/plugin-version-bump.md`); with it, Claude Code would pin the dev install to that string.
+- The dev channel tracks commits only because no `version` is set anywhere on `develop`. Keep `version` out of `plugin.json` on `develop` (`.claude/rules/plugin-version-bump.md`); with it, Claude Code would pin the dev install to that string. `main` does carry it in `plugin.json`; the back-merge into `develop` removes it again with `sh scripts/strip-plugin-json-version.sh`.
 - The dev version is the `develop` commit SHA, so every merge into `develop` offers an update for every dev plugin, even ones whose files did not change. This is expected.
 - The two marketplaces have different names, so a user can add both. Tell users not to install the same plugin from both: the manifest names collide and the hooks of one copy do not run. To switch, `claude plugin uninstall <plugin>@<old-marketplace>` first, then install from the other.
 - Keep the two channels' install commands in `README.md` and `CONTRIBUTING.md` in step with this file.

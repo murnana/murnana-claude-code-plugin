@@ -76,11 +76,11 @@
 `develop` から `main` へのマージ PR（リリース PR）で、変更のあったプラグインのバージョンを上げます。
 
 1. 変更のあったプラグインを調べます: `git diff --name-only origin/main...origin/develop -- plugins/`
-2. 該当プラグインごとに `sh scripts/set-plugin-version.sh <plugin-name> <x.y.z>` を実行します。`.claude-plugin/marketplace.json` のエントリーの `version` と、取得元のコミット `source.sha` を書き換え、アーリーアクセス版のカタログも作り直します。`sha` には、今のブランチで `plugins/<plugin-name>/` を最後に変えたコミットが入るので、プラグインの変更はコミットして push しておきます。`plugin.json` には `version` を書きません（書くとエントリーより優先され、ブランチを追従するインストールに更新が届かなくなります）。
+2. 該当プラグインごとに `sh scripts/set-plugin-version.sh <plugin-name> <x.y.z>` を実行します。`.claude-plugin/marketplace.json` のエントリーの `version` と、取得元のコミット `source.sha` を書き換え、アーリーアクセス版のカタログも作り直します。`sha` には、今のブランチで `plugins/<plugin-name>/` を最後に変えたコミットが入るので、プラグインの変更はコミットして push しておきます。スクリプトはまず `plugin.json` に `version` を書いて終了するので、それをコミットしてからもう一度実行します。`main` の `plugin.json` にはエントリーと同じ `version` を書きますが、`develop` には書きません（書くとエントリーより優先され、ブランチを追従するインストールに更新が届かなくなります）。
 3. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。新しいバージョンのリンクはエントリーの `sha`（`tree/<短縮 SHA>/plugins/<plugin-name>`）を、`[unreleased]` は `compare/<短縮 SHA>...main` を指します。
 4. `claude plugin validate .` を実行し、変更のあったプラグインごとに `claude plugin validate plugins/<plugin-name>` も実行します。
 5. `main` に**マージコミットで**マージします（squash や rebase はしません）。固定した `sha` は PR のブランチ上のコミットなので、マージコミットでないと `main` の履歴から外れます。
-6. バージョン更新が `develop` にも反映されるよう、`main` を `develop` にマージします。
+6. バージョン更新が `develop` にも反映されるよう、`main` を `develop` にマージします。このとき `sh scripts/strip-plugin-json-version.sh` で `plugin.json` の `version` を外し、同じ PR に含めます（`develop` をアーリーアクセス版のままにするため）。
 
 Git のタグと GitHub Release は使いません。バージョンは `marketplace.json` の各エントリーで管理し、正式版の取得元はエントリーの `sha` でリリースしたコミットに固定します。`main` が先に進んでも、利用者にはリリースした時点のファイルが届きます。
 
