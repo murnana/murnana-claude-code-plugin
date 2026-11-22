@@ -27,22 +27,57 @@ jobs:
         run: |
           set -uo pipefail
           status=0
+          manifest=.claude-plugin/marketplace.json
+          # ベースにまだ marketplace.json が無い場合に備え、空の plugins で受ける。
+          base_manifest=$({ git show "origin/$BASE_REF:$manifest" 2>/dev/null || true; })
+          [ -n "$base_manifest" ] || base_manifest='{"plugins":[]}'
+
           for dir in plugins/*/; do
             name=$(basename "$dir")
-            manifest="plugins/$name/.claude-plugin/plugin.json"
-            [ -f "$manifest" ] || continue
-            head_version=$(jq -r '.version // empty' "$manifest")
-            # ベースにまだ無い新規プラグインでは git show が失敗する。pipefail と -e で止まらないよう || true で受ける。
-            base_version=$({ git show "origin/$BASE_REF:$manifest" 2>/dev/null || true; } | jq -r '.version // empty')
-            listed_version=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty' .claude-plugin/marketplace.json)
+            plugin_json="plugins/$name/.claude-plugin/plugin.json"
+            [ -f "$plugin_json" ] || continue
+
+            # plugin.json の version はマーケットプレイスのエントリーより優先される。
+            # main（正式版）ではエントリーと同じ値を書き、develop（アーリーアクセス版）では書かない
+            # （書くと dev チャンネルがコミットを追従しなくなる）。
+            pj_version=$(jq -r '.version // empty' "$plugin_json")
+            if [ "$BASE_REF" = "main" ]; then
+              entry_version=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty' "$manifest")
+              if [ "$pj_version" != "$entry_version" ]; then
+                echo "::error file=$plugin_json::$name: plugin.json version ('$pj_version') must equal the marketplace.json entry version ('$entry_version') on main; run: sh scripts/set-plugin-version.sh $name $entry_version"
+                status=1
+              fi
+            elif [ -n "$pj_version" ]; then
+              echo "::error file=$plugin_json::$name: remove version from plugin.json on develop; run: sh scripts/strip-plugin-json-version.sh"
+              status=1
+            fi
+
+            head_version=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty' "$manifest")
+            base_version=$(printf '%s' "$base_manifest" | jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .version // empty')
 
             if ! printf '%s' "$head_version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-              echo "::error file=$manifest::$name: version must be MAJOR.MINOR.PATCH (got '$head_version')"
+              echo "::error file=$manifest::$name: entry version must be MAJOR.MINOR.PATCH (got '$head_version')"
               status=1
               continue
             fi
-            if [ -n "$listed_version" ] && [ "$listed_version" != "$head_version" ]; then
-              echo "::error file=.claude-plugin/marketplace.json::$name: marketplace.json version ($listed_version) differs from plugin.json ($head_version)"
+
+            # 正式版は source.sha でリリースしたコミットに固定する。main から辿れるよう、この PR の履歴にあることを確かめる。
+            head_sha=$(jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .source.sha // empty' "$manifest")
+            base_sha=$(printf '%s' "$base_manifest" | jq -r --arg n "$name" '.plugins[] | select(.name == $n) | .source.sha // empty')
+            if ! printf '%s' "$head_sha" | grep -Eq '^[0-9a-f]{40}$'; then
+              echo "::error file=$manifest::$name: source.sha must be a full 40-character commit SHA (got '$head_sha'); run: sh scripts/set-plugin-version.sh $name $head_version"
+              status=1
+              continue
+            fi
+            if ! git cat-file -e "$head_sha^{commit}" 2>/dev/null || ! git merge-base --is-ancestor "$head_sha" HEAD; then
+              echo "::error file=$manifest::$name: source.sha $head_sha is not in this PR's history; push that commit"
+              status=1
+              continue
+            fi
+            # main に入る中身と、固定したコミットの中身が一致していなければ、利用者に届くファイルが食い違う。
+            if [ "$BASE_REF" = "main" ] \
+              && [ "$(git rev-parse -q --verify "$head_sha:plugins/$name" || true)" != "$(git rev-parse "HEAD:plugins/$name")" ]; then
+              echo "::error file=$manifest::$name: plugins/$name differs from source.sha $head_sha; run: sh scripts/set-plugin-version.sh $name <new-version>"
               status=1
             fi
             [ -n "$base_version" ] || continue
@@ -60,6 +95,13 @@ jobs:
                 echo "::error file=$manifest::$name: do not change the version in a $HEAD_REF PR ($base_version -> $head_version); versions are bumped in the develop -> main PR"
                 status=1
               fi
+              if [ -n "$base_sha" ] && [ "$head_sha" != "$base_sha" ]; then
+                echo "::error file=$manifest::$name: do not change source.sha in a $HEAD_REF PR; it is updated with the version in the develop -> main PR"
+                status=1
+              fi
             fi
           done
           exit $status
+      - name: Check dev channel catalog
+        # channels/dev は .claude-plugin/marketplace.json から生成する。手で編集した差分や再生成忘れを止める。
+        run: sh scripts/build-dev-marketplace.sh --check

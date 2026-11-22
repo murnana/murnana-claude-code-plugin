@@ -43,11 +43,11 @@ Only for auto-invocable skills. Write about 20 realistic queries:
 - **8–10 should-not-trigger near-misses**: they share keywords with the skill but need something else (e.g. for a CSV-analysis skill: "update the formulas in my Excel budget", "write a script that loads this CSV into Postgres"). Obviously unrelated queries test nothing.
 - Simple one-step requests may not trigger any skill, because Claude handles them alone. Make positives substantive.
 
-When optimizing the description:
+When optimizing triggering (edit the `when_to_use` bullets; keep `description` a one-sentence summary and the pair within about 100 tokens):
 
 1. Split the queries 60/40 into train and validation sets, keeping both proportional.
 2. Run each query 3 times. A query passes when its trigger rate is on the right side of 0.5.
-3. Revise the description using **train failures only**, generalizing to the category instead of pasting keywords from a failed query.
+3. Revise `when_to_use` using **train failures only**, generalizing to the category instead of pasting keywords from a failed query. Prefer rewording a bullet to adding one.
 4. Pick the iteration with the best **validation** score; that is often not the last one.
 5. About five iterations is usually enough.
 
@@ -115,7 +115,10 @@ claude plugin eval init          # interactive: Claude proposes cases and grader
 claude plugin eval .             # run every case, 3× with and 3× without the plugin
 claude plugin eval evals/<case>/prompt.md   # run one case
 claude plugin eval . --ablation none        # one arm only (cheaper while tuning graders)
+claude plugin eval . --model haiku          # run every case on Haiku (repeat with sonnet)
 ```
+
+If the project's rules describe a different way to run its suites (for example copying the plugin to a temporary directory first), follow that and add `--model <model>` to its command.
 
 ## Format B: project / personal skills (`evals/evals.json`)
 
@@ -148,7 +151,7 @@ Store trigger queries in `evals/trigger-queries.json`:
 How the user runs them:
 
 - **skill-creator plugin** (automates runs, grading, benchmark, viewer and description tuning): `/plugin install skill-creator@claude-plugins-official`, then ask it to evaluate the skill.
-- **Manually**: run each prompt in a fresh session with the skill, then again with it turned off (`"skillOverrides": { "<name>": "off" }` in settings). Compare the outputs against the assertions.
+- **Manually**: run each prompt in a fresh session with the skill, then again with it turned off (`"skillOverrides": { "<name>": "off" }` in settings). Compare the outputs against the assertions. Repeat on each target model by starting the session with `claude --model haiku` or `claude --model sonnet`.
 - **Trigger check from the shell**: `claude -p "<query>" --output-format json`, then inspect the result for a `Skill` tool call whose input names the skill.
 
 Results go in a sibling workspace, not in the skill: `<skill-name>-workspace/iteration-N/eval-<id>/{with_skill,without_skill}/`.
@@ -159,4 +162,5 @@ Results go in a sibling workspace, not in the skill: `<skill-name>-workspace/ite
 - **Generalize**: fix the underlying issue, not the one test prompt.
 - **Keep it lean**: if transcripts show wasted work, remove the instruction causing it. If pass rates plateau, try removing rules.
 - If every run re-wrote the same helper, bundle it in `scripts/`.
+- **Test every target model.** A skill that passes on Opus can fail on Haiku or Sonnet. Run the cases on each model the skill will run on; when only the smaller model fails, the usual cause is a step without an exact command, outcome or default (see the writing guide's "Writing for Haiku and Sonnet").
 - Stop when feedback is consistently empty, or when iterations stop improving the results.

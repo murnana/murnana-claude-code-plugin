@@ -18,6 +18,6 @@ Applies to all development in this repository.
 
 Use `hotfix/<topic>` only for an urgent problem in what is already released on `main`.
 
-- Branch from `main`, fix it, and bump the patch version of each changed plugin (`plugin.json`, `marketplace.json`, and the CHANGELOG release section) in the same PR.
+- Branch from `main`, fix it, and bump the patch version of each changed plugin (`sh scripts/set-plugin-version.sh` and the CHANGELOG release section) in the same PR.
 - Open the pull request against `main`, run `claude plugin validate .` first, and merge it.
 - Merge `main` back into `develop` right after, so the fix and the version bump are not lost in the next release.

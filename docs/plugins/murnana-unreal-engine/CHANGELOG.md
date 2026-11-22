@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+## [0.0.4] - 2026-11-22
+
+### Changed
+
+- `plugin.json` の `version` を外す変更を取りやめ、マーケットプレイスのエントリーと同じ値を `plugin.json` にも書くようにした
+
 ## [0.0.3] - 2026-11-14
 
 ### Changed
@@ -28,7 +34,8 @@
 
 - ue5-docs スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.0.4]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-unreal-engine
 [0.0.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-unreal-engine
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-unreal-engine
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/6c53594/plugins/murnana-unreal-engine

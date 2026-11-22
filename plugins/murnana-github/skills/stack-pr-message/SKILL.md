@@ -3,7 +3,7 @@ name: stack-pr-message
 description: Write titles and bodies for every PR in a GitHub stack and apply them with gh pr edit
 argument-hint: "[optional intent hint for the whole stack]"
 disable-model-invocation: true
-allowed-tools: Bash(git log *) Bash(git diff *) Bash(gh auth status *) Bash(gh repo view *) Bash(gh stack view *) Bash(gh pr view *) Bash(gh pr diff *) Bash(gh pr edit *) Read Grep Glob AskUserQuestion
+allowed-tools: Bash(git log *) Bash(git diff *) Bash(gh auth status *) Bash(gh repo view *) Bash(gh stack view *) Bash(gh pr view *) Bash(gh pr diff *) Bash(gh pr edit *) Bash(git rev-parse --absolute-git-dir) Read Grep Glob AskUserQuestion
 ---
 
 # Stack PR Message
@@ -85,15 +85,16 @@ Show, for every layer bottom to top: PR number, branch, new title, and the full 
 
 ## Step 6: Apply
 
-For each approved layer:
+Run `git rev-parse --absolute-git-dir` once; the body file is `<that dir>/PR_BODY.md` (inside `.git/`, so it is never committed). Then, for each approved layer:
 
-```bash
-gh pr edit <n> --title "<title>" --body-file - <<'EOF'
-<body>
-EOF
-```
+1. Write the layer's body to that file with the `Write` tool, exactly as approved (overwrite it for each layer).
+2. Run, as a Bash call of its own:
 
-- Use `--body-file -` with a quoted heredoc — never a multi-line `--body` argument, which mangles Japanese text and line breaks.
+   ```bash
+   gh pr edit <n> --title "<title>" --body-file <git dir>/PR_BODY.md
+   ```
+
+- Never pass the body as a multi-line `--body` argument, through `$(...)`, or on stdin with a heredoc.
 - If `assignees` was empty and the user didn't say otherwise, add `--add-assignee @me` in the same call.
 - Don't change draft/ready state; that's the user's call (`gh pr ready` / `gh stack submit --open`).
 - Report each PR URL (from the Step 1 JSON) when done. No re-fetch needed.

@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-tech-docs",
+  "version": "0.0.4",
   "description": "Helpers for writing technical documents (CHANGELOG, etc.)",
-  "version": "0.0.3",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
   "keywords": ["documentation", "changelog", "Keep a Changelog"],

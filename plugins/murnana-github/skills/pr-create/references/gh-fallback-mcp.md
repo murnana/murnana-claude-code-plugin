@@ -2,6 +2,8 @@
 
 ## Step 1: Confirm the diagnosis
 
+If `gh` is installed but `gh auth status` reports no login or a keyring/token error, first suspect the sandbox: follow [sandbox-credentials.md](sandbox-credentials.md), which offers this fallback as one of its options.
+
 Show the user exactly what failed — the output of `gh auth status` from the dynamic context block, and, if `gh` itself is missing, the shell's "command not found".
 
 ## Step 2: Ask, don't act

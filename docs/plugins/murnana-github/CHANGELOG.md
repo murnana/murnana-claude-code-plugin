@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-22
+
+### Changed
+
+- pr-create / stack-pr-message スキルで、PR の本文をいったん `.git/PR_BODY.md` に書き出してから `gh pr create --body-file` / `gh pr edit --body-file` で渡すようにした。`gh` のコマンドが本文を含まない短いものになり、承認時に確認しやすくなる
+- pr-create / stack-create / stack-pr-message スキルで、sandbox が PC に保存された GitHub の認証情報（`gh` のトークン、git の認証情報、1Password を含む SSH エージェント）を塞いで `gh auth status`・`gh pr create`・`git push` などが失敗したとき、未ログイン扱いで MCP への切り替えを勧めるのではなく、`sandbox.excludedCommands` に `gh` と `git push` のコマンドを加える設定を案内し、設定後に再試行できるようにした
+- `plugin.json` の `version` を外す変更を取りやめ、マーケットプレイスのエントリーと同じ値を `plugin.json` にも書くようにした
+
 ## [0.3.0] - 2026-11-14
 
 ### Added
@@ -56,7 +64,8 @@
 
 - pr-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.4.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-github
 [0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-github
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-github
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/014d844/plugins/murnana-github

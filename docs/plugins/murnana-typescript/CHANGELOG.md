@@ -7,6 +7,20 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-22
+
+### Added
+
+- TypeScript のコードをレビューする review スキル（`/murnana-typescript:review`）を追加した。メモリーリーク・リソースリーク、不具合、プロジェクトのルール違反、命名を確かめて報告する。ファイルは変更しない
+- プロジェクトに命名規則がないときは、言語の開発元が使っている命名規則で確かめる
+- 同じ基準で独立にレビューする読み取り専用のサブエージェント code-reviewer（`@agent-murnana-typescript:code-reviewer`）を追加した
+- `/murnana-typescript:test-case` スキルを追加した。テストリストを先に書き、1 つずつテストにして、失敗するところを一度確かめてから報告する
+- `test-case-writer` サブエージェントを追加した。すでにあるプログラムのテストを別の Claude に任せて、報告だけを受け取れる
+
+### Changed
+
+- `plugin.json` の `version` を外す変更を取りやめ、マーケットプレイスのエントリーと同じ値を `plugin.json` にも書くようにした
+
 ## [0.0.2] - 2026-11-14
 
 ### Changed
@@ -24,6 +38,7 @@
 
 - evals をリポジトリルートの `evals/plugins/murnana-typescript/` に移した
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-typescript
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-typescript
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-typescript

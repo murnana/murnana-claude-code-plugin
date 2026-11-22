@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [0.0.4] - 2026-11-22
+
+### Changed
+
+- `plugin.json` の `version` を外す変更を取りやめ、マーケットプレイスのエントリーと同じ値を `plugin.json` にも書くようにした
+- changelog-write スキルが例に挙げる murnana-claude-code-plugin のバージョン運用を、現在のもの（`plugin.json` ではなく `marketplace.json` のエントリーにだけ書き、リリース PR で上げる。取得元はエントリーの `sha` でリリースしたコミットに固定する）に合わせた
+
 ## [0.0.3] - 2026-11-14
 
 ### Security
@@ -29,7 +36,8 @@
 
 - Keep a Changelog の最新版に沿って CHANGELOG.md を作成・追記し、依頼されたときにバージョンを切れる changelog-write スキルを追加した
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.0.4]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-tech-docs
 [0.0.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-tech-docs
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-tech-docs
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/05c5eaa/plugins/murnana-tech-docs

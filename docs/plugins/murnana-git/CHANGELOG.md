@@ -7,6 +7,17 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-22
+
+### Fixed
+
+- commit スキルが報告するコミットのハッシュが、実際に作ったコミットではなく古いもの（直前の HEAD）になることがあったのを修正した。`git commit` の出力から、作成されたコミットのハッシュと件名を直接取得する。出力にコミット行が無いとき（失敗時など）は何も表示しない
+
+### Changed
+
+- commit スキルで、sandbox が PC にある署名用の鍵や認証情報（1Password を含む SSH エージェント、`gpg-agent`、OS のキーチェーン）を塞いで署名付きの `git commit` が失敗したとき、署名なしで進めずに停止し、`sandbox.excludedCommands` に `git commit *` を加える設定を案内するようにした。除外設定が効くよう、コミットメッセージは `git commit -F -` で標準入力から渡す
+- `plugin.json` の `version` を外す変更を取りやめ、マーケットプレイスのエントリーと同じ値を `plugin.json` にも書くようにした
+
 ## [0.3.0] - 2026-11-14
 
 ### Fixed
@@ -62,7 +73,8 @@
 
 - コミット0件のリポジトリで commit スキルが起動できない不具合
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/894f706...main
+[0.4.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/894f706/plugins/murnana-git
 [0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-git
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-git
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/0f332ec/plugins/murnana-git

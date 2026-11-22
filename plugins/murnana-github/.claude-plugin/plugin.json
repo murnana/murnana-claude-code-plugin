@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-github",
+  "version": "0.4.0",
   "description": "GitHub workflow helpers",
-  "version": "0.3.0",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
   "keywords": ["GitHub", "pull request", "gh", "stacked pull requests", "gh-stack"],

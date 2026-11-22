@@ -1,0 +1,160 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "murnana-claude-code-plugin-dev",
+  "description": "murnana's Claude Code plugins: Git/GitHub workflow helpers, Claude Code configuration authoring, technical documentation, Unity package maintenance, and Unreal Engine knowledge (early access: follows the develop branch, without release versions)",
+  "owner": {
+    "name": "murnana"
+  },
+  "plugins": [
+    {
+      "name": "murnana-unreal-engine",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-unreal-engine",
+        "ref": "develop"
+      },
+      "description": "Unreal Engine knowledges"
+    },
+    {
+      "name": "murnana-git",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-git",
+        "ref": "develop"
+      },
+      "description": "Git workflow helpers"
+    },
+    {
+      "name": "murnana-github",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-github",
+        "ref": "develop"
+      },
+      "description": "GitHub workflow helpers"
+    },
+    {
+      "name": "murnana-agent-config",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-agent-config",
+        "ref": "develop"
+      },
+      "description": "Helpers for authoring Claude Code configuration (rules, skills, subagents, etc.)"
+    },
+    {
+      "name": "murnana-tech-docs",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-tech-docs",
+        "ref": "develop"
+      },
+      "description": "Helpers for writing technical documents (CHANGELOG, etc.)"
+    },
+    {
+      "name": "murnana-unity-package",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-unity-package",
+        "ref": "develop"
+      },
+      "description": "Helpers for maintaining Unity Package Manager (UPM) packages (CHANGELOG, etc.)"
+    },
+    {
+      "name": "murnana-unity",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-unity",
+        "ref": "develop"
+      },
+      "description": "Helpers for working with the Unity Editor (launch a project on a chosen platform, check work against Unity's terms, etc.)"
+    },
+    {
+      "name": "murnana-cpp",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-cpp",
+        "ref": "develop"
+      },
+      "description": "C++開発用ツールキット(コードコメントとDoxygenドキュメントコメントを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    },
+    {
+      "name": "murnana-csharp",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-csharp",
+        "ref": "develop"
+      },
+      "description": "C#の開発を手伝うセット(Roslyn公式言語サーバーの接続、コードコメントとXMLドキュメントコメントを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    },
+    {
+      "name": "murnana-java",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-java",
+        "ref": "develop"
+      },
+      "description": "Java開発用ツールキット(コードコメントとJavadocを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    },
+    {
+      "name": "murnana-kotlin",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-kotlin",
+        "ref": "develop"
+      },
+      "description": "Kotlin のコードを書くためのツールキット(KDoc とコードコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    },
+    {
+      "name": "murnana-python",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-python",
+        "ref": "develop"
+      },
+      "description": "Python開発用ツールキット(コードコメントとdocstringを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    },
+    {
+      "name": "murnana-rust",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-rust",
+        "ref": "develop"
+      },
+      "description": "Rust 開発の補助セット(コードコメントとドキュメントコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    },
+    {
+      "name": "murnana-swift",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-swift",
+        "ref": "develop"
+      },
+      "description": "Swift開発用ツールキット(コードコメント・DocCドキュメントコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    },
+    {
+      "name": "murnana-typescript",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
+        "path": "plugins/murnana-typescript",
+        "ref": "develop"
+      },
+      "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    }
+  ]
+}

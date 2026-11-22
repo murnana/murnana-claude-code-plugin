@@ -58,13 +58,14 @@ gh stack submit --auto [--remote <name>]
 
 Then read the new PR numbers with `gh stack view --json`, replace every `#<branch-name>` placeholder with that branch's `#<pr.number>` (the only change allowed after approval), and apply the messages to each target:
 
-```bash
-gh pr edit <n> --title "<title>" --add-assignee @me --body-file - <<'EOF'
-<body>
-EOF
-```
+1. Write that target's body with the `Write` tool to `<git dir>/PR_BODY.md` (the git dir from `git rev-parse --absolute-git-dir`; overwrite it for each target).
+2. Run, as a Bash call of its own:
 
-- Use `--body-file -` with a quoted heredoc, never a multi-line `--body` argument.
+   ```bash
+   gh pr edit <n> --title "<title>" --add-assignee @me --body-file <git dir>/PR_BODY.md
+   ```
+
+- Never pass the body as a multi-line `--body` argument, through `$(...)`, or on stdin with a heredoc.
 - Drop `--add-assignee @me` when the template or the user specified an assignee (assign them instead).
 - Unless the user asked for drafts, mark each **new** PR ready: `gh pr ready <n>`. This matches plain pr-create's default (non-draft) without touching PRs that existed before.
 - Report every new PR's URL from the JSON, bottom first. No extra re-fetch.

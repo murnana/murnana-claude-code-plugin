@@ -16,8 +16,8 @@
 
 | ブランチ | 役割 |
 |---|---|
-| `main` | 公開状態。マーケットプレイスの各プラグインは `main` から配布されます |
-| `develop` | 開発の統合先。リリース前の変更が集まります |
+| `main` | 公開状態。正式版のマーケットプレイス（`murnana-claude-code-plugin`）は `main` から配布されます |
+| `develop` | 開発の統合先。リリース前の変更が集まり、アーリーアクセス版のマーケットプレイス（`murnana-claude-code-plugin-dev`）から配布されます |
 | `feature/*` | 機能追加・変更・ドキュメント更新用。`develop` から切ります |
 | `bugfix/*` | バグ修正用。`develop` から切ります |
 | `hotfix/*` | リリース済みの `main` の緊急修正用。`main` から切ります |
@@ -30,7 +30,7 @@
 
 リリース済みの内容に緊急の問題があるときだけ使います。
 
-1. `main` から `hotfix/<topic>` を切って修正し、変更したプラグインのパッチバージョンを同じ PR で上げます（`plugin.json`、`marketplace.json`、CHANGELOG）。
+1. `main` から `hotfix/<topic>` を切って修正し、変更したプラグインのパッチバージョンを同じ PR で上げます（`marketplace.json` のエントリーと CHANGELOG）。
 2. `claude plugin validate .` を実行し、`main` 向けに PR を作ってマージします。
 3. 修正とバージョン更新が失われないよう、すぐに `main` を `develop` にマージします。
 
@@ -50,28 +50,39 @@
 - 向き先は、`feature/*` と `bugfix/*` が `develop`、リリースと `hotfix/*` が `main` です。
 - PR テンプレートがあればそれを使います。なければ、先頭に gitmoji を付けた短い題名（約 50 字、日本語）と、本文の「なぜ」「影響範囲」「デバッグ方法」の 3 節を書きます。
 - 影響範囲には具体的なファイルや利用者を書き、デバッグ方法には実行するコマンドや確認の手順を書きます。差分の言い換えは書きません。
+- 本文は一時ファイル（`.git/PR_BODY.md`）に書き出してから、`gh pr create --body-file <path>` で渡します。
 
 ## 開発の流れ
 
 1. `develop` ブランチを探します（`git fetch origin develop`）。ない場合は、最新の `main` から `develop` を作成してプッシュします。
 2. `develop` から `feature/<topic>` または `bugfix/<topic>` を切ります。
 3. 変更し、`docs/plugins/<plugin-name>/CHANGELOG.md` の `## [Unreleased]` に日本語で追記します（[Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) のカテゴリー）。
-4. `develop` 向けに PR を作り、マージします。**この時点ではプラグインのバージョンを上げません。**
+4. `.claude-plugin/marketplace.json` を変えたときは、`sh scripts/build-dev-marketplace.sh` で `channels/dev/.claude-plugin/marketplace.json` を作り直して一緒にコミットします。手では編集しません。
+5. `develop` 向けに PR を作り、マージします。**この時点ではプラグインのバージョンを上げません。** マージした時点で、アーリーアクセス版の利用者に届きます。
 
-手元で動作確認するときは、`claude --plugin-dir plugins/<plugin-name>` を使います。マーケットプレイス経由では `main` の内容しか取得されないためです。
+手元で動作確認するときは、`claude --plugin-dir plugins/<plugin-name>` を使います。マーケットプレイス経由では、push 済みの `main`（正式版）か `develop`（アーリーアクセス版）の内容しか取得されないためです。
+
+## リリースチャンネル
+
+| チャンネル | カタログ | 取得元 | バージョン |
+|---|---|---|---|
+| 正式版 `murnana-claude-code-plugin` | `main` の `.claude-plugin/marketplace.json` | `main` | エントリーの `version` |
+| アーリーアクセス版 `murnana-claude-code-plugin-dev` | `develop` の `channels/dev/.claude-plugin/marketplace.json`（raw URL で追加） | `develop` | なし（コミット SHA） |
+
+アーリーアクセス版のカタログは、正式版のカタログから `scripts/build-dev-marketplace.sh` で生成します。名前に `-dev` を付け、このリポジトリーのプラグインの `version` と `sha` を消して取得元を `develop` にします。詳しくは `.claude/rules/release-channels.md` を参照してください。
 
 ## リリースの流れ
 
 `develop` から `main` へのマージ PR（リリース PR）で、変更のあったプラグインのバージョンを上げます。
 
 1. 変更のあったプラグインを調べます: `git diff --name-only origin/main...origin/develop -- plugins/`
-2. 該当プラグインの `plugins/<plugin-name>/.claude-plugin/plugin.json` の `version` を上げます。
-3. `.claude-plugin/marketplace.json` の同じプラグインの `version` を `plugin.json` と一致させます。
-4. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。
-5. `claude plugin validate .` を実行し、変更のあったプラグインごとに `claude plugin validate plugins/<plugin-name>` も実行します。
-6. `main` にマージします。その後、バージョン更新が `develop` にも反映されるよう `main` を `develop` にマージします。
+2. 該当プラグインごとに `sh scripts/set-plugin-version.sh <plugin-name> <x.y.z>` を実行します。`.claude-plugin/marketplace.json` のエントリーの `version` と、取得元のコミット `source.sha` を書き換え、アーリーアクセス版のカタログも作り直します。`sha` には、今のブランチで `plugins/<plugin-name>/` を最後に変えたコミットが入るので、プラグインの変更はコミットして push しておきます。スクリプトはまず `plugin.json` に `version` を書いて終了するので、それをコミットしてからもう一度実行します。`main` の `plugin.json` にはエントリーと同じ `version` を書きますが、`develop` には書きません（書くとエントリーより優先され、ブランチを追従するインストールに更新が届かなくなります）。
+3. CHANGELOG の `[Unreleased]` の内容を `## [x.y.z] - YYYY-MM-DD` に移し、末尾のリンク参照を更新します。新しいバージョンのリンクはエントリーの `sha`（`tree/<短縮 SHA>/plugins/<plugin-name>`）を、`[unreleased]` は `compare/<短縮 SHA>...main` を指します。
+4. `claude plugin validate .` を実行し、変更のあったプラグインごとに `claude plugin validate plugins/<plugin-name>` も実行します。
+5. `main` に**マージコミットで**マージします（squash や rebase はしません）。固定した `sha` は PR のブランチ上のコミットなので、マージコミットでないと `main` の履歴から外れます。
+6. バージョン更新が `develop` にも反映されるよう、`main` を `develop` にマージします。このとき `sh scripts/strip-plugin-json-version.sh` で `plugin.json` の `version` を外し、同じ PR に含めます（`develop` をアーリーアクセス版のままにするため）。
 
-Git のタグと GitHub Release は使いません。プラグインごとにバージョンが違うため、リポジトリー単位のタグは意味を持たず、プラグインごとのタグは数が増えて見通しが悪くなるためです。バージョンは各 `plugin.json` で管理します。
+Git のタグと GitHub Release は使いません。バージョンは `marketplace.json` の各エントリーで管理し、正式版の取得元はエントリーの `sha` でリリースしたコミットに固定します。`main` が先に進んでも、利用者にはリリースした時点のファイルが届きます。
 
 バージョンは [Semantic Versioning](https://semver.org/) に従います（`v` は付けません）。
 
@@ -80,15 +91,6 @@ Git のタグと GitHub Release は使いません。プラグインごとにバ
 - メジャー: 破壊的変更（スキルやコマンドの改名・削除など）。`0.y.z` の間はマイナーで構いません
 
 上げ幅は、`[Unreleased]` に溜まった変更のうち最大のものに合わせます。`plugins/` の外の変更（README、`docs/`、`.claude/`、CLAUDE.md）ではバージョンを上げません。
-
-## 外部リポジトリーのプラグイン（unity-ariadne）
-
-`unity-ariadne` は [murnana/unity-ariadne](https://github.com/murnana/unity-ariadne) の `claude-plugins/` にあり、このリポジトリーの `plugins/` にはありません。`marketplace.json` のエントリーだけを管理します。
-
-- `unity-ariadne` を更新（リリース）したら、このリポジトリーの `marketplace.json` の `unity-ariadne` の `version` を、`unity-ariadne` 側の `claude-plugins/.claude-plugin/plugin.json` の `version` に合わせます。これを上げないと、利用者のキャッシュが更新されません。
-- 通常の `feature/*` と同じく `develop` から `feature/unity-ariadne-<version>` を切り、`develop` 向けに PR を作ります。利用者に届くのはリリース PR（`develop` → `main`）のマージ後です。
-- `Check plugin versions` ワークフローはこのプラグインを調べません。バージョンの一致は手で確認します。
-- 詳しい手順と参照方式（`git-subdir` / `archive`）は [docs/plugins/unity-ariadne/README.md](docs/plugins/unity-ariadne/README.md) を参照してください。
 
 ## サードパーティーの資料
 
@@ -99,6 +101,7 @@ Git のタグと GitHub Release は使いません。プラグインごとにバ
 - `.claude/rules/branch-workflow.md`: ブランチ運用
 - `.claude/rules/plugin-version-bump.md`: バージョン更新
 - `.claude/rules/marketplace-manifest.md`: `marketplace.json` の書き方
+- `.claude/rules/release-channels.md`: 正式版とアーリーアクセス版のチャンネル
 - `.claude/rules/commit-message.md`: コミットメッセージ（`murnana-git` の `commit` スキルに準拠）
 - `.claude/rules/commit-message-sync.md`: スキル更新時にコミットメッセージのルールを合わせる手順
 - `.claude/rules/pr-message.md`: PR のタイトルと本文（`murnana-github` の `pr-create` スキルに準拠）
