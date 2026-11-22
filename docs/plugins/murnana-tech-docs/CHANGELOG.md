@@ -11,7 +11,7 @@
 
 ### Changed
 
-- `plugin.json` から `version` を外し、バージョン番号はマーケットプレイス（`.claude-plugin/marketplace.json`）のエントリーだけで管理するようにした。正式版のマーケットプレイス `murnana-claude-code-plugin` から入れた場合のバージョン番号は変わらない。`develop` ブランチを追従するアーリーアクセス版を、別のマーケットプレイス `murnana-claude-code-plugin-dev` で配布するための変更
+- `plugin.json` の `version` を外す変更を取りやめ、マーケットプレイスのエントリーと同じ値を `plugin.json` にも書くようにした
 - changelog-write スキルが例に挙げる murnana-claude-code-plugin のバージョン運用を、現在のもの（`plugin.json` ではなく `marketplace.json` のエントリーにだけ書き、リリース PR で上げる。取得元はエントリーの `sha` でリリースしたコミットに固定する）に合わせた
 
 ## [0.0.3] - 2026-11-14

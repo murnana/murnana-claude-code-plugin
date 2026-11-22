@@ -1,6 +1,7 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-unreal-engine",
+  "version": "0.0.4",
   "description": "Unreal Engine knowledges",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",

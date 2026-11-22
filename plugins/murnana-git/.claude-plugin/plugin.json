@@ -1,6 +1,7 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-git",
+  "version": "0.4.0",
   "description": "Git workflow helpers",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",

@@ -1,6 +1,7 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-unity-package",
+  "version": "0.0.5",
   "description": "Helpers for maintaining Unity Package Manager (UPM) packages (CHANGELOG, etc.)",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
