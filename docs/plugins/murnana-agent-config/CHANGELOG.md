@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-22
+
 ### Changed
 
 - skill-create スキルが、プロジェクトの CLAUDE.md・AGENTS.md・`.claude/rules/` を最初に集め、そこにあるルールをスキルの既定より優先するようにした。適用したルールは表にして、承認を求めるときに示す
@@ -50,7 +52,8 @@
 - rule-create スキル
 - skill-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
+[0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-agent-config
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-agent-config
 [0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-agent-config
 [0.0.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/278ceff/plugins/murnana-agent-config

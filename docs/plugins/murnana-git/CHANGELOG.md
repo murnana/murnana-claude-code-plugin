@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-22
+
 ### Fixed
 
 - commit スキルが報告するコミットのハッシュが、実際に作ったコミットではなく古いもの（直前の HEAD）になることがあったのを修正した。`git commit` の出力から、作成されたコミットのハッシュと件名を直接取得する。出力にコミット行が無いとき（失敗時など）は何も表示しない
@@ -71,7 +73,8 @@
 
 - コミット0件のリポジトリで commit スキルが起動できない不具合
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/e7e9b31...main
+[0.4.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/e7e9b31/plugins/murnana-git
 [0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-git
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-git
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/0f332ec/plugins/murnana-git

@@ -12,10 +12,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-unreal-engine",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Unreal Engine knowledges",
-      "version": "0.0.3"
+      "version": "0.0.4"
     },
     {
       "name": "murnana-git",
@@ -23,10 +23,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-git",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "e7e9b3164e9eea8f8d16fc744c91a9554684a8b4"
       },
       "description": "Git workflow helpers",
-      "version": "0.3.0"
+      "version": "0.4.0"
     },
     {
       "name": "murnana-github",
@@ -34,10 +34,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-github",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "GitHub workflow helpers",
-      "version": "0.3.0"
+      "version": "0.4.0"
     },
     {
       "name": "murnana-agent-config",
@@ -45,10 +45,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-agent-config",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Helpers for authoring Claude Code configuration (rules, skills, subagents, etc.)",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "name": "murnana-tech-docs",
@@ -56,10 +56,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-tech-docs",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "ec16700f482f34ca2f5ab315c7767475856f8af0"
       },
       "description": "Helpers for writing technical documents (CHANGELOG, etc.)",
-      "version": "0.0.3"
+      "version": "0.0.4"
     },
     {
       "name": "murnana-unity-package",
@@ -67,10 +67,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-unity-package",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Helpers for maintaining Unity Package Manager (UPM) packages (CHANGELOG, etc.)",
-      "version": "0.0.4"
+      "version": "0.0.5"
     },
     {
       "name": "murnana-unity",
@@ -78,10 +78,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-unity",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Helpers for working with the Unity Editor (launch a project on a chosen platform, check work against Unity's terms, etc.)",
-      "version": "0.2.3"
+      "version": "0.2.4"
     },
     {
       "name": "murnana-cpp",
@@ -89,10 +89,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-cpp",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "C++開発用ツールキット(コードコメントとDoxygenドキュメントコメントを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-      "version": "0.0.2"
+      "version": "0.1.0"
     },
     {
       "name": "murnana-csharp",
@@ -100,10 +100,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-csharp",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "C#の開発を手伝うセット(Roslyn公式言語サーバーの接続、コードコメントとXMLドキュメントコメントを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-      "version": "0.0.2"
+      "version": "0.1.0"
     },
     {
       "name": "murnana-java",
@@ -111,10 +111,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-java",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Java開発用ツールキット(コードコメントとJavadocを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-      "version": "0.0.2"
+      "version": "0.1.0"
     },
     {
       "name": "murnana-kotlin",
@@ -122,10 +122,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-kotlin",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Kotlin のコードを書くためのツールキット(KDoc とコードコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-      "version": "0.1.1"
+      "version": "0.2.0"
     },
     {
       "name": "murnana-python",
@@ -133,10 +133,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-python",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Python開発用ツールキット(コードコメントとdocstringを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-      "version": "0.0.2"
+      "version": "0.1.0"
     },
     {
       "name": "murnana-rust",
@@ -144,10 +144,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-rust",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Rust 開発の補助セット(コードコメントとドキュメントコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-      "version": "0.0.2"
+      "version": "0.1.0"
     },
     {
       "name": "murnana-swift",
@@ -155,10 +155,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-swift",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "Swift開発用ツールキット(コードコメント・DocCドキュメントコメントを書くスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-      "version": "0.0.2"
+      "version": "0.1.0"
     },
     {
       "name": "murnana-typescript",
@@ -166,10 +166,10 @@
         "source": "git-subdir",
         "url": "https://github.com/murnana/murnana-claude-code-plugin.git",
         "path": "plugins/murnana-typescript",
-        "sha": "e3a21631deacea6def2d54cdd9ee47154354848f"
+        "sha": "78b93591a5842295663b8edabb95ffcf21d2a406"
       },
       "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)",
-      "version": "0.0.2"
+      "version": "0.1.0"
     }
   ]
 }

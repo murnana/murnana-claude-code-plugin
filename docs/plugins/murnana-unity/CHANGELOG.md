@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-11-22
+
 ### Changed
 
 - `plugin.json` から `version` を外し、バージョン番号はマーケットプレイス（`.claude-plugin/marketplace.json`）のエントリーだけで管理するようにした。正式版のマーケットプレイス `murnana-claude-code-plugin` から入れた場合のバージョン番号は変わらない。`develop` ブランチを追従するアーリーアクセス版を、別のマーケットプレイス `murnana-claude-code-plugin-dev` で配布するための変更
@@ -64,7 +66,8 @@
 
 - Unity プロジェクトを指定したプラットフォームで Unity Editor に開く launch スキルを追加した。Unity CLI で Editor の検索・インストールを行い、Editor 本体の `-projectPath` と `-buildTarget` で起動する。最初に指定したプラットフォームをプロジェクトの既定として保存し、指定がなければそれを使う
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
+[0.2.4]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-unity
 [0.2.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-unity
 [0.2.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-unity
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity

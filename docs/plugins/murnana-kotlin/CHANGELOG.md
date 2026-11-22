@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-22
+
 ### Added
 
 - Kotlin のコードをレビューする review スキル（`/murnana-kotlin:review`）を追加した。メモリーリーク・リソースリーク、不具合、プロジェクトのルール違反、命名を確かめて報告する。ファイルは変更しない
@@ -35,6 +37,7 @@
 
 - evals をリポジトリルートの `evals/plugins/murnana-kotlin/` に移した
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
+[0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-kotlin
 [0.1.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-kotlin
 [0.1.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-kotlin

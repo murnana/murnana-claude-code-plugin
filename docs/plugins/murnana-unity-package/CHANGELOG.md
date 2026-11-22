@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.0.5] - 2026-11-22
+
 ### Changed
 
 - `plugin.json` から `version` を外し、バージョン番号はマーケットプレイス（`.claude-plugin/marketplace.json`）のエントリーだけで管理するようにした。正式版のマーケットプレイス `murnana-claude-code-plugin` から入れた場合のバージョン番号は変わらない。`develop` ブランチを追従するアーリーアクセス版を、別のマーケットプレイス `murnana-claude-code-plugin-dev` で配布するための変更
@@ -36,7 +38,8 @@
 
 - Unity Package Manager (UPM) パッケージの CHANGELOG.md を、Keep a Changelog と Unity のバージョニング規則に沿って作成・追記できる changelog-write スキルを追加した。依頼されたときはバージョンを切り、`package.json` の `version` も更新する
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
+[0.0.5]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-unity-package
 [0.0.4]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-unity-package
 [0.0.3]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-unity-package
 [0.0.2]: https://github.com/murnana/murnana-claude-code-plugin/tree/main/plugins/murnana-unity-package

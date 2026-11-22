@@ -7,6 +7,8 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-22
+
 ### Changed
 
 - pr-create / stack-pr-message スキルで、PR の本文をいったん `.git/PR_BODY.md` に書き出してから `gh pr create --body-file` / `gh pr edit --body-file` で渡すようにした。`gh` のコマンドが本文を含まない短いものになり、承認時に確認しやすくなる
@@ -62,7 +64,8 @@
 
 - pr-create スキル
 
-[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/03dfea1...main
+[unreleased]: https://github.com/murnana/murnana-claude-code-plugin/compare/78b9359...main
+[0.4.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/78b9359/plugins/murnana-github
 [0.3.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/03dfea1/plugins/murnana-github
 [0.2.1]: https://github.com/murnana/murnana-claude-code-plugin/tree/8502458/plugins/murnana-github
 [0.2.0]: https://github.com/murnana/murnana-claude-code-plugin/tree/014d844/plugins/murnana-github
