@@ -1,11 +1,18 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-unity",
-  "version": "0.2.4",
   "description": "Helpers for working with the Unity Editor (launch a project on a chosen platform, check work against Unity's terms, etc.)",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
-  "keywords": ["unity", "editor", "cli", "launch", "build target", "terms", "compliance"],
+  "keywords": [
+    "unity",
+    "editor",
+    "cli",
+    "launch",
+    "build target",
+    "terms",
+    "compliance"
+  ],
   "defaultEnabled": false,
   "author": {
     "name": "murnana"

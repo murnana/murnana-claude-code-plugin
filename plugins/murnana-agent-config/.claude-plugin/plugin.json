@@ -1,11 +1,16 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-agent-config",
-  "version": "0.3.0",
   "description": "Helpers for authoring Claude Code configuration (rules, skills, subagents, etc.)",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
-  "keywords": ["Claude Code", "rules", "skills", "subagents", "CLAUDE.md"],
+  "keywords": [
+    "Claude Code",
+    "rules",
+    "skills",
+    "subagents",
+    "CLAUDE.md"
+  ],
   "defaultEnabled": false,
   "author": {
     "name": "murnana"
