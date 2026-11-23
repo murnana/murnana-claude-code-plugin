@@ -5,15 +5,18 @@
 # The dev catalog renames the marketplace, drops every version and release commit pin, and points
 # this repository's plugins at the develop branch, so installs track develop by
 # commit SHA.
+# channels/dev/extra-plugins.json lists plugins published only on the dev channel (for example
+# from other repositories); they are appended unchanged.
 # See .claude/rules/release-channels.md for why.
 set -eu
 
 root=$(cd "$(dirname "$0")/.." && pwd)
 stable="$root/.claude-plugin/marketplace.json"
 dev="$root/channels/dev/.claude-plugin/marketplace.json"
+extra="$root/channels/dev/extra-plugins.json"
 self_url="https://github.com/murnana/murnana-claude-code-plugin.git"
 
-generated=$(jq --arg url "$self_url" '
+generated=$(jq --arg url "$self_url" --slurpfile extra "$extra" '
   .name += "-dev"
   | .description += " (early access: follows the develop branch, without release versions)"
   | .plugins |= map(
@@ -21,6 +24,7 @@ generated=$(jq --arg url "$self_url" '
       then del(.version, .source.sha) | .source.ref = "develop"
       else .
       end)
+  | .plugins += $extra[0]
 ' "$stable")
 
 if [ "${1:-}" = "--check" ]; then
