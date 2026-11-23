@@ -1,11 +1,16 @@
 {
   "$schema": "https://www.schemastore.org/claude-code-plugin-manifest.json",
   "name": "murnana-github",
-  "version": "0.4.0",
   "description": "GitHub workflow helpers",
   "license": "0BSD",
   "repository": "https://github.com/murnana/murnana-claude-code-plugin/",
-  "keywords": ["GitHub", "pull request", "gh", "stacked pull requests", "gh-stack"],
+  "keywords": [
+    "GitHub",
+    "pull request",
+    "gh",
+    "stacked pull requests",
+    "gh-stack"
+  ],
   "defaultEnabled": false,
   "author": {
     "name": "murnana"

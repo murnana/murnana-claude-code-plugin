@@ -155,6 +155,16 @@
         "ref": "develop"
       },
       "description": "TypeScript開発用ツールキット(コードコメントとTSDocを書く・見直すスキル、コードレビューとテストケースを書くスキルとサブエージェント)"
+    },
+    {
+      "name": "unity-guidgraph",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/murnana/unity-guidgraph.git",
+        "path": "claude-plugins",
+        "ref": "develop"
+      },
+      "description": "Unityプロジェクトの依存関係グラフ(SQLite)をMCPで照会します（アーリーアクセス）"
     }
   ]
 }
